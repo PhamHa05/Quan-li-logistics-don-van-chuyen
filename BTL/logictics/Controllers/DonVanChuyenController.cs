@@ -1,6 +1,7 @@
 ﻿using BLL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using Logistics.API.Models.Request;
 
 namespace Logistics.API.Controllers
 {
@@ -54,16 +55,8 @@ namespace Logistics.API.Controllers
             return Ok(new { success = result });
         }
 
-        public class SearchRequest
-        {
-            public int PageIndex { get; set; }
-            public int PageSize { get; set; }
-            public string MaVanDon { get; set; }
-            public string TrangThai { get; set; }
-        }
-
         [HttpPost("search")]
-        public IActionResult Search([FromBody] SearchRequest request)
+        public IActionResult Search([FromBody] DonVanChuyenSearchRequest request)
         {
             long total;
             var data = _donVanChuyenBusiness.Search(request.PageIndex, request.PageSize, out total, request.MaVanDon, request.TrangThai);
