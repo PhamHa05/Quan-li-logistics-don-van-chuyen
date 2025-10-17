@@ -60,18 +60,8 @@ namespace Logistics.API.Controllers
             return Ok(new { success = result });
         }
 
-        // Tạo một model riêng cho việc tìm kiếm để API rõ ràng hơn
-        // Bạn có thể tạo file SearchRequest.cs
-        public class SearchRequest
-        {
-            public int PageIndex { get; set; }
-            public int PageSize { get; set; }
-            public string HoTen { get; set; }
-            public string TenDangNhap { get; set; }
-        }
-
         [HttpPost("search")]
-        public IActionResult Search([FromBody] SearchRequest request)
+        public IActionResult Search([FromBody] NguoiDungSearchRequest request)
         {
             long total;
             var data = _nguoiDungBusiness.Search(request.PageIndex, request.PageSize, out total, request.HoTen, request.TenDangNhap);
