@@ -1,0 +1,676 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\dal\\donvanchuyenrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|solutionrelative:dal\\donvanchuyenrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\models\\donvanchuyenmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|solutionrelative:models\\donvanchuyenmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\dal\\helper\\datatableextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|solutionrelative:dal\\helper\\datatableextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\dal\\interfaces\\idonvanchuyenrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|solutionrelative:dal\\interfaces\\idonvanchuyenrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\bll\\donvanchuyenbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|solutionrelative:bll\\donvanchuyenbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\dal\\helper\\databasehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|solutionrelative:dal\\helper\\databasehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\testapi\\controllers\\donvanchuyencontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|solutionrelative:testapi\\controllers\\donvanchuyencontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\bll\\interfaces\\inguoidungbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|solutionrelative:bll\\interfaces\\inguoidungbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\bll\\diemgiaohangbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|solutionrelative:bll\\diemgiaohangbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\bll\\interfaces\\idonvanchuyenbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|solutionrelative:bll\\interfaces\\idonvanchuyenbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\dal\\diemgiaohangrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|solutionrelative:dal\\diemgiaohangrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\bll\\nguoidungbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|solutionrelative:bll\\nguoidungbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\testapi\\searchrequest\\donvanchuyensearchrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|solutionrelative:testapi\\searchrequest\\donvanchuyensearchrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\dal\\nguoidungrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|solutionrelative:dal\\nguoidungrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\models\\diemgiaohangmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|solutionrelative:models\\diemgiaohangmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\bll\\interfaces\\ituyenduongbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|solutionrelative:bll\\interfaces\\ituyenduongbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\bll\\tuyenduongbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|solutionrelative:bll\\tuyenduongbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\models\\tuyenduongmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|solutionrelative:models\\tuyenduongmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\dal\\tuyenduongrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|solutionrelative:dal\\tuyenduongrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\models\\loginrequestmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|solutionrelative:models\\loginrequestmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\bll\\interfaces\\itaixebusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|solutionrelative:bll\\interfaces\\itaixebusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\bll\\taixebusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|solutionrelative:bll\\taixebusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\dal\\interfaces\\ituyenduongrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|solutionrelative:dal\\interfaces\\ituyenduongrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\dal\\helper\\interfaces\\idatabasehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|solutionrelative:dal\\helper\\interfaces\\idatabasehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\models\\nguoidungmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|solutionrelative:models\\nguoidungmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\bll\\interfaces\\idiemgiaohangbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|solutionrelative:bll\\interfaces\\idiemgiaohangbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\dal\\interfaces\\idiemgiaohangrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|solutionrelative:dal\\interfaces\\idiemgiaohangrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\models\\taixemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|solutionrelative:models\\taixemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\dal\\interfaces\\inguoidungrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|solutionrelative:dal\\interfaces\\inguoidungrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\dal\\interfaces\\itaixerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|solutionrelative:dal\\interfaces\\itaixerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\dal\\taixerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|solutionrelative:dal\\taixerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\bll\\bll.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|solutionrelative:bll\\bll.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\testapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|solutionrelative:testapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\testapi\\searchrequest\\taixesearchrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|solutionrelative:testapi\\searchrequest\\taixesearchrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\testapi\\controllers\\tuyenduongcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|solutionrelative:testapi\\controllers\\tuyenduongcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\testapi\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|solutionrelative:testapi\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\testapi\\controllers\\nguoidungcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|solutionrelative:testapi\\controllers\\nguoidungcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\testapi\\controllers\\diemgiaohangcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|solutionrelative:testapi\\controllers\\diemgiaohangcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\testapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|solutionrelative:testapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|e:\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\test\\test\\testapi\\controllers\\taixecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|solutionrelative:testapi\\controllers\\taixecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{6324226f-61b6-4f28-92ee-18d4b5fe1e48}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "DonVanChuyenRepository.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\DAL\\DonVanChuyenRepository.cs",
+              "RelativeDocumentMoniker": "DAL\\DonVanChuyenRepository.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\DAL\\DonVanChuyenRepository.cs",
+              "RelativeToolTip": "DAL\\DonVanChuyenRepository.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAA9wBQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T19:05:59.466Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "DonVanChuyenBusiness.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\BLL\\DonVanChuyenBusiness.cs",
+              "RelativeDocumentMoniker": "BLL\\DonVanChuyenBusiness.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\BLL\\DonVanChuyenBusiness.cs",
+              "RelativeToolTip": "BLL\\DonVanChuyenBusiness.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAADwvzMAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T19:04:24.74Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DatabaseHelper.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\DAL\\Helper\\DatabaseHelper.cs",
+              "RelativeDocumentMoniker": "DAL\\Helper\\DatabaseHelper.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\DAL\\Helper\\DatabaseHelper.cs",
+              "RelativeToolTip": "DAL\\Helper\\DatabaseHelper.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAAA2wEgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T01:46:23.784Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IDonVanChuyenRepository.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\DAL\\Interfaces\\IDonVanChuyenRepository.cs",
+              "RelativeDocumentMoniker": "DAL\\Interfaces\\IDonVanChuyenRepository.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\DAL\\Interfaces\\IDonVanChuyenRepository.cs",
+              "RelativeToolTip": "DAL\\Interfaces\\IDonVanChuyenRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T19:16:25.018Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DonVanChuyenModel.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\Models\\DonVanChuyenModel.cs",
+              "RelativeDocumentMoniker": "Models\\DonVanChuyenModel.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\Models\\DonVanChuyenModel.cs",
+              "RelativeToolTip": "Models\\DonVanChuyenModel.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAA+wBcAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T19:07:17.363Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "DataTableExtensions.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\DAL\\Helper\\DataTableExtensions.cs",
+              "RelativeDocumentMoniker": "DAL\\Helper\\DataTableExtensions.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\DAL\\Helper\\DataTableExtensions.cs",
+              "RelativeToolTip": "DAL\\Helper\\DataTableExtensions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T01:49:25.563Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DonVanChuyenController.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\TestAPI\\Controllers\\DonVanChuyenController.cs",
+              "RelativeDocumentMoniker": "TestAPI\\Controllers\\DonVanChuyenController.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\TestAPI\\Controllers\\DonVanChuyenController.cs",
+              "RelativeToolTip": "TestAPI\\Controllers\\DonVanChuyenController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T19:11:32.785Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "INguoiDungBusiness.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\BLL\\Interfaces\\INguoiDungBusiness.cs",
+              "RelativeDocumentMoniker": "BLL\\Interfaces\\INguoiDungBusiness.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\BLL\\Interfaces\\INguoiDungBusiness.cs",
+              "RelativeToolTip": "BLL\\Interfaces\\INguoiDungBusiness.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAUwBQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T01:51:12.002Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "DiemGiaoHangBusiness.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\BLL\\DiemGiaoHangBusiness.cs",
+              "RelativeDocumentMoniker": "BLL\\DiemGiaoHangBusiness.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\BLL\\DiemGiaoHangBusiness.cs",
+              "RelativeToolTip": "BLL\\DiemGiaoHangBusiness.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAswAsAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T14:30:46.359Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\TestAPI\\Program.cs",
+              "RelativeDocumentMoniker": "TestAPI\\Program.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\TestAPI\\Program.cs",
+              "RelativeToolTip": "TestAPI\\Program.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAADAAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T01:48:05.232Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "IDonVanChuyenBusiness.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\BLL\\Interfaces\\IDonVanChuyenBusiness.cs",
+              "RelativeDocumentMoniker": "BLL\\Interfaces\\IDonVanChuyenBusiness.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\BLL\\Interfaces\\IDonVanChuyenBusiness.cs",
+              "RelativeToolTip": "BLL\\Interfaces\\IDonVanChuyenBusiness.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T19:08:11.97Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "DiemGiaoHangRepository.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\DAL\\DiemGiaoHangRepository.cs",
+              "RelativeDocumentMoniker": "DAL\\DiemGiaoHangRepository.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\DAL\\DiemGiaoHangRepository.cs",
+              "RelativeToolTip": "DAL\\DiemGiaoHangRepository.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAowBUAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T14:27:15.026Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "NguoiDungBusiness.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\BLL\\NguoiDungBusiness.cs",
+              "RelativeDocumentMoniker": "BLL\\NguoiDungBusiness.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\BLL\\NguoiDungBusiness.cs",
+              "RelativeToolTip": "BLL\\NguoiDungBusiness.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAADwvycAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T01:51:10.038Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "DonVanChuyenSearchRequest.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\TestAPI\\SearchRequest\\DonVanChuyenSearchRequest.cs",
+              "RelativeDocumentMoniker": "TestAPI\\SearchRequest\\DonVanChuyenSearchRequest.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\TestAPI\\SearchRequest\\DonVanChuyenSearchRequest.cs",
+              "RelativeToolTip": "TestAPI\\SearchRequest\\DonVanChuyenSearchRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T19:12:33.731Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "NguoiDungRepository.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\DAL\\NguoiDungRepository.cs",
+              "RelativeDocumentMoniker": "DAL\\NguoiDungRepository.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\DAL\\NguoiDungRepository.cs",
+              "RelativeToolTip": "DAL\\NguoiDungRepository.cs",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAUwHMAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T01:51:07.609Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "TaiXeSearchRequest.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\TestAPI\\SearchRequest\\TaiXeSearchRequest.cs",
+              "RelativeDocumentMoniker": "TestAPI\\SearchRequest\\TaiXeSearchRequest.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\TestAPI\\SearchRequest\\TaiXeSearchRequest.cs",
+              "RelativeToolTip": "TestAPI\\SearchRequest\\TaiXeSearchRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T13:53:16.607Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "TuyenDuongController.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\TestAPI\\Controllers\\TuyenDuongController.cs",
+              "RelativeDocumentMoniker": "TestAPI\\Controllers\\TuyenDuongController.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\TestAPI\\Controllers\\TuyenDuongController.cs",
+              "RelativeToolTip": "TestAPI\\Controllers\\TuyenDuongController.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAIwB4AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T17:50:47.139Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "TuyenDuongRepository.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\DAL\\TuyenDuongRepository.cs",
+              "RelativeDocumentMoniker": "DAL\\TuyenDuongRepository.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\DAL\\TuyenDuongRepository.cs",
+              "RelativeToolTip": "DAL\\TuyenDuongRepository.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAwBYAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T17:49:22.719Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "TuyenDuongBusiness.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\BLL\\TuyenDuongBusiness.cs",
+              "RelativeDocumentMoniker": "BLL\\TuyenDuongBusiness.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\BLL\\TuyenDuongBusiness.cs",
+              "RelativeToolTip": "BLL\\TuyenDuongBusiness.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAA8wCIAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T17:50:40.189Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "TuyenDuongModel.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\Models\\TuyenDuongModel.cs",
+              "RelativeDocumentMoniker": "Models\\TuyenDuongModel.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\Models\\TuyenDuongModel.cs",
+              "RelativeToolTip": "Models\\TuyenDuongModel.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAwBAAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T17:50:14.058Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "DiemGiaoHangModel.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\Models\\DiemGiaoHangModel.cs",
+              "RelativeDocumentMoniker": "Models\\DiemGiaoHangModel.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\Models\\DiemGiaoHangModel.cs",
+              "RelativeToolTip": "Models\\DiemGiaoHangModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T14:35:34.602Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ITuyenDuongBusiness.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\BLL\\Interfaces\\ITuyenDuongBusiness.cs",
+              "RelativeDocumentMoniker": "BLL\\Interfaces\\ITuyenDuongBusiness.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\BLL\\Interfaces\\ITuyenDuongBusiness.cs",
+              "RelativeToolTip": "BLL\\Interfaces\\ITuyenDuongBusiness.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAADwvxcAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T17:56:14.431Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "WeatherForecastController.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\TestAPI\\Controllers\\WeatherForecastController.cs",
+              "RelativeDocumentMoniker": "TestAPI\\Controllers\\WeatherForecastController.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\TestAPI\\Controllers\\WeatherForecastController.cs",
+              "RelativeToolTip": "TestAPI\\Controllers\\WeatherForecastController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T14:06:26.3Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "LoginRequestModel.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\Models\\LoginRequestModel.cs",
+              "RelativeDocumentMoniker": "Models\\LoginRequestModel.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\Models\\LoginRequestModel.cs",
+              "RelativeToolTip": "Models\\LoginRequestModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T01:50:54.501Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "ITaiXeBusiness.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\BLL\\Interfaces\\ITaiXeBusiness.cs",
+              "RelativeDocumentMoniker": "BLL\\Interfaces\\ITaiXeBusiness.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\BLL\\Interfaces\\ITaiXeBusiness.cs",
+              "RelativeToolTip": "BLL\\Interfaces\\ITaiXeBusiness.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAqwAsAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T13:42:36.001Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "TaiXeBusiness.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\BLL\\TaiXeBusiness.cs",
+              "RelativeDocumentMoniker": "BLL\\TaiXeBusiness.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\BLL\\TaiXeBusiness.cs",
+              "RelativeToolTip": "BLL\\TaiXeBusiness.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T13:45:46.432Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "ITuyenDuongRepository.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\DAL\\Interfaces\\ITuyenDuongRepository.cs",
+              "RelativeDocumentMoniker": "DAL\\Interfaces\\ITuyenDuongRepository.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\DAL\\Interfaces\\ITuyenDuongRepository.cs",
+              "RelativeToolTip": "DAL\\Interfaces\\ITuyenDuongRepository.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAA6wCMAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T17:55:56.529Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "IDatabaseHelper.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\DAL\\Helper\\Interfaces\\IDatabaseHelper.cs",
+              "RelativeDocumentMoniker": "DAL\\Helper\\Interfaces\\IDatabaseHelper.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\DAL\\Helper\\Interfaces\\IDatabaseHelper.cs",
+              "RelativeToolTip": "DAL\\Helper\\Interfaces\\IDatabaseHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T01:51:00.864Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "NguoiDungModel.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\Models\\NguoiDungModel.cs",
+              "RelativeDocumentMoniker": "Models\\NguoiDungModel.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\Models\\NguoiDungModel.cs",
+              "RelativeToolTip": "Models\\NguoiDungModel.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAYwBMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T03:25:17.177Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "NguoiDungController.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\TestAPI\\Controllers\\NguoiDungController.cs",
+              "RelativeDocumentMoniker": "TestAPI\\Controllers\\NguoiDungController.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\TestAPI\\Controllers\\NguoiDungController.cs",
+              "RelativeToolTip": "TestAPI\\Controllers\\NguoiDungController.cs",
+              "ViewState": "AgIAADUAAAAAAAAAAAAUwEEAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T01:50:39.68Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "DiemGiaoHangController.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\TestAPI\\Controllers\\DiemGiaoHangController.cs",
+              "RelativeDocumentMoniker": "TestAPI\\Controllers\\DiemGiaoHangController.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\TestAPI\\Controllers\\DiemGiaoHangController.cs",
+              "RelativeToolTip": "TestAPI\\Controllers\\DiemGiaoHangController.cs",
+              "ViewState": "AgIAADUAAAAAAAAAAAAcwEAAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T14:30:55.766Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "IDiemGiaoHangBusiness.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\BLL\\Interfaces\\IDiemGiaoHangBusiness.cs",
+              "RelativeDocumentMoniker": "BLL\\Interfaces\\IDiemGiaoHangBusiness.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\BLL\\Interfaces\\IDiemGiaoHangBusiness.cs",
+              "RelativeToolTip": "BLL\\Interfaces\\IDiemGiaoHangBusiness.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T14:49:52.256Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "IDiemGiaoHangRepository.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\DAL\\Interfaces\\IDiemGiaoHangRepository.cs",
+              "RelativeDocumentMoniker": "DAL\\Interfaces\\IDiemGiaoHangRepository.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\DAL\\Interfaces\\IDiemGiaoHangRepository.cs",
+              "RelativeToolTip": "DAL\\Interfaces\\IDiemGiaoHangRepository.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAADwvxwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T14:30:40.948Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "TaiXeModel.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\Models\\TaiXeModel.cs",
+              "RelativeDocumentMoniker": "Models\\TaiXeModel.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\Models\\TaiXeModel.cs",
+              "RelativeToolTip": "Models\\TaiXeModel.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAmwAsAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T13:41:41.928Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\TestAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "TestAPI\\appsettings.json",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\TestAPI\\appsettings.json",
+              "RelativeToolTip": "TestAPI\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAB7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-10-17T01:48:15.254Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "ITaiXeRepository.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\DAL\\Interfaces\\ITaiXeRepository.cs",
+              "RelativeDocumentMoniker": "DAL\\Interfaces\\ITaiXeRepository.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\DAL\\Interfaces\\ITaiXeRepository.cs",
+              "RelativeToolTip": "DAL\\Interfaces\\ITaiXeRepository.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T13:44:01.83Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "TaiXeRepository.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\DAL\\TaiXeRepository.cs",
+              "RelativeDocumentMoniker": "DAL\\TaiXeRepository.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\DAL\\TaiXeRepository.cs",
+              "RelativeToolTip": "DAL\\TaiXeRepository.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAzwBwAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T13:41:49.346Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "TaiXeController.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\TestAPI\\Controllers\\TaiXeController.cs",
+              "RelativeDocumentMoniker": "TestAPI\\Controllers\\TaiXeController.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\TestAPI\\Controllers\\TaiXeController.cs",
+              "RelativeToolTip": "TestAPI\\Controllers\\TaiXeController.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAAAQwDMAAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T13:40:55.316Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "INguoiDungRepository.cs",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\DAL\\Interfaces\\INguoiDungRepository.cs",
+              "RelativeDocumentMoniker": "DAL\\Interfaces\\INguoiDungRepository.cs",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\DAL\\Interfaces\\INguoiDungRepository.cs",
+              "RelativeToolTip": "DAL\\Interfaces\\INguoiDungRepository.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAUwA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-17T03:30:03.986Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "BLL",
+              "DocumentMoniker": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\BLL\\BLL.csproj",
+              "RelativeDocumentMoniker": "BLL\\BLL.csproj",
+              "ToolTip": "E:\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Test\\Test\\BLL\\BLL.csproj",
+              "RelativeToolTip": "BLL\\BLL.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-10-17T01:46:37.269Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
