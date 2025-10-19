@@ -13,6 +13,7 @@ namespace BLL.Interfaces
         bool Update(TaiXeModel model);
         bool Delete(long id);
         TaiXeModel GetDatabyID(long id);
-        List<TaiXeModel> Search(int pageIndex, int pageSize, out long total, string ho_ten, string so_dien_thoai);
+        List<TaiXeModel> Search(int pageIndex, int pageSize, out long total, string maTaiXe, string tenTaiXe);
     }
+
 }

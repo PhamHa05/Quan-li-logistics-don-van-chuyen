@@ -4033,11 +4033,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Phát triển phần mềm hướng dịch vụ\\Test\\QuanLyLogistics\\DAL\\DAL.csproj",
+      "projectUniqueName": "E:\\Phát triển phần mềm hướng dịch vụ\\Logistics\\QuanLyLogistics\\DAL\\DAL.csproj",
       "projectName": "DAL",
-      "projectPath": "E:\\Phát triển phần mềm hướng dịch vụ\\Test\\QuanLyLogistics\\DAL\\DAL.csproj",
+      "projectPath": "E:\\Phát triển phần mềm hướng dịch vụ\\Logistics\\QuanLyLogistics\\DAL\\DAL.csproj",
       "packagesPath": "C:\\Users\\TRAN HA\\.nuget\\packages\\",
-      "outputPath": "E:\\Phát triển phần mềm hướng dịch vụ\\Test\\QuanLyLogistics\\DAL\\obj\\",
+      "outputPath": "E:\\Phát triển phần mềm hướng dịch vụ\\Logistics\\QuanLyLogistics\\DAL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4058,8 +4058,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "E:\\Phát triển phần mềm hướng dịch vụ\\Test\\QuanLyLogistics\\Models\\Models.csproj": {
-              "projectPath": "E:\\Phát triển phần mềm hướng dịch vụ\\Test\\QuanLyLogistics\\Models\\Models.csproj"
+            "E:\\Phát triển phần mềm hướng dịch vụ\\Logistics\\QuanLyLogistics\\Models\\Models.csproj": {
+              "projectPath": "E:\\Phát triển phần mềm hướng dịch vụ\\Logistics\\QuanLyLogistics\\Models\\Models.csproj"
             }
           }
         }
