@@ -5,6 +5,253 @@
     "version": "1.0"
   },
   "paths": {
+    "/api/DiemGiaoHang/create": {
+      "post": {
+        "tags": [
+          "DiemGiaoHang"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiemGiaoHangModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiemGiaoHangModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiemGiaoHangModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DiemGiaoHang/update": {
+      "put": {
+        "tags": [
+          "DiemGiaoHang"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiemGiaoHangModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiemGiaoHangModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiemGiaoHangModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DiemGiaoHang/delete/{id}": {
+      "delete": {
+        "tags": [
+          "DiemGiaoHang"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DiemGiaoHang/tuyen-duong/{tuyenDuongId}": {
+      "get": {
+        "tags": [
+          "DiemGiaoHang"
+        ],
+        "parameters": [
+          {
+            "name": "tuyenDuongId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DonVanChuyen/get-by-id/{id}": {
+      "get": {
+        "tags": [
+          "DonVanChuyen"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DonVanChuyen/create": {
+      "post": {
+        "tags": [
+          "DonVanChuyen"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DonVanChuyenModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DonVanChuyenModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DonVanChuyenModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DonVanChuyen/update": {
+      "put": {
+        "tags": [
+          "DonVanChuyen"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DonVanChuyenModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DonVanChuyenModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DonVanChuyenModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DonVanChuyen/delete/{id}": {
+      "delete": {
+        "tags": [
+          "DonVanChuyen"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/DonVanChuyen/search": {
+      "post": {
+        "tags": [
+          "DonVanChuyen"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DonVanChuyenSearchRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DonVanChuyenSearchRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DonVanChuyenSearchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/NguoiDung/login": {
       "post": {
         "tags": [
@@ -214,6 +461,141 @@
   },
   "components": {
     "schemas": {
+      "DiemGiaoHangModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "idTuyenDuong": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "idDonVanChuyen": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "thuTuDung": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "thoiGianDuKien": {
+            "type": "string",
+            "format": "date-span",
+            "nullable": true
+          },
+          "thoiGianThucTe": {
+            "type": "string",
+            "format": "date-span",
+            "nullable": true
+          },
+          "trangThai": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DonVanChuyenModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "maVanDon": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenNguoiGui": {
+            "type": "string",
+            "nullable": true
+          },
+          "sdtNguoiGui": {
+            "type": "string",
+            "nullable": true
+          },
+          "diaChiLayHang": {
+            "type": "string",
+            "nullable": true
+          },
+          "tenNguoiNhan": {
+            "type": "string",
+            "nullable": true
+          },
+          "sdtNguoiNhan": {
+            "type": "string",
+            "nullable": true
+          },
+          "diaChiGiaoHang": {
+            "type": "string",
+            "nullable": true
+          },
+          "loaiHang": {
+            "type": "string",
+            "nullable": true
+          },
+          "khoiLuong": {
+            "type": "number",
+            "format": "double"
+          },
+          "tienThuHo": {
+            "type": "number",
+            "format": "double"
+          },
+          "loaiDichVu": {
+            "type": "string",
+            "nullable": true
+          },
+          "trangThai": {
+            "type": "string",
+            "nullable": true
+          },
+          "idTaiXe": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "idTuyenDuong": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "thoiGianTao": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "thoiGianCapNhat": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DonVanChuyenSearchRequest": {
+        "type": "object",
+        "properties": {
+          "pageIndex": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maVanDon": {
+            "type": "string",
+            "nullable": true
+          },
+          "trangThai": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "LoginRequestModel": {
         "type": "object",
         "properties": {
