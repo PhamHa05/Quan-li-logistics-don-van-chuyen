@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "b6PJkUfnwYc=",
+  "dgSpecHash": "ifNsUtSErP8=",
   "success": true,
-  "projectFilePath": "E:\\Phát triển phần mềm hướng dịch vụ\\Logistics\\QuanLyLogistics\\TestAPI\\Logistics.csproj",
+  "projectFilePath": "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\TestAPI\\Logistics.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\TRAN HA\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\TRAN HA\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

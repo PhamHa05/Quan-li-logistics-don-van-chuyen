@@ -4013,11 +4013,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Phát triển phần mềm hướng dịch vụ\\Logistics\\QuanLyLogistics\\Models\\Models.csproj",
+      "projectUniqueName": "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\Models.csproj",
       "projectName": "Models",
-      "projectPath": "E:\\Phát triển phần mềm hướng dịch vụ\\Logistics\\QuanLyLogistics\\Models\\Models.csproj",
+      "projectPath": "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\Models.csproj",
       "packagesPath": "C:\\Users\\TRAN HA\\.nuget\\packages\\",
-      "outputPath": "E:\\Phát triển phần mềm hướng dịch vụ\\Logistics\\QuanLyLogistics\\Models\\obj\\",
+      "outputPath": "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
