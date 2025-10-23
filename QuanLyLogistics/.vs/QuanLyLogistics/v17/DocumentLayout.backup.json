@@ -1,77 +1,133 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\",
+  "WorkspaceRootPath": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|c:\\users\\admin\\onedrive\\ta\u0300i li\u00EA\u0323u\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\models\\searchrequest\\donvanchuyensearchrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|solutionrelative:models\\searchrequest\\donvanchuyensearchrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\bll\\interfaces\\ituyenduongbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|solutionrelative:bll\\interfaces\\ituyenduongbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|c:\\users\\admin\\onedrive\\ta\u0300i li\u00EA\u0323u\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\models\\donvanchuyenmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|solutionrelative:models\\donvanchuyenmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\bll\\tuyenduongbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|solutionrelative:bll\\tuyenduongbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|c:\\users\\admin\\onedrive\\ta\u0300i li\u00EA\u0323u\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\models\\diemgiaohangmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|solutionrelative:models\\diemgiaohangmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\dal\\interfaces\\ituyenduongrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|solutionrelative:dal\\interfaces\\ituyenduongrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|c:\\users\\admin\\onedrive\\ta\u0300i li\u00EA\u0323u\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\testapi\\controllers\\donvanchuyencontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|solutionrelative:testapi\\controllers\\donvanchuyencontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\dal\\tuyenduongrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|solutionrelative:dal\\tuyenduongrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|c:\\users\\admin\\onedrive\\ta\u0300i li\u00EA\u0323u\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\dal\\donvanchuyenrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|solutionrelative:dal\\donvanchuyenrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\testapi\\controllers\\tuyenduongcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|solutionrelative:testapi\\controllers\\tuyenduongcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|c:\\users\\admin\\onedrive\\ta\u0300i li\u00EA\u0323u\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\dal\\interfaces\\idonvanchuyenrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|solutionrelative:dal\\interfaces\\idonvanchuyenrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\testapi\\controllers\\taixecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|solutionrelative:testapi\\controllers\\taixecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|c:\\users\\admin\\onedrive\\ta\u0300i li\u00EA\u0323u\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\bll\\donvanchuyenbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|solutionrelative:bll\\donvanchuyenbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\models\\tuyenduongmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|solutionrelative:models\\tuyenduongmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|c:\\users\\admin\\onedrive\\ta\u0300i li\u00EA\u0323u\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\bll\\interfaces\\idonvanchuyenbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|solutionrelative:bll\\interfaces\\idonvanchuyenbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\models\\taixemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|solutionrelative:models\\taixemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|c:\\users\\admin\\onedrive\\ta\u0300i li\u00EA\u0323u\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\bll\\interfaces\\idiemgiaohangbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|solutionrelative:bll\\interfaces\\idiemgiaohangbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\bll\\interfaces\\itaixebusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|solutionrelative:bll\\interfaces\\itaixebusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|c:\\users\\admin\\onedrive\\ta\u0300i li\u00EA\u0323u\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\bll\\diemgiaohangbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|solutionrelative:bll\\diemgiaohangbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\bll\\taixebusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|solutionrelative:bll\\taixebusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|c:\\users\\admin\\onedrive\\ta\u0300i li\u00EA\u0323u\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\dal\\diemgiaohangrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|solutionrelative:dal\\diemgiaohangrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\dal\\interfaces\\itaixerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|solutionrelative:dal\\interfaces\\itaixerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|c:\\users\\admin\\onedrive\\ta\u0300i li\u00EA\u0323u\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\dal\\interfaces\\idiemgiaohangrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|solutionrelative:dal\\interfaces\\idiemgiaohangrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\dal\\taixerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|solutionrelative:dal\\taixerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|c:\\users\\admin\\onedrive\\ta\u0300i li\u00EA\u0323u\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\models\\searchrequest\\taixesearchrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\models\\searchrequest\\taixesearchrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|solutionrelative:models\\searchrequest\\taixesearchrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|c:\\users\\admin\\onedrive\\ta\u0300i li\u00EA\u0323u\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\testapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|solutionrelative:testapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|c:\\users\\admin\\onedrive\\ta\u0300i li\u00EA\u0323u\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\testapi\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|solutionrelative:testapi\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|c:\\users\\admin\\onedrive\\ta\u0300i li\u00EA\u0323u\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\testapi\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\testapi\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|solutionrelative:testapi\\weatherforecast.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|c:\\users\\admin\\onedrive\\ta\u0300i li\u00EA\u0323u\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\testapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\bll\\sukientrangthaibusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|solutionrelative:bll\\sukientrangthaibusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\bll\\giaodichcodbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|solutionrelative:bll\\giaodichcodbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\dal\\interfaces\\idonvanchuyenrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|solutionrelative:dal\\interfaces\\idonvanchuyenrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\dal\\interfaces\\idiemgiaohangrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|solutionrelative:dal\\interfaces\\idiemgiaohangrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\models\\searchrequest\\donvanchuyensearchrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|solutionrelative:models\\searchrequest\\donvanchuyensearchrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\models\\donvanchuyenmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|solutionrelative:models\\donvanchuyenmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\models\\diemgiaohangmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{72BD7B60-B473-4C02-A5BA-2A6B2AAADADA}|Models\\Models.csproj|solutionrelative:models\\diemgiaohangmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\testapi\\controllers\\donvanchuyencontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|solutionrelative:testapi\\controllers\\donvanchuyencontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\dal\\donvanchuyenrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|solutionrelative:dal\\donvanchuyenrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\bll\\donvanchuyenbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|solutionrelative:bll\\donvanchuyenbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\bll\\interfaces\\idonvanchuyenbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|solutionrelative:bll\\interfaces\\idonvanchuyenbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\bll\\interfaces\\idiemgiaohangbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|solutionrelative:bll\\interfaces\\idiemgiaohangbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\bll\\diemgiaohangbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6EDF39E0-45B1-4CBD-9298-AE37DEDB47AF}|BLL\\BLL.csproj|solutionrelative:bll\\diemgiaohangbusiness.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\dal\\diemgiaohangrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87D3FE41-71E3-49E9-A028-5F71E12E5470}|DAL\\DAL.csproj|solutionrelative:dal\\diemgiaohangrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\testapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|solutionrelative:testapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\testapi\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|solutionrelative:testapi\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\testapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|solutionrelative:testapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|c:\\users\\admin\\onedrive\\ta\u0300i li\u00EA\u0323u\\ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\testapi\\controllers\\diemgiaohangcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|d:\\btl_ptpmhdv\\quan-li-logistics-don-van-chuyen\\quanlylogistics\\testapi\\controllers\\diemgiaohangcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{8ADECD36-56FF-45BE-A8AB-E11EACBBB81B}|TestAPI\\Logistics.csproj|solutionrelative:testapi\\controllers\\diemgiaohangcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -82,197 +138,221 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "DonVanChuyenController.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\TestAPI\\Controllers\\DonVanChuyenController.cs",
-              "RelativeDocumentMoniker": "TestAPI\\Controllers\\DonVanChuyenController.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\TestAPI\\Controllers\\DonVanChuyenController.cs",
-              "RelativeToolTip": "TestAPI\\Controllers\\DonVanChuyenController.cs",
-              "ViewState": "AgIAACkAAAAAAAAAAAAkwEEAAAABAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "ITuyenDuongBusiness.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\Interfaces\\ITuyenDuongBusiness.cs",
+              "RelativeDocumentMoniker": "BLL\\Interfaces\\ITuyenDuongBusiness.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\Interfaces\\ITuyenDuongBusiness.cs*",
+              "RelativeToolTip": "BLL\\Interfaces\\ITuyenDuongBusiness.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T02:48:29.731Z",
+              "WhenOpened": "2025-10-23T03:52:47.622Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "DonVanChuyenModel.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\DonVanChuyenModel.cs",
-              "RelativeDocumentMoniker": "Models\\DonVanChuyenModel.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\DonVanChuyenModel.cs",
-              "RelativeToolTip": "Models\\DonVanChuyenModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
+              "Title": "TuyenDuongBusiness.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\TuyenDuongBusiness.cs",
+              "RelativeDocumentMoniker": "BLL\\TuyenDuongBusiness.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\TuyenDuongBusiness.cs*",
+              "RelativeToolTip": "BLL\\TuyenDuongBusiness.cs*",
+              "ViewState": "AgIAABYAAAAAAAAAAAAmwD4AAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T02:46:20.105Z",
+              "WhenOpened": "2025-10-23T03:52:36.704Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "DiemGiaoHangModel.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\DiemGiaoHangModel.cs",
-              "RelativeDocumentMoniker": "Models\\DiemGiaoHangModel.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\DiemGiaoHangModel.cs",
-              "RelativeToolTip": "Models\\DiemGiaoHangModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Title": "ITuyenDuongRepository.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\Interfaces\\ITuyenDuongRepository.cs",
+              "RelativeDocumentMoniker": "DAL\\Interfaces\\ITuyenDuongRepository.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\Interfaces\\ITuyenDuongRepository.cs*",
+              "RelativeToolTip": "DAL\\Interfaces\\ITuyenDuongRepository.cs*",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwDMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T02:37:03.196Z",
+              "WhenOpened": "2025-10-23T03:52:28.061Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "DonVanChuyenSearchRequest.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\SearchRequest\\DonVanChuyenSearchRequest.cs",
-              "RelativeDocumentMoniker": "Models\\SearchRequest\\DonVanChuyenSearchRequest.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\SearchRequest\\DonVanChuyenSearchRequest.cs",
-              "RelativeToolTip": "Models\\SearchRequest\\DonVanChuyenSearchRequest.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAApAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "TuyenDuongRepository.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\TuyenDuongRepository.cs",
+              "RelativeDocumentMoniker": "DAL\\TuyenDuongRepository.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\TuyenDuongRepository.cs*",
+              "RelativeToolTip": "DAL\\TuyenDuongRepository.cs*",
+              "ViewState": "AgIAAGEAAAAAAAAAAAAAwIwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T02:46:14.254Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "IDonVanChuyenRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\Interfaces\\IDonVanChuyenRepository.cs",
-              "RelativeDocumentMoniker": "DAL\\Interfaces\\IDonVanChuyenRepository.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\Interfaces\\IDonVanChuyenRepository.cs",
-              "RelativeToolTip": "DAL\\Interfaces\\IDonVanChuyenRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T02:48:04.848Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "DonVanChuyenBusiness.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\DonVanChuyenBusiness.cs",
-              "RelativeDocumentMoniker": "BLL\\DonVanChuyenBusiness.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\DonVanChuyenBusiness.cs",
-              "RelativeToolTip": "BLL\\DonVanChuyenBusiness.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAAkwD0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T02:46:48.948Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "IDonVanChuyenBusiness.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\Interfaces\\IDonVanChuyenBusiness.cs",
-              "RelativeDocumentMoniker": "BLL\\Interfaces\\IDonVanChuyenBusiness.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\Interfaces\\IDonVanChuyenBusiness.cs",
-              "RelativeToolTip": "BLL\\Interfaces\\IDonVanChuyenBusiness.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T02:47:33.561Z",
+              "WhenOpened": "2025-10-23T03:52:15.967Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "DonVanChuyenRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\DonVanChuyenRepository.cs",
-              "RelativeDocumentMoniker": "DAL\\DonVanChuyenRepository.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\DonVanChuyenRepository.cs",
-              "RelativeToolTip": "DAL\\DonVanChuyenRepository.cs",
-              "ViewState": "AgIAAI0AAAAAAAAAAAAkwKUAAAAAAAAAAAAAAA==",
+              "Title": "TuyenDuongController.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\TestAPI\\Controllers\\TuyenDuongController.cs",
+              "RelativeDocumentMoniker": "TestAPI\\Controllers\\TuyenDuongController.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\TestAPI\\Controllers\\TuyenDuongController.cs*",
+              "RelativeToolTip": "TestAPI\\Controllers\\TuyenDuongController.cs*",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAwCwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T02:46:31.175Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "DiemGiaoHangRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\DiemGiaoHangRepository.cs",
-              "RelativeDocumentMoniker": "DAL\\DiemGiaoHangRepository.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\DiemGiaoHangRepository.cs",
-              "RelativeToolTip": "DAL\\DiemGiaoHangRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T02:39:04.604Z",
+              "WhenOpened": "2025-10-23T03:51:49.044Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
-              "Title": "DiemGiaoHangBusiness.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\DiemGiaoHangBusiness.cs",
-              "RelativeDocumentMoniker": "BLL\\DiemGiaoHangBusiness.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\DiemGiaoHangBusiness.cs",
-              "RelativeToolTip": "BLL\\DiemGiaoHangBusiness.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAAAAAAAAAAAA==",
+              "Title": "TaiXeBusiness.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\TaiXeBusiness.cs",
+              "RelativeDocumentMoniker": "BLL\\TaiXeBusiness.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\TaiXeBusiness.cs",
+              "RelativeToolTip": "BLL\\TaiXeBusiness.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T02:38:59.96Z",
+              "WhenOpened": "2025-10-23T03:49:35.299Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ITaiXeRepository.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\Interfaces\\ITaiXeRepository.cs",
+              "RelativeDocumentMoniker": "DAL\\Interfaces\\ITaiXeRepository.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\Interfaces\\ITaiXeRepository.cs",
+              "RelativeToolTip": "DAL\\Interfaces\\ITaiXeRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T03:49:10.013Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "TaiXeRepository.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\TaiXeRepository.cs",
+              "RelativeDocumentMoniker": "DAL\\TaiXeRepository.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\TaiXeRepository.cs",
+              "RelativeToolTip": "DAL\\TaiXeRepository.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAAwG0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T03:49:03.043Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TuyenDuongModel.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\TuyenDuongModel.cs",
+              "RelativeDocumentMoniker": "Models\\TuyenDuongModel.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\TuyenDuongModel.cs*",
+              "RelativeToolTip": "Models\\TuyenDuongModel.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T03:48:32.61Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "TaiXeModel.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\TaiXeModel.cs",
+              "RelativeDocumentMoniker": "Models\\TaiXeModel.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\TaiXeModel.cs",
+              "RelativeToolTip": "Models\\TaiXeModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T03:48:10.618Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "TaiXeController.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\TestAPI\\Controllers\\TaiXeController.cs",
+              "RelativeDocumentMoniker": "TestAPI\\Controllers\\TaiXeController.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\TestAPI\\Controllers\\TaiXeController.cs",
+              "RelativeToolTip": "TestAPI\\Controllers\\TaiXeController.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAwDoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T03:50:26.105Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
-              "Title": "IDiemGiaoHangBusiness.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\Interfaces\\IDiemGiaoHangBusiness.cs",
-              "RelativeDocumentMoniker": "BLL\\Interfaces\\IDiemGiaoHangBusiness.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\Interfaces\\IDiemGiaoHangBusiness.cs",
-              "RelativeToolTip": "BLL\\Interfaces\\IDiemGiaoHangBusiness.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Title": "ITaiXeBusiness.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\Interfaces\\ITaiXeBusiness.cs",
+              "RelativeDocumentMoniker": "BLL\\Interfaces\\ITaiXeBusiness.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\Interfaces\\ITaiXeBusiness.cs",
+              "RelativeToolTip": "BLL\\Interfaces\\ITaiXeBusiness.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T02:41:53.885Z",
+              "WhenOpened": "2025-10-23T03:50:00.796Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "SuKienTrangThaiBusiness.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\SuKienTrangThaiBusiness.cs",
+              "RelativeDocumentMoniker": "BLL\\SuKienTrangThaiBusiness.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\SuKienTrangThaiBusiness.cs",
+              "RelativeToolTip": "BLL\\SuKienTrangThaiBusiness.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T02:51:18.924Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "DonVanChuyenSearchRequest.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\SearchRequest\\DonVanChuyenSearchRequest.cs",
+              "RelativeDocumentMoniker": "Models\\SearchRequest\\DonVanChuyenSearchRequest.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\SearchRequest\\DonVanChuyenSearchRequest.cs",
+              "RelativeToolTip": "Models\\SearchRequest\\DonVanChuyenSearchRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T02:46:14.254Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 12,
               "Title": "TaiXeSearchRequest.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\SearchRequest\\TaiXeSearchRequest.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\SearchRequest\\TaiXeSearchRequest.cs",
               "RelativeDocumentMoniker": "Models\\SearchRequest\\TaiXeSearchRequest.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\SearchRequest\\TaiXeSearchRequest.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\SearchRequest\\TaiXeSearchRequest.cs",
               "RelativeToolTip": "Models\\SearchRequest\\TaiXeSearchRequest.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-23T02:46:16.078Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Dockerfile",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\TestAPI\\Dockerfile",
-              "RelativeDocumentMoniker": "TestAPI\\Dockerfile",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\TestAPI\\Dockerfile",
-              "RelativeToolTip": "TestAPI\\Dockerfile",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-10-23T02:46:09.795Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "IDiemGiaoHangRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\Interfaces\\IDiemGiaoHangRepository.cs",
-              "RelativeDocumentMoniker": "DAL\\Interfaces\\IDiemGiaoHangRepository.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\Interfaces\\IDiemGiaoHangRepository.cs",
-              "RelativeToolTip": "DAL\\Interfaces\\IDiemGiaoHangRepository.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAgwBwAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 20,
+              "Title": "DiemGiaoHangModel.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\DiemGiaoHangModel.cs",
+              "RelativeDocumentMoniker": "Models\\DiemGiaoHangModel.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\DiemGiaoHangModel.cs",
+              "RelativeToolTip": "Models\\DiemGiaoHangModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T02:39:29.075Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-23T02:37:03.196Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 13,
               "Title": "WeatherForecast.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\TestAPI\\WeatherForecast.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\TestAPI\\WeatherForecast.cs",
               "RelativeDocumentMoniker": "TestAPI\\WeatherForecast.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\TestAPI\\WeatherForecast.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\TestAPI\\WeatherForecast.cs",
               "RelativeToolTip": "TestAPI\\WeatherForecast.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -281,42 +361,183 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\TestAPI\\Program.cs",
-              "RelativeDocumentMoniker": "TestAPI\\Program.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\TestAPI\\Program.cs",
-              "RelativeToolTip": "TestAPI\\Program.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 15,
+              "Title": "GiaoDichCODBusiness.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\GiaoDichCODBusiness.cs",
+              "RelativeDocumentMoniker": "BLL\\GiaoDichCODBusiness.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\GiaoDichCODBusiness.cs",
+              "RelativeToolTip": "BLL\\GiaoDichCODBusiness.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T02:45:10.031Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-23T02:51:17.488Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 17,
-              "Title": "DiemGiaoHangController.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\TestAPI\\Controllers\\DiemGiaoHangController.cs",
-              "RelativeDocumentMoniker": "TestAPI\\Controllers\\DiemGiaoHangController.cs",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\TestAPI\\Controllers\\DiemGiaoHangController.cs",
-              "RelativeToolTip": "TestAPI\\Controllers\\DiemGiaoHangController.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAYwEsAAAAAAAAAAAAAAA==",
+              "Title": "IDiemGiaoHangRepository.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\Interfaces\\IDiemGiaoHangRepository.cs",
+              "RelativeDocumentMoniker": "DAL\\Interfaces\\IDiemGiaoHangRepository.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\Interfaces\\IDiemGiaoHangRepository.cs",
+              "RelativeToolTip": "DAL\\Interfaces\\IDiemGiaoHangRepository.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwBwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T02:42:26.004Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-23T02:39:29.075Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 16,
+              "Title": "IDonVanChuyenRepository.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\Interfaces\\IDonVanChuyenRepository.cs",
+              "RelativeDocumentMoniker": "DAL\\Interfaces\\IDonVanChuyenRepository.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\Interfaces\\IDonVanChuyenRepository.cs",
+              "RelativeToolTip": "DAL\\Interfaces\\IDonVanChuyenRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T02:48:04.848Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "DonVanChuyenModel.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\DonVanChuyenModel.cs",
+              "RelativeDocumentMoniker": "Models\\DonVanChuyenModel.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\DonVanChuyenModel.cs",
+              "RelativeToolTip": "Models\\DonVanChuyenModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T02:46:20.105Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "DonVanChuyenController.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\TestAPI\\Controllers\\DonVanChuyenController.cs",
+              "RelativeDocumentMoniker": "TestAPI\\Controllers\\DonVanChuyenController.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\TestAPI\\Controllers\\DonVanChuyenController.cs",
+              "RelativeToolTip": "TestAPI\\Controllers\\DonVanChuyenController.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAAAkwEEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T02:48:29.731Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "DonVanChuyenBusiness.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\DonVanChuyenBusiness.cs",
+              "RelativeDocumentMoniker": "BLL\\DonVanChuyenBusiness.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\DonVanChuyenBusiness.cs",
+              "RelativeToolTip": "BLL\\DonVanChuyenBusiness.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAkwD0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T02:46:48.948Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "IDonVanChuyenBusiness.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\Interfaces\\IDonVanChuyenBusiness.cs",
+              "RelativeDocumentMoniker": "BLL\\Interfaces\\IDonVanChuyenBusiness.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\Interfaces\\IDonVanChuyenBusiness.cs",
+              "RelativeToolTip": "BLL\\Interfaces\\IDonVanChuyenBusiness.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T02:47:33.561Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "DonVanChuyenRepository.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\DonVanChuyenRepository.cs",
+              "RelativeDocumentMoniker": "DAL\\DonVanChuyenRepository.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\DonVanChuyenRepository.cs",
+              "RelativeToolTip": "DAL\\DonVanChuyenRepository.cs",
+              "ViewState": "AgIAAI0AAAAAAAAAAAAkwKUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T02:46:31.175Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "DiemGiaoHangRepository.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\DiemGiaoHangRepository.cs",
+              "RelativeDocumentMoniker": "DAL\\DiemGiaoHangRepository.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\DiemGiaoHangRepository.cs",
+              "RelativeToolTip": "DAL\\DiemGiaoHangRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T02:39:04.604Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "DiemGiaoHangBusiness.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\DiemGiaoHangBusiness.cs",
+              "RelativeDocumentMoniker": "BLL\\DiemGiaoHangBusiness.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\DiemGiaoHangBusiness.cs",
+              "RelativeToolTip": "BLL\\DiemGiaoHangBusiness.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T02:38:59.96Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "IDiemGiaoHangBusiness.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\Interfaces\\IDiemGiaoHangBusiness.cs",
+              "RelativeDocumentMoniker": "BLL\\Interfaces\\IDiemGiaoHangBusiness.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\Interfaces\\IDiemGiaoHangBusiness.cs",
+              "RelativeToolTip": "BLL\\Interfaces\\IDiemGiaoHangBusiness.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T02:41:53.885Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\TestAPI\\Dockerfile",
+              "RelativeDocumentMoniker": "TestAPI\\Dockerfile",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\TestAPI\\Dockerfile",
+              "RelativeToolTip": "TestAPI\\Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-10-23T02:46:09.795Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\TestAPI\\Program.cs",
+              "RelativeDocumentMoniker": "TestAPI\\Program.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\TestAPI\\Program.cs",
+              "RelativeToolTip": "TestAPI\\Program.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T02:45:10.031Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "DiemGiaoHangController.cs",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\TestAPI\\Controllers\\DiemGiaoHangController.cs",
+              "RelativeDocumentMoniker": "TestAPI\\Controllers\\DiemGiaoHangController.cs",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\TestAPI\\Controllers\\DiemGiaoHangController.cs",
+              "RelativeToolTip": "TestAPI\\Controllers\\DiemGiaoHangController.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAYwEsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T02:42:26.004Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
               "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\TestAPI\\appsettings.json",
+              "DocumentMoniker": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\TestAPI\\appsettings.json",
               "RelativeDocumentMoniker": "TestAPI\\appsettings.json",
-              "ToolTip": "C:\\Users\\Admin\\OneDrive\\Ta\u0300i li\u00EA\u0323u\\Ph\u00E1t tri\u1EC3n ph\u1EA7n m\u1EC1m h\u01B0\u1EDBng d\u1ECBch v\u1EE5\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\TestAPI\\appsettings.json",
+              "ToolTip": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\TestAPI\\appsettings.json",
               "RelativeToolTip": "TestAPI\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAACKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-23T02:43:26.279Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-23T02:43:26.279Z"
             }
           ]
         }

@@ -69,3 +69,21 @@ C:\Users\Admin\OneDrive\Tài liệu\Phát triển phần mềm hướng dịch
 C:\Users\Admin\OneDrive\Tài liệu\Phát triển phần mềm hướng dịch vụ\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\DAL\obj\Debug\net8.0\DAL.pdb
 C:\Users\Admin\OneDrive\Tài liệu\Phát triển phần mềm hướng dịch vụ\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\DAL\obj\Debug\net8.0\DAL.genruntimeconfig.cache
 C:\Users\Admin\OneDrive\Tài liệu\Phát triển phần mềm hướng dịch vụ\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\DAL\obj\Debug\net8.0\ref\DAL.dll
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\DAL\bin\Debug\net8.0\DAL.deps.json
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\DAL\bin\Debug\net8.0\DAL.runtimeconfig.json
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\DAL\bin\Debug\net8.0\DAL.dll
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\DAL\bin\Debug\net8.0\DAL.pdb
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\DAL\bin\Debug\net8.0\Models.dll
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\DAL\bin\Debug\net8.0\Models.pdb
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\DAL\obj\Debug\net8.0\DAL.csproj.AssemblyReference.cache
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\DAL\obj\Debug\net8.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\DAL\obj\Debug\net8.0\DAL.AssemblyInfoInputs.cache
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\DAL\obj\Debug\net8.0\DAL.AssemblyInfo.cs
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\DAL\obj\Debug\net8.0\DAL.csproj.CoreCompileInputs.cache
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\DAL\obj\Debug\net8.0\DAL.sourcelink.json
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\DAL\obj\Debug\net8.0\DAL.csproj.Up2Date
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\DAL\obj\Debug\net8.0\DAL.dll
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\DAL\obj\Debug\net8.0\refint\DAL.dll
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\DAL\obj\Debug\net8.0\DAL.pdb
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\DAL\obj\Debug\net8.0\DAL.genruntimeconfig.cache
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\DAL\obj\Debug\net8.0\ref\DAL.dll

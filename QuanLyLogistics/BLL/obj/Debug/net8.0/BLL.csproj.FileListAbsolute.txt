@@ -77,3 +77,23 @@ C:\Users\Admin\OneDrive\Tài liệu\Phát triển phần mềm hướng dịch
 C:\Users\Admin\OneDrive\Tài liệu\Phát triển phần mềm hướng dịch vụ\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\BLL\obj\Debug\net8.0\BLL.csproj.Up2Date
 C:\Users\Admin\OneDrive\Tài liệu\Phát triển phần mềm hướng dịch vụ\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\BLL\obj\Debug\net8.0\BLL.genruntimeconfig.cache
 C:\Users\Admin\OneDrive\Tài liệu\Phát triển phần mềm hướng dịch vụ\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\BLL\obj\Debug\net8.0\ref\BLL.dll
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\BLL\bin\Debug\net8.0\BLL.deps.json
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\BLL\bin\Debug\net8.0\BLL.runtimeconfig.json
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\BLL\bin\Debug\net8.0\BLL.dll
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\BLL\bin\Debug\net8.0\BLL.pdb
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\BLL\bin\Debug\net8.0\DAL.dll
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\BLL\bin\Debug\net8.0\Models.dll
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\BLL\bin\Debug\net8.0\DAL.pdb
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\BLL\bin\Debug\net8.0\Models.pdb
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\BLL\obj\Debug\net8.0\BLL.csproj.AssemblyReference.cache
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\BLL\obj\Debug\net8.0\BLL.GeneratedMSBuildEditorConfig.editorconfig
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\BLL\obj\Debug\net8.0\BLL.AssemblyInfoInputs.cache
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\BLL\obj\Debug\net8.0\BLL.AssemblyInfo.cs
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\BLL\obj\Debug\net8.0\BLL.csproj.CoreCompileInputs.cache
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\BLL\obj\Debug\net8.0\BLL.sourcelink.json
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\BLL\obj\Debug\net8.0\BLL.csproj.Up2Date
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\BLL\obj\Debug\net8.0\BLL.dll
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\BLL\obj\Debug\net8.0\refint\BLL.dll
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\BLL\obj\Debug\net8.0\BLL.pdb
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\BLL\obj\Debug\net8.0\BLL.genruntimeconfig.cache
+D:\BTL_PTPMHDV\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\BLL\obj\Debug\net8.0\ref\BLL.dll
