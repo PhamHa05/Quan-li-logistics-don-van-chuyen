@@ -35,10 +35,38 @@ builder.Services.AddScoped<ITuyenDuongBusiness, TuyenDuongBusiness>();
 builder.Services.AddScoped<IDonVanChuyenRepository, DonVanChuyenRepository>();
 builder.Services.AddScoped<IDonVanChuyenBusiness, DonVanChuyenBusiness>();
 
-builder.Services.AddControllers();
+// Đăng ký SuKienTrangThai
+builder.Services.AddScoped<ISuKienTrangThaiRepository, SuKienTrangThaiRepository>();
+builder.Services.AddScoped<ISuKienTrangThaiBusiness, SuKienTrangThaiBusiness>();
+
+// Đăng ký GiaoDichCOD
+builder.Services.AddScoped<IGiaoDichCODRepository, GiaoDichCODRepository>();
+builder.Services.AddScoped<IGiaoDichCODBusiness, GiaoDichCODBusiness>();
+
+builder.Services.AddControllers()
+    .AddJsonOptions(opt =>
+    {
+        opt.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+    }
+    
+    );
+
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+    options.JsonSerializerOptions.Converters.Add(
+        new System.Text.Json.Serialization.JsonStringEnumConverter());
+});
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();   
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new() { Title = "Logistics API", Version = "v1" });
+    c.DocInclusionPredicate((docName, apiDesc) =>
+        apiDesc.ActionDescriptor.DisplayName?.Contains("Controllers") == true);
+});   
 
 var app = builder.Build();
 
