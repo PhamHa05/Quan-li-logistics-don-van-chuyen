@@ -35,3 +35,13 @@ E:\Phát triển phần mềm hướng dịch vụ\Quan-li-logistics-don-van-chu
 E:\Phát triển phần mềm hướng dịch vụ\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\Getway\obj\Debug\net8.0\Gateway.pdb
 E:\Phát triển phần mềm hướng dịch vụ\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\Getway\obj\Debug\net8.0\Gateway.genruntimeconfig.cache
 E:\Phát triển phần mềm hướng dịch vụ\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\Getway\obj\Debug\net8.0\ref\Gateway.dll
+E:\Phát triển phần mềm hướng dịch vụ\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\Getway\bin\Debug\net8.0\FluentValidation.dll
+E:\Phát triển phần mềm hướng dịch vụ\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\Getway\bin\Debug\net8.0\IPAddressRange.dll
+E:\Phát triển phần mềm hướng dịch vụ\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\Getway\bin\Debug\net8.0\Microsoft.AspNetCore.JsonPatch.dll
+E:\Phát triển phần mềm hướng dịch vụ\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\Getway\bin\Debug\net8.0\Microsoft.AspNetCore.MiddlewareAnalysis.dll
+E:\Phát triển phần mềm hướng dịch vụ\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\Getway\bin\Debug\net8.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+E:\Phát triển phần mềm hướng dịch vụ\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\Getway\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+E:\Phát triển phần mềm hướng dịch vụ\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\Getway\bin\Debug\net8.0\Microsoft.Extensions.DiagnosticAdapter.dll
+E:\Phát triển phần mềm hướng dịch vụ\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\Getway\bin\Debug\net8.0\Newtonsoft.Json.dll
+E:\Phát triển phần mềm hướng dịch vụ\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\Getway\bin\Debug\net8.0\Newtonsoft.Json.Bson.dll
+E:\Phát triển phần mềm hướng dịch vụ\Quan-li-logistics-don-van-chuyen\QuanLyLogistics\Getway\bin\Debug\net8.0\Ocelot.dll

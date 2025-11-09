@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Logistics+Gateway",
+    "Projects": [
+      {
+        "Path": "TestAPI\\Logistics.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "Getway\\Gateway.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
