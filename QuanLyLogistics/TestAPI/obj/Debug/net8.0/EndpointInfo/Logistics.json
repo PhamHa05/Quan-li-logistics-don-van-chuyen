@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Logistics",
-    "version": "1.0"
+    "title": "Logistics API",
+    "version": "v1"
   },
   "paths": {
     "/api/DiemGiaoHang/create": {
@@ -252,6 +252,91 @@
         }
       }
     },
+    "/api/GiaoDichCOD/create": {
+      "post": {
+        "tags": [
+          "GiaoDichCOD"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GiaoDichCODModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GiaoDichCODModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GiaoDichCODModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/GiaoDichCOD/update": {
+      "put": {
+        "tags": [
+          "GiaoDichCOD"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GiaoDichCODModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GiaoDichCODModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GiaoDichCODModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/GiaoDichCOD/don-van-chuyen/{id}": {
+      "get": {
+        "tags": [
+          "GiaoDichCOD"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/NguoiDung/login": {
       "post": {
         "tags": [
@@ -409,6 +494,60 @@
             "in": "query",
             "schema": {
               "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/SuKienTrangThai/create": {
+      "post": {
+        "tags": [
+          "SuKienTrangThai"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SuKienTrangThaiModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SuKienTrangThaiModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SuKienTrangThaiModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/SuKienTrangThai/history/{idDonVanChuyen}": {
+      "get": {
+        "tags": [
+          "SuKienTrangThai"
+        ],
+        "parameters": [
+          {
+            "name": "idDonVanChuyen",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
             }
           }
         ],
@@ -820,6 +959,41 @@
         },
         "additionalProperties": false
       },
+      "GiaoDichCODModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "idDonVanChuyen": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "soTienDuKien": {
+            "type": "number",
+            "format": "double"
+          },
+          "soTienThucTe": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "thoiGianThuTien": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "daDoiSoat": {
+            "type": "boolean"
+          },
+          "trangThaiThanhToan": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "LoginRequestModel": {
         "type": "object",
         "properties": {
@@ -872,6 +1046,49 @@
           "ngayTao": {
             "type": "string",
             "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SuKienTrangThaiModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "idDonVanChuyen": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "trangThaiCu": {
+            "type": "string",
+            "nullable": true
+          },
+          "trangThaiMoi": {
+            "type": "string",
+            "nullable": true
+          },
+          "thoiGianSuKien": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ghiChu": {
+            "type": "string",
+            "nullable": true
+          },
+          "urlAnhKyNhan": {
+            "type": "string",
+            "nullable": true
+          },
+          "urlChuKy": {
+            "type": "string",
+            "nullable": true
+          },
+          "maYeuCau": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false

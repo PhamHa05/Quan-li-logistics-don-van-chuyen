@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\BLL.csproj": {}
+    "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\BLL.csproj": {}
   },
   "projects": {
-    "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\BLL.csproj": {
+    "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\BLL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\BLL.csproj",
+        "projectUniqueName": "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\BLL.csproj",
         "projectName": "BLL",
-        "projectPath": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\BLL.csproj",
-        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\obj\\",
+        "projectPath": "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\BLL.csproj",
+        "packagesPath": "C:\\Users\\TRAN HA\\.nuget\\packages\\",
+        "outputPath": "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\TRAN HA\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -32,11 +32,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\DAL.csproj": {
-                "projectPath": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\DAL.csproj"
+              "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\DAL.csproj": {
+                "projectPath": "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\DAL.csproj"
               },
-              "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\Models.csproj": {
-                "projectPath": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\Models.csproj"
+              "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\Models.csproj": {
+                "projectPath": "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\Models.csproj"
               }
             }
           }
@@ -51,7 +51,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -76,6 +76,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[8.0.21, )"
+            },
+            "Ocelot": {
+              "target": "Package",
+              "version": "[24.0.1, )"
             }
           },
           "imports": [
@@ -94,24 +98,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\DAL.csproj": {
+    "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\DAL.csproj",
+        "projectUniqueName": "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\DAL.csproj",
         "projectName": "DAL",
-        "projectPath": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\DAL.csproj",
-        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\obj\\",
+        "projectPath": "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\DAL.csproj",
+        "packagesPath": "C:\\Users\\TRAN HA\\.nuget\\packages\\",
+        "outputPath": "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\TRAN HA\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -126,8 +130,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\Models.csproj": {
-                "projectPath": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\Models.csproj"
+              "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\Models.csproj": {
+                "projectPath": "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\Models.csproj"
               }
             }
           }
@@ -142,7 +146,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -167,6 +171,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[8.0.21, )"
+            },
+            "Ocelot": {
+              "target": "Package",
+              "version": "[24.0.1, )"
             }
           },
           "imports": [
@@ -185,24 +193,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\Models.csproj": {
+    "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\Models.csproj",
+        "projectUniqueName": "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\Models.csproj",
         "projectName": "Models",
-        "projectPath": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\Models.csproj",
-        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
-        "outputPath": "D:\\BTL_PTPMHDV\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\obj\\",
+        "projectPath": "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\Models.csproj",
+        "packagesPath": "C:\\Users\\TRAN HA\\.nuget\\packages\\",
+        "outputPath": "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\TRAN HA\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -229,7 +237,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -254,6 +262,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[8.0.21, )"
+            },
+            "Ocelot": {
+              "target": "Package",
+              "version": "[24.0.1, )"
             }
           },
           "imports": [
@@ -272,7 +284,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
