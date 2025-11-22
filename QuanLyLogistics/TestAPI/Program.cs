@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-// ??ng ký Database Helper
+// Đăng ký Database Helper
 builder.Services.AddScoped<IDatabaseHelper, DatabaseHelper>();
 
 // Đăng ký các dịch vụ tầng DAL
@@ -43,13 +43,24 @@ builder.Services.AddScoped<ISuKienTrangThaiBusiness, SuKienTrangThaiBusiness>();
 builder.Services.AddScoped<IGiaoDichCODRepository, GiaoDichCODRepository>();
 builder.Services.AddScoped<IGiaoDichCODBusiness, GiaoDichCODBusiness>();
 
-builder.Services.AddControllers()
-    .AddJsonOptions(opt =>
+// Cấu hình CORS cho frontend
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
     {
-        opt.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
-    }
-    
-    );
+        policy.WithOrigins(
+            "http://localhost:5500",
+            "http://127.0.0.1:5500",
+            "http://localhost:5501",
+            "http://127.0.0.1:5501",
+            "http://localhost:8080",
+            "null"
+        )
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowCredentials();
+    });
+});
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
@@ -58,7 +69,6 @@ builder.Services.AddControllers().AddJsonOptions(options =>
         new System.Text.Json.Serialization.JsonStringEnumConverter());
 });
 
-
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -66,7 +76,7 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new() { Title = "Logistics API", Version = "v1" });
     c.DocInclusionPredicate((docName, apiDesc) =>
         apiDesc.ActionDescriptor.DisplayName?.Contains("Controllers") == true);
-});   
+});
 
 var app = builder.Build();
 
@@ -78,6 +88,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowFrontend");
 
 app.UseAuthorization();
 

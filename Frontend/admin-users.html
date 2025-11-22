@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="vi" ng-app="logisticsApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý người dùng - Logistics Manager</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="admin-style.css">
+</head>
+<body ng-controller="AdminUsersController">
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Logistics Manager</h2>
+            </div>
+            <div class="sidebar-menu">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="admin-orders.html"><i class="fas fa-shipping-fast"></i> Đơn hàng</a></li>
+                    <li><a href="admin-routes.html"><i class="fas fa-route"></i> Tuyến đường</a></li>
+                    <li><a href="admin-drivers.html"><i class="fas fa-users"></i> Tài xế</a></li>
+                    <li><a href="admin-cod.html"><i class="fas fa-money-bill-wave"></i> COD</a></li>
+                    <li class="active"><a href="admin-users.html"><i class="fas fa-user-cog"></i> Người dùng</a></li>
+                    <li><a href="admin-reports.html"><i class="fas fa-chart-bar"></i> Báo cáo</a></li>
+                    <li><a href="admin-settings.html"><i class="fas fa-cog"></i> Cài đặt</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="header-left">
+                    <h1>Quản lý người dùng</h1>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <div class="user-avatar">{{currentUser.fullName.substring(0,2).toUpperCase()}}</div>
+                        <div>
+                            <div class="user-name">{{currentUser.fullName}}</div>
+                            <div class="user-role">Quản trị viên</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" ng-click="logout()"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="content">
+                <!-- Stats Cards -->
+                <div class="dashboard-cards">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Tổng người dùng</div>
+                            <div class="card-icon primary">
+                                <i class="fas fa-users"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">{{users.length}}</div>
+                        <div class="card-description">Tất cả tài khoản</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Admin</div>
+                            <div class="card-icon danger">
+                                <i class="fas fa-user-shield"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">{{(users | filter:{vaiTro:'ADMIN'}).length}}</div>
+                        <div class="card-description">Quản trị viên</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Tài xế</div>
+                            <div class="card-icon success">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">{{(users | filter:{vaiTro:'TAIXE'}).length}}</div>
+                        <div class="card-description">Tài khoản tài xế</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Khách hàng</div>
+                            <div class="card-icon warning">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">{{(users | filter:{vaiTro:'KHACH'}).length}}</div>
+                        <div class="card-description">Tài khoản khách</div>
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-header">
+                        <div class="card-title">Bộ lọc & Tìm kiếm</div>
+                        <div class="card-icon primary">
+                            <i class="fas fa-filter"></i>
+                        </div>
+                    </div>
+                    <div class="card-body" style="padding: 20px;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 15px; align-items: end;">
+                            <div>
+                                <label style="display: block; margin-bottom: 8px; font-weight: 500; color: #2c3e50; font-size: 0.9rem;">
+                                    <i class="fas fa-search"></i> Tìm kiếm
+                                </label>
+                                <input type="text" ng-model="searchFilters.name" ng-change="applyFilters()" class="input" placeholder="Tên, email, số điện thoại...">
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 8px; font-weight: 500; color: #2c3e50; font-size: 0.9rem;">
+                                    <i class="fas fa-user-tag"></i> Loại tài khoản
+                                </label>
+                                <select ng-model="searchFilters.role" ng-change="applyFilters()" class="input">
+                                    <option value="">Tất cả</option>
+                                    <option value="ADMIN">Admin</option>
+                                    <option value="TAIXE">Tài xế</option>
+                                    <option value="KHACH">Khách hàng</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 8px; font-weight: 500; color: #2c3e50; font-size: 0.9rem;">
+                                    <i class="fas fa-toggle-on"></i> Trạng thái
+                                </label>
+                                <select id="statusFilter" class="input">
+                                    <option value="">Tất cả</option>
+                                    <option value="active">Hoạt động</option>
+                                    <option value="inactive">Vô hiệu hóa</option>
+                                </select>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary" ng-click="showAddModal()">
+                                    <i class="fas fa-plus"></i> Thêm người dùng
+                                </button>
+                                <button class="btn btn-info" ng-click="loadUsers()" style="margin-left: 10px;" title="Tải lại dữ liệu">
+                                    <i class="fas fa-redo"></i> Reload
+                                </button>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Users Table -->
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-header">
+                        <div class="card-title">Danh sách người dùng</div>
+                        <div class="card-icon primary">
+                            <i class="fas fa-list"></i>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50px;">
+                                        <input type="checkbox" id="selectAll" onchange="toggleSelectAll()">
+                                    </th>
+                                    <th style="width: 80px;">Avatar</th>
+                                    <th>Tên người dùng</th>
+                                    <th>Email</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Loại TK</th>
+                                    <th>Trạng thái</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Đăng nhập lần cuối</th>
+                                    <th style="width: 180px;">Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTableBody">
+                                <tr ng-show="isLoading">
+                                    <td colspan="10" style="text-align: center; padding: 40px; color: #95a5a6;">
+                                        <i class="fas fa-spinner fa-spin" style="font-size: 3rem; margin-bottom: 10px; display: block;"></i>
+                                        Đang tải dữ liệu...
+                                    </td>
+                                </tr>
+                                <tr ng-show="!isLoading && getPaginatedUsers().length === 0">
+                                    <td colspan="10" style="text-align: center; padding: 40px; color: #95a5a6;">
+                                        <i class="fas fa-users" style="font-size: 3rem; margin-bottom: 10px; display: block;"></i>
+                                        Chưa có người dùng nào
+                                    </td>
+                                </tr>
+                                <tr ng-repeat="user in getPaginatedUsers()" ng-show="!isLoading">
+                                    <td>
+                                        <input type="checkbox" ng-model="user.selected">
+                                    </td>
+                                    <td>
+                                        <div class="user-avatar" style="width: 40px; height: 40px; background: #3498db; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">
+                                            {{user.hoTen.substring(0,2).toUpperCase()}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <strong>{{user.hoTen}}</strong><br>
+                                        <small style="color: #7f8c8d;">{{user.tenDangNhap}}</small>
+                                    </td>
+                                    <td>{{user.email || 'N/A'}}</td>
+                                    <td>{{user.soDienThoai || 'N/A'}}</td>
+                                    <td>
+                                        <span ng-if="user.vaiTro === 'ADMIN'" class="badge badge-danger">
+                                            <i class="fas fa-user-shield"></i> Admin
+                                        </span>
+                                        <span ng-if="user.vaiTro === 'TAIXE'" class="badge badge-success">
+                                            <i class="fas fa-user-tie"></i> Tài xế
+                                        </span>
+                                        <span ng-if="user.vaiTro === 'KHACH'" class="badge badge-primary">
+                                            <i class="fas fa-user"></i> Khách hàng
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span ng-if="!user.trangThai || user.trangThai === 'HOAT_DONG'" class="badge badge-success">
+                                            <i class="fas fa-check-circle"></i> Hoạt động
+                                        </span>
+                                        <span ng-if="user.trangThai === 'VO_HIEU_HOA'" class="badge badge-secondary">
+                                            <i class="fas fa-ban"></i> Vô hiệu hóa
+                                        </span>
+                                    </td>
+                                    <td>{{formatDate(user.ngayTao)}}</td>
+                                    <td>N/A</td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary" ng-click="showEditModal(user)" title="Chỉnh sửa">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-warning" ng-click="showChangePasswordModal(user)" title="Đổi mật khẩu">
+                                            <i class="fas fa-key"></i>
+                                        </button>
+                                        <button ng-if="!user.trangThai || user.trangThai === 'HOAT_DONG'" class="btn btn-sm btn-secondary" ng-click="toggleUserStatus(user)" title="Vô hiệu hóa">
+                                            <i class="fas fa-ban"></i>
+                                        </button>
+                                        <button ng-if="user.trangThai === 'VO_HIEU_HOA'" class="btn btn-sm btn-success" ng-click="toggleUserStatus(user)" title="Kích hoạt">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-danger" ng-click="deleteUser(user)" title="Xóa">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div style="display: flex; justify-content: center; align-items: center; gap: 15px; margin: 20px 0;" ng-show="totalPages > 1">
+                        <button class="btn btn-secondary btn-sm" ng-click="prevPage()" ng-disabled="currentPage === 1">
+                            <i class="fas fa-chevron-left"></i> Trước
+                        </button>
+                        <span>Trang {{currentPage}} / {{totalPages}}</span>
+                        <button class="btn btn-secondary btn-sm" ng-click="nextPage()" ng-disabled="currentPage === totalPages">
+                            Sau <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Bulk Actions -->
+                <div id="bulkActionsBar" style="display: none; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: white; padding: 15px 30px; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); z-index: 1000;">
+                    <span id="selectedCount" style="margin-right: 20px; font-weight: 600; color: #2c3e50;">0 mục đã chọn</span>
+                    <button class="btn btn-success" onclick="bulkActivate()" style="margin-right: 10px;">
+                        <i class="fas fa-check"></i> Kích hoạt
+                    </button>
+                    <button class="btn btn-warning" onclick="bulkDeactivate()" style="margin-right: 10px;">
+                        <i class="fas fa-ban"></i> Vô hiệu hóa
+                    </button>
+                    <button class="btn btn-danger" onclick="bulkDelete()">
+                        <i class="fas fa-trash"></i> Xóa
+                    </button>
+                    <button class="btn btn-secondary" onclick="clearSelection()" style="margin-left: 10px;">
+                        <i class="fas fa-times"></i> Hủy
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create/Edit User Modal - AngularJS -->
+    <div class="modal" ng-show="showModal" ng-click="closeModal()">
+        <div class="modal-content modal-lg" ng-click="$event.stopPropagation()" style="max-width: 700px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-user-plus"></i> {{isEditMode ? 'Cập nhật người dùng' : 'Thêm người dùng mới'}}</h3>
+                <span class="close" ng-click="closeModal()">&times;</span>
+            </div>
+            <form ng-submit="saveUser()">
+                <div class="modal-body">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div class="form-group">
+                            <label class="required"><i class="fas fa-user"></i> Tên đăng nhập</label>
+                            <input type="text" ng-model="userForm.TenDangNhap" class="form-control" required placeholder="Nhập tên đăng nhập" ng-disabled="isEditMode">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="required"><i class="fas fa-id-card"></i> Họ và tên</label>
+                            <input type="text" ng-model="userForm.HoTen" class="form-control" required placeholder="Nhập họ tên">
+                        </div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div class="form-group">
+                            <label class="required"><i class="fas fa-envelope"></i> Email</label>
+                            <input type="email" ng-model="userForm.Email" class="form-control" required placeholder="email@example.com">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label><i class="fas fa-phone"></i> Số điện thoại</label>
+                            <input type="tel" ng-model="userForm.SoDienThoai" class="form-control" placeholder="0123456789" pattern="[0-9]{10}">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required"><i class="fas fa-user-tag"></i> Vai trò</label>
+                        <select ng-model="userForm.VaiTro" class="form-control" required>
+                            <option value="">-- Chọn vai trò --</option>
+                            <option value="ADMIN">Admin (Quản trị viên)</option>
+                            <option value="TAIXE">Tài xế</option>
+                            <option value="KHACH">Khách hàng</option>
+                        </select>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;" ng-if="!isEditMode">
+                        <div class="form-group">
+                            <label class="required"><i class="fas fa-lock"></i> Mật khẩu</label>
+                            <input type="password" ng-model="userForm.MatKhau" class="form-control" required placeholder="Tối thiểu 6 ký tự" minlength="6">
+                            <small style="color: #7f8c8d; display: block; margin-top: 5px;">
+                                Tối thiểu 6 ký tự
+                            </small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="required"><i class="fas fa-lock"></i> Xác nhận mật khẩu</label>
+                            <input type="password" ng-model="userForm.confirmPassword" class="form-control" required placeholder="Nhập lại mật khẩu" minlength="6">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label><i class="fas fa-map-marker-alt"></i> Địa chỉ</label>
+                        <textarea ng-model="userForm.DiaChi" class="form-control" rows="2" placeholder="Nhập địa chỉ..."></textarea>
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" ng-click="closeModal()">
+                        <i class="fas fa-times"></i> Hủy
+                    </button>
+                    <button type="submit" class="btn btn-primary" ng-disabled="isLoading">
+                        <i class="fas fa-save"></i> {{isEditMode ? 'Cập nhật' : 'Tạo mới'}}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Change Password Modal - AngularJS -->
+    <div class="modal" ng-show="showPasswordModal" ng-click="closePasswordModal()">
+        <div class="modal-content" ng-click="$event.stopPropagation()" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-key"></i> Đổi mật khẩu</h3>
+                <span class="close" ng-click="closePasswordModal()">&times;</span>
+            </div>
+            <form ng-submit="changePassword()">
+                <div class="modal-body">
+                    <div style="margin-bottom: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                        <strong>Người dùng:</strong> {{selectedUserName}}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required"><i class="fas fa-lock"></i> Mật khẩu mới</label>
+                        <input type="password" ng-model="passwordForm.newPassword" class="form-control" required placeholder="Tối thiểu 6 ký tự" minlength="6">
+                        <small style="color: #7f8c8d; display: block; margin-top: 5px;">
+                            Tối thiểu 6 ký tự
+                        </small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required"><i class="fas fa-lock"></i> Xác nhận mật khẩu</label>
+                        <input type="password" ng-model="passwordForm.confirmPassword" class="form-control" required placeholder="Nhập lại mật khẩu mới" minlength="6">
+                    </div>
+                </div>
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" ng-click="closePasswordModal()">
+                        <i class="fas fa-times"></i> Hủy
+                    </button>
+                    <button type="submit" class="btn btn-primary" ng-disabled="isLoading">
+                        <i class="fas fa-check"></i> Đổi mật khẩu
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    
+    <!-- App Configuration & Services -->
+    <script src="app.config.js"></script>
+    <script src="services/api.service.js"></script>
+    
+    <!-- Controllers -->
+    <script src="controllers/admin-users.controller.js"></script>
+</body>
+</html>

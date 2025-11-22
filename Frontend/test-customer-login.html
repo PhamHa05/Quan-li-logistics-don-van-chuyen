@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Login Customer</title>
+</head>
+<body>
+    <h1>Test Login Khách Hàng</h1>
+    <div id="result"></div>
+    
+    <script>
+        async function testLogin() {
+            const resultDiv = document.getElementById('result');
+            
+            try {
+                const response = await fetch('http://localhost:5257/api/NguoiDung/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        TenDangNhap: 'nguyenvana',
+                        MatKhau: '123456'
+                    })
+                });
+                
+                if (response.ok) {
+                    const user = await response.json();
+                    resultDiv.innerHTML = `
+                        <h2>✅ Đăng nhập thành công!</h2>
+                        <pre>${JSON.stringify(user, null, 2)}</pre>
+                        <p><strong>Role:</strong> ${user.vaiTro}</p>
+                        <p><strong>Họ tên:</strong> ${user.hoTen}</p>
+                        <p><strong>SĐT:</strong> ${user.soDienThoai}</p>
+                        <p><strong>Email:</strong> ${user.email}</p>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `<h2>❌ Đăng nhập thất bại!</h2><p>Status: ${response.status}</p>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<h2>❌ Lỗi kết nối!</h2><pre>${error.message}</pre>`;
+            }
+        }
+        
+        testLogin();
+    </script>
+</body>
+</html>

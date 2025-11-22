@@ -55,5 +55,19 @@ namespace Logistics.API.Controllers
             var data = _taiXeBusiness.Search(request.PageIndex, request.PageSize, out total, request.HoTen, request.SoDienThoai);
             return Ok(new { TotalItems = total, Data = data });
         }
+
+        [HttpGet("dashboard-stats/{idTaiXe}")]
+        public IActionResult GetDashboardStats(long idTaiXe)
+        {
+            try
+            {
+                var stats = _taiXeBusiness.GetDashboardStats(idTaiXe);
+                return Ok(stats);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { success = false, message = ex.Message });
+            }
+        }
     }
 }

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard Fix Tool</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        h2 {
+            color: #2c3e50;
+            margin: 20px 0 15px 0;
+            font-size: 20px;
+            border-left: 4px solid #667eea;
+            padding-left: 12px;
+        }
+        .step {
+            background: #f8f9fa;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #667eea;
+            color: white;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        .btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        .btn-success {
+            background: #2ecc71;
+        }
+        .btn-success:hover {
+            background: #27ae60;
+        }
+        .btn-danger {
+            background: #e74c3c;
+        }
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-weight: bold;
+            display: none;
+        }
+        .status.show {
+            display: block;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 2px solid #bee5eb;
+        }
+        pre {
+            background: #2c3e50;
+            color: #2ecc71;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+        }
+        .progress {
+            background: #ecf0f1;
+            height: 40px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 20px 0;
+            display: none;
+        }
+        .progress.show {
+            display: block;
+        }
+        .progress-bar {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>🔧 Customer Dashboard Fix Tool</h1>
+            <p style="color: #7f8c8d; margin-bottom: 20px;">Công cụ tự động sửa lỗi và thiết lập dữ liệu cho Customer Dashboard</p>
+            
+            <div id="status" class="status"></div>
+            <div id="progress" class="progress">
+                <div id="progressBar" class="progress-bar">0%</div>
+            </div>
+            
+            <h2>🚀 Quick Fix (All-in-One)</h2>
+            <button class="btn btn-success" onclick="runFullFix()" style="font-size: 18px; padding: 20px 40px;">
+                ⚡ FIX EVERYTHING NOW!
+            </button>
+            
+            <h2>📋 Manual Steps</h2>
+            
+            <div class="step">
+                <span class="step-number">1</span>
+                <strong>Kiểm tra API</strong>
+                <button class="btn" onclick="checkAPI()">Check API</button>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">2</span>
+                <strong>Tạo đơn hàng mẫu</strong>
+                <button class="btn" onclick="createOrders()">Create Sample Orders</button>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">3</span>
+                <strong>Kiểm tra dữ liệu</strong>
+                <button class="btn" onclick="verifyData()">Verify Data</button>
+            </div>
+            
+            <div class="step">
+                <span class="step-number">4</span>
+                <strong>Đi đến Dashboard</strong>
+                <button class="btn btn-success" onclick="goToDashboard()">Go to Dashboard</button>
+            </div>
+            
+            <h2>📊 Console Output</h2>
+            <pre id="console">Waiting...</pre>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5257/api';
+        const CUSTOMER_PHONE = '0911222333';
+        const CUSTOMER_NAME = 'Nguyễn Văn A';
+        let consoleOutput = [];
+        
+        function log(msg, color = '#2ecc71') {
+            const timestamp = new Date().toLocaleTimeString();
+            consoleOutput.push(`[${timestamp}] ${msg}`);
+            document.getElementById('console').textContent = consoleOutput.slice(-20).join('\n');
+            console.log(msg);
+        }
+        
+        function showStatus(msg, type = 'info') {
+            const status = document.getElementById('status');
+            status.className = `status ${type} show`;
+            status.textContent = msg;
+            log(msg);
+        }
+        
+        function updateProgress(percent, text) {
+            const progressDiv = document.getElementById('progress');
+            const progressBar = document.getElementById('progressBar');
+            progressDiv.classList.add('show');
+            progressBar.style.width = percent + '%';
+            progressBar.textContent = text || (percent + '%');
+        }
+        
+        function hideProgress() {
+            document.getElementById('progress').classList.remove('show');
+        }
+        
+        async function checkAPI() {
+            try {
+                showStatus('🔄 Đang kiểm tra API...', 'info');
+                log('Testing API at ' + API_BASE);
+                
+                const response = await fetch(`${API_BASE}/DonVanChuyen/search`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        PageIndex: 1,
+                        PageSize: 10,
+                        MaVanDon: '',
+                        TrangThai: ''
+                    })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    const total = data.totalItems || data.TotalItems || 0;
+                    log(`✅ API OK - ${total} orders in database`);
+                    showStatus(`✅ API đang chạy tốt! Database có ${total} đơn hàng`, 'success');
+                    return true;
+                } else {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+            } catch (e) {
+                log(`❌ API Error: ${e.message}`);
+                showStatus('❌ API không phản hồi! Vui lòng start backend trước.', 'error');
+                return false;
+            }
+        }
+        
+        async function createOrders() {
+            try {
+                showStatus('🔄 Đang tạo đơn hàng mẫu...', 'info');
+                
+                const orders = [
+                    {
+                        MaVanDon: 'NVA001',
+                        TenNguoiGui: CUSTOMER_NAME,
+                        SdtNguoiGui: CUSTOMER_PHONE,
+                        DiaChiLayHang: 'Quận 1, TP.HCM',
+                        TenNguoiNhan: 'Anh Minh',
+                        SdtNguoiNhan: '0922111222',
+                        DiaChiGiaoHang: '100 Lê Lợi, Q.1',
+                        LoaiHang: 'Quần áo',
+                        KhoiLuong: 2.5,
+                        TienThuHo: 500000,
+                        LoaiDichVu: 'NHANH',
+                        TrangThai: 'CHO_LAY_HANG',
+                        IdTaiXe: null,
+                        IdTuyenDuong: null
+                    },
+                    {
+                        MaVanDon: 'NVA002',
+                        TenNguoiGui: CUSTOMER_NAME,
+                        SdtNguoiGui: CUSTOMER_PHONE,
+                        DiaChiLayHang: 'Quận 1, TP.HCM',
+                        TenNguoiNhan: 'Chị Lan',
+                        SdtNguoiNhan: '0933222333',
+                        DiaChiGiaoHang: '45 Nguyễn Huệ, Q.1',
+                        LoaiHang: 'Điện tử',
+                        KhoiLuong: 1.0,
+                        TienThuHo: 1500000,
+                        LoaiDichVu: 'NHANH',
+                        TrangThai: 'DANG_GIAO',
+                        IdTaiXe: 1,
+                        IdTuyenDuong: 1
+                    },
+                    {
+                        MaVanDon: 'NVA003',
+                        TenNguoiGui: CUSTOMER_NAME,
+                        SdtNguoiGui: CUSTOMER_PHONE,
+                        DiaChiLayHang: 'Quận 1, TP.HCM',
+                        TenNguoiNhan: 'Anh Tuấn',
+                        SdtNguoiNhan: '0944333444',
+                        DiaChiGiaoHang: '78 Pasteur, Q.3',
+                        LoaiHang: 'Sách',
+                        KhoiLuong: 3.0,
+                        TienThuHo: 300000,
+                        LoaiDichVu: 'THONG_THUONG',
+                        TrangThai: 'GIAO_THANH_CONG',
+                        IdTaiXe: 2,
+                        IdTuyenDuong: 2
+                    }
+                ];
+                
+                let created = 0;
+                for (let i = 0; i < orders.length; i++) {
+                    try {
+                        const response = await fetch(`${API_BASE}/DonVanChuyen/create`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(orders[i])
+                        });
+                        
+                        if (response.ok) {
+                            created++;
+                            log(`✅ Created: ${orders[i].MaVanDon}`);
+                        } else if (response.status === 409 || response.status === 400) {
+                            log(`⚠️ Already exists: ${orders[i].MaVanDon}`);
+                        } else {
+                            log(`❌ Failed: ${orders[i].MaVanDon}`);
+                        }
+                    } catch (e) {
+                        log(`❌ Error creating ${orders[i].MaVanDon}: ${e.message}`);
+                    }
+                }
+                
+                showStatus(`✅ Tạo thành công ${created}/3 đơn hàng!`, 'success');
+                return true;
+            } catch (e) {
+                log(`❌ Error: ${e.message}`);
+                showStatus('❌ Lỗi khi tạo đơn hàng!', 'error');
+                return false;
+            }
+        }
+        
+        async function verifyData() {
+            try {
+                showStatus('🔄 Đang kiểm tra dữ liệu...', 'info');
+                
+                const response = await fetch(`${API_BASE}/DonVanChuyen/search`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        PageIndex: 1,
+                        PageSize: 100,
+                        MaVanDon: '',
+                        TrangThai: ''
+                    })
+                });
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    const allOrders = result.data || result.Data || [];
+                    const customerOrders = allOrders.filter(o => 
+                        (o.sdtNguoiGui || o.SdtNguoiGui) === CUSTOMER_PHONE
+                    );
+                    
+                    log(`📊 Total orders: ${allOrders.length}`);
+                    log(`👤 Customer orders: ${customerOrders.length}`);
+                    
+                    if (customerOrders.length > 0) {
+                        customerOrders.forEach(o => {
+                            log(`  - ${o.maVanDon || o.MaVanDon}: ${o.trangThai || o.TrangThai}`);
+                        });
+                        showStatus(`✅ Tìm thấy ${customerOrders.length} đơn hàng cho customer!`, 'success');
+                        return true;
+                    } else {
+                        log('⚠️ Chưa có đơn hàng cho customer này');
+                        showStatus('⚠️ Chưa có đơn hàng. Hãy tạo đơn mẫu!', 'info');
+                        return false;
+                    }
+                }
+            } catch (e) {
+                log(`❌ Error: ${e.message}`);
+                showStatus('❌ Lỗi khi kiểm tra dữ liệu!', 'error');
+                return false;
+            }
+        }
+        
+        function goToDashboard() {
+            showStatus('🚀 Đang chuyển đến Dashboard...', 'info');
+            setTimeout(() => {
+                window.location.href = 'index-customer.html';
+            }, 1000);
+        }
+        
+        async function runFullFix() {
+            consoleOutput = [];
+            log('🚀 Starting FULL FIX process...');
+            showStatus('⏳ Đang thực hiện Full Fix...', 'info');
+            
+            // Step 1: Check API
+            updateProgress(10, 'Checking API...');
+            const apiOk = await checkAPI();
+            if (!apiOk) {
+                updateProgress(100, 'FAILED');
+                showStatus('❌ API không chạy! Vui lòng start backend trước.', 'error');
+                return;
+            }
+            
+            await new Promise(r => setTimeout(r, 500));
+            
+            // Step 2: Create orders
+            updateProgress(40, 'Creating orders...');
+            await createOrders();
+            await new Promise(r => setTimeout(r, 500));
+            
+            // Step 3: Verify data
+            updateProgress(70, 'Verifying data...');
+            const hasData = await verifyData();
+            
+            // Step 4: Done
+            updateProgress(100, 'Complete!');
+            
+            if (hasData) {
+                showStatus('✅ HOÀN TẤT! Đang chuyển đến Dashboard...', 'success');
+                setTimeout(() => {
+                    window.location.href = 'index-customer.html';
+                }, 2000);
+            } else {
+                showStatus('⚠️ Vui lòng kiểm tra lại dữ liệu!', 'info');
+                hideProgress();
+            }
+        }
+        
+        // Auto check on load
+        window.onload = () => {
+            log('🔧 Fix Tool ready!');
+            log('Customer: ' + CUSTOMER_NAME);
+            log('Phone: ' + CUSTOMER_PHONE);
+            setTimeout(checkAPI, 500);
+        };
+    </script>
+</body>
+</html>

@@ -14,6 +14,7 @@ namespace BLL.Interfaces
         bool Delete(long id);
         TaiXeModel GetDatabyID(long id);
         List<TaiXeModel> Search(int pageIndex, int pageSize, out long total, string maTaiXe, string tenTaiXe);
+        TaiXeDashboardStatsModel GetDashboardStats(long idTaiXe);
     }
 
 }

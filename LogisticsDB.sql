@@ -1,4 +1,4 @@
-CREATE DATABASE LogisticsDB;
+9CREATE DATABASE LogisticsDB;
 GO
 
 USE LogisticsDB;
@@ -184,6 +184,7 @@ Select*from DiemGiaoHang
 Select*from DiemGiaoHang
 Select*from SuKienTrangThai
 Select*from GiaoDichCOD
+
 
 
 -- 1. Xóa bản ghi trong các bảng chi tiết trước (có FK)

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="vi" ng-app="logisticsApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Tài xế - Logistics</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="admin-style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="DriverDashboardController">
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-truck"></i> Driver Portal</h2>
+            </div>
+            <div class="sidebar-menu">
+                <ul>
+                    <li class="active"><a href="index-driver.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="driver-orders.html"><i class="fas fa-clipboard-list"></i> Đơn hàng của tôi</a></li>
+                    <li><a href="driver-routes.html"><i class="fas fa-route"></i> Tuyến đường hôm nay</a></li>
+                    <li><a href="driver-cod.html"><i class="fas fa-money-bill-wave"></i> Quản lý COD</a></li>
+                    <li><a href="driver-history.html"><i class="fas fa-history"></i> Lịch sử giao hàng</a></li>
+                    <li><a href="driver-profile.html"><i class="fas fa-user"></i> Thông tin cá nhân</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="header-left">
+                    <h1>Dashboard Tài xế</h1>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <div class="user-avatar">{{getUserInitials()}}</div>
+                        <div>
+                            <div class="user-name">{{driverInfo.hoTen || currentUser.fullName || currentUser.username}}</div>
+                            <div class="user-role">Nhân viên giao hàng</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" ng-click="logout()"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
+                </div>
+            </div>
+            
+            <!-- Content -->
+            <div class="content">
+                <!-- Error message -->
+                <div ng-if="error" style="background: #fee; border: 1px solid #fcc; color: #c33; padding: 15px; margin-bottom: 20px; border-radius: 8px;">
+                    <i class="fas fa-exclamation-triangle"></i> {{error}}
+                </div>
+                
+                <!-- Driver Info Card -->
+                <div class="card" style="margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid #ecf0f1;">
+                        <h3 style="margin: 0;"><i class="fas fa-id-card"></i> Thông tin tài xế</h3>
+                        <span class="badge badge-success" style="font-size: 1rem; padding: 8px 16px;">
+                            <i class="fas fa-circle" style="font-size: 0.6rem;"></i> Đang hoạt động
+                        </span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 20px;">
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <div style="width: 50px; height: 50px; background: #3498db; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <div>
+                                <div style="color: #7f8c8d; font-size: 0.9rem;">Biển số xe</div>
+                                <div style="font-weight: 600; font-size: 1.1rem;">{{driverInfo.bienSoXe || '-'}}</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <div style="width: 50px; height: 50px; background: #27ae60; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                                <i class="fas fa-motorcycle"></i>
+                            </div>
+                            <div>
+                                <div style="color: #7f8c8d; font-size: 0.9rem;">Loại phương tiện</div>
+                                <div style="font-weight: 600; font-size: 1.1rem;">{{driverInfo.loaiPhuongTien || '-'}}</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <div style="width: 50px; height: 50px; background: #e74c3c; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <div style="color: #7f8c8d; font-size: 0.9rem;">Số điện thoại</div>
+                                <div style="font-weight: 600; font-size: 1.1rem;">{{driverInfo.soDienThoai || '-'}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dashboard Cards -->
+                <div class="dashboard-cards">
+                    <div class="card" ng-click="navigateTo('driver-orders.html')" style="cursor: pointer; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);">
+                        <div class="card-header" style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                            <div class="card-title">Đơn hôm nay</div>
+                            <div class="card-icon" style="background: rgba(255,255,255,0.2);">
+                                <i class="fas fa-box"></i>
+                            </div>
+                        </div>
+                        <div class="card-value" style="font-size: 2.5rem; font-weight: 700;">{{stats.todayOrders}}</div>
+                        <div class="card-description" style="opacity: 0.9;">Cần giao trong hôm nay</div>
+                    </div>
+                    
+                    <div class="card" ng-click="navigateTo('driver-orders.html')" style="cursor: pointer; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none; box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4);">
+                        <div class="card-header" style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                            <div class="card-title">Đang giao</div>
+                            <div class="card-icon" style="background: rgba(255,255,255,0.2);">
+                                <i class="fas fa-shipping-fast"></i>
+                            </div>
+                        </div>
+                        <div class="card-value" style="font-size: 2.5rem; font-weight: 700;">{{stats.deliveringOrders}}</div>
+                        <div class="card-description" style="opacity: 0.9;">Đang trên đường giao</div>
+                    </div>
+                    
+                    <div class="card" ng-click="navigateTo('driver-history.html')" style="cursor: pointer; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; border: none; box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);">
+                        <div class="card-header" style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                            <div class="card-title">Đã giao hôm nay</div>
+                            <div class="card-icon" style="background: rgba(255,255,255,0.2);">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+                        <div class="card-value" style="font-size: 2.5rem; font-weight: 700;">{{stats.completedOrders}}</div>
+                        <div class="card-description" style="opacity: 0.9;">Hoàn thành hôm nay</div>
+                    </div>
+                    
+                    <div class="card" ng-click="navigateTo('driver-cod.html')" style="cursor: pointer; background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); color: white; border: none; box-shadow: 0 4px 15px rgba(67, 233, 123, 0.4);">
+                        <div class="card-header" style="border-bottom: 1px solid rgba(255,255,255,0.2);">
+                            <div class="card-title">COD đã thu</div>
+                            <div class="card-icon" style="background: rgba(255,255,255,0.2);">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                        </div>
+                        <div class="card-value" style="font-size: 2.5rem; font-weight: 700;">{{formatCurrency(stats.codCollected)}}</div>
+                        <div class="card-description" style="opacity: 0.9;">Tiền thu hộ hôm nay</div>
+                    </div>
+                </div>
+                
+                <!-- Thống kê theo thời gian -->
+                <div class="content-section">
+                    <div class="section-header">
+                        <div class="section-title"><i class="fas fa-chart-line"></i> Thống kê theo thời gian</div>
+                        <button class="btn btn-primary" ng-click="refresh()">
+                            <i class="fas fa-sync"></i> Làm mới
+                        </button>
+                    </div>
+                    <div class="section-body">
+                        <div class="stats-grid">
+                            <div class="stat-box" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none;">
+                                <h4><i class="fas fa-calendar-day"></i> Hôm nay</h4>
+                                <div class="stat-row">
+                                    <span>Đơn được giao:</span>
+                                    <strong>{{statsToday.total}} đơn</strong>
+                                </div>
+                                <div class="stat-row">
+                                    <span>Đã giao:</span>
+                                    <strong>{{statsToday.delivered}} đơn</strong>
+                                </div>
+                                <div class="stat-row">
+                                    <span>Thất bại:</span>
+                                    <strong>{{statsToday.failed}} đơn</strong>
+                                </div>
+                                <div class="stat-row">
+                                    <span>COD thu được:</span>
+                                    <strong>{{formatCurrency(statsToday.cod)}}</strong>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-box" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; border: none;">
+                                <h4><i class="fas fa-calendar-week"></i> Tuần này</h4>
+                                <div class="stat-row">
+                                    <span>Tổng đơn:</span>
+                                    <strong>{{statsWeek.total}} đơn</strong>
+                                </div>
+                                <div class="stat-row">
+                                    <span>Thành công:</span>
+                                    <strong>{{statsWeek.success}} đơn ({{statsWeek.successRate}}%)</strong>
+                                </div>
+                                <div class="stat-row">
+                                    <span>Thất bại:</span>
+                                    <strong>{{statsWeek.failed}} đơn</strong>
+                                </div>
+                                <div class="stat-row">
+                                    <span>COD thu được:</span>
+                                    <strong>{{formatCurrency(statsWeek.cod)}}</strong>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-box" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white; border: none;">
+                                <h4><i class="fas fa-calendar-alt"></i> Tháng này</h4>
+                                <div class="stat-row">
+                                    <span>Tổng đơn:</span>
+                                    <strong>{{statsMonth.total}} đơn</strong>
+                                </div>
+                                <div class="stat-row">
+                                    <span>Thành công:</span>
+                                    <strong>{{statsMonth.success}} đơn ({{statsMonth.successRate}}%)</strong>
+                                </div>
+                                <div class="stat-row">
+                                    <span>Thất bại:</span>
+                                    <strong>{{statsMonth.failed}} đơn</strong>
+                                </div>
+                                <div class="stat-row">
+                                    <span>COD thu được:</span>
+                                    <strong>{{formatCurrency(statsMonth.cod)}}</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Đơn hàng cần xử lý -->
+                <div class="content-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <i class="fas fa-clipboard-list"></i> Đơn hàng cần xử lý 
+                            <span class="badge badge-warning">{{stats.pendingOrders}}</span>
+                        </div>
+                        <a href="driver-orders.html" class="btn btn-primary">Xem tất cả</a>
+                    </div>
+                    <div class="section-body">
+                        <div ng-if="loading" style="text-align: center; padding: 40px; color: #7f8c8d;">
+                            <i class="fas fa-spinner fa-spin" style="font-size: 3rem; opacity: 0.3;"></i>
+                            <p>Đang tải đơn hàng...</p>
+                        </div>
+                        <div ng-if="!loading && pendingOrders.length === 0" style="text-align: center; padding: 40px; color: #7f8c8d;">
+                            <i class="fas fa-clipboard-list" style="font-size: 3rem; opacity: 0.3;"></i>
+                            <p>Không có đơn hàng cần xử lý</p>
+                        </div>
+                        <div ng-if="!loading && pendingOrders.length > 0" style="overflow-x: auto;">
+                            <table class="data-table">
+                                <thead style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                                    <tr>
+                                        <th>Mã đơn</th>
+                                        <th>Người nhận</th>
+                                        <th>Địa chỉ giao</th>
+                                        <th>COD</th>
+                                        <th>Trạng thái</th>
+                                        <th>Ngày tạo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="order in pendingOrders" style="background: white; transition: all 0.3s;" 
+                                        ng-mouseover="$event.currentTarget.style.background='#f8f9fa'" 
+                                        ng-mouseleave="$event.currentTarget.style.background='white'">
+                                        <td><strong>{{order.orderCode || order.id}}</strong></td>
+                                        <td>{{order.receiverName}}</td>
+                                        <td style="max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                            {{order.receiverAddress}}
+                                        </td>
+                                        <td><strong style="color: #27ae60;">{{formatCurrency(order.codAmount)}}</strong></td>
+                                        <td><span class="badge" ng-class="getStatusBadgeClass(order.status)">{{order.status}}</span></td>
+                                        <td>{{formatDate(order.createdAt)}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Đơn hàng gần đây -->
+                <div class="content-section">
+                    <div class="section-header">
+                        <div class="section-title"><i class="fas fa-history"></i> Hoạt động gần đây</div>
+                        <a href="driver-history.html" class="btn btn-primary">Lịch sử đầy đủ</a>
+                    </div>
+                    <div class="section-body">
+                        <div ng-if="loading" style="text-align: center; padding: 40px; color: #7f8c8d;">
+                            <i class="fas fa-spinner fa-spin" style="font-size: 3rem; opacity: 0.3;"></i>
+                            <p>Đang tải hoạt động...</p>
+                        </div>
+                        <div ng-if="!loading && recentActivities.length === 0" style="text-align: center; padding: 40px; color: #7f8c8d;">
+                            <i class="fas fa-history" style="font-size: 3rem; opacity: 0.3;"></i>
+                            <p>Chưa có hoạt động nào</p>
+                        </div>
+                        <div ng-if="!loading && recentActivities.length > 0" class="activity-list">
+                            <div ng-repeat="activity in recentActivities" class="activity-item" 
+                                 style="display: flex; align-items: center; padding: 15px; border-bottom: 1px solid #ecf0f1; background: white; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                                <div style="width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px;"
+                                     ng-style="activity.status === 'Đã giao' ? {'background': 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)'} : {'background': 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'}">
+                                    <i class="fas" ng-class="activity.status === 'Đã giao' ? 'fa-check-circle' : 'fa-times-circle'" 
+                                       style="font-size: 1.5rem; color: white;"></i>
+                                </div>
+                                <div style="flex: 1;">
+                                    <div style="font-weight: 600; margin-bottom: 5px;">
+                                        <span ng-class="getStatusBadgeClass(activity.status)">{{activity.status}}</span>
+                                        <strong style="margin-left: 10px;">{{activity.orderCode || activity.id}}</strong>
+                                    </div>
+                                    <div style="color: #7f8c8d; font-size: 0.9rem;">
+                                        {{activity.receiverName}} - {{activity.receiverAddress}}
+                                    </div>
+                                </div>
+                                <div style="text-align: right; min-width: 150px;">
+                                    <div style="font-weight: 600; color: #27ae60;">{{formatCurrency(activity.codAmount)}}</div>
+                                    <div style="color: #7f8c8d; font-size: 0.85rem;">{{formatDate(activity.updatedAt || activity.createdAt)}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- COD cần nộp -->
+                <div class="content-section">
+                    <div class="section-header">
+                        <div class="section-title">
+                            <i class="fas fa-money-bill-wave"></i> COD cần nộp
+                            <span class="badge badge-danger">{{formatCurrency(codStats.notSubmitted)}}</span>
+                        </div>
+                        <a href="driver-cod.html" class="btn btn-success">
+                            <i class="fas fa-hand-holding-usd"></i> Nộp COD
+                        </a>
+                    </div>
+                    <div class="section-body">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px; border-radius: 10px; color: white; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);">
+                                <div style="display: flex; align-items: center; gap: 15px;">
+                                    <i class="fas fa-wallet" style="font-size: 3rem; opacity: 0.8;"></i>
+                                    <div style="flex: 1;">
+                                        <div style="opacity: 0.9; margin-bottom: 5px;">Tổng COD đã thu</div>
+                                        <div style="font-size: 1.8rem; font-weight: 700;">{{formatCurrency(codStats.totalCollected)}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 25px; border-radius: 10px; color: white; box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4);">
+                                <div style="display: flex; align-items: center; gap: 15px;">
+                                    <i class="fas fa-hand-holding-usd" style="font-size: 3rem; opacity: 0.8;"></i>
+                                    <div style="flex: 1;">
+                                        <div style="opacity: 0.9; margin-bottom: 5px;">Chưa nộp</div>
+                                        <div style="font-size: 1.8rem; font-weight: 700;">{{formatCurrency(codStats.notSubmitted)}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 25px; border-radius: 10px; color: white; box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);">
+                                <div style="display: flex; align-items: center; gap: 15px;">
+                                    <i class="fas fa-check-circle" style="font-size: 3rem; opacity: 0.8;"></i>
+                                    <div style="flex: 1;">
+                                        <div style="opacity: 0.9; margin-bottom: 5px;">Đã nộp</div>
+                                        <div style="font-size: 1.8rem; font-weight: 700;">{{formatCurrency(codStats.submitted)}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Actions -->
+                <div class="card">
+                    <div class="card-title" style="padding: 20px; border-bottom: 1px solid #ecf0f1;">
+                        <h3 style="margin: 0;"><i class="fas fa-bolt"></i> Thao tác nhanh</h3>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; padding: 20px;">
+                        <a href="driver-orders.html" class="btn btn-primary" style="padding: 15px; text-align: center; display: block;">
+                            <i class="fas fa-clipboard-list" style="font-size: 1.5rem; display: block; margin-bottom: 8px;"></i>
+                            <div>Xem đơn hàng</div>
+                        </a>
+                        <a href="driver-routes.html" class="btn btn-success" style="padding: 15px; text-align: center; display: block;">
+                            <i class="fas fa-route" style="font-size: 1.5rem; display: block; margin-bottom: 8px;"></i>
+                            <div>Tuyến đường</div>
+                        </a>
+                        <a href="driver-cod.html" class="btn btn-warning" style="padding: 15px; text-align: center; display: block;">
+                            <i class="fas fa-money-bill-wave" style="font-size: 1.5rem; display: block; margin-bottom: 8px;"></i>
+                            <div>Quản lý COD</div>
+                        </a>
+                        <a href="driver-history.html" class="btn btn-info" style="padding: 15px; text-align: center; display: block;">
+                            <i class="fas fa-history" style="font-size: 1.5rem; display: block; margin-bottom: 8px;"></i>
+                            <div>Lịch sử</div>
+                        </a>
+                        <a href="driver-profile.html" class="btn btn-secondary" style="padding: 15px; text-align: center; display: block;">
+                            <i class="fas fa-user" style="font-size: 1.5rem; display: block; margin-bottom: 8px;"></i>
+                            <div>Hồ sơ</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="app.config.js?v=6"></script>
+    <script src="services/api.service.js?v=6"></script>
+    <script src="controllers/driver-dashboard.controller.js?v=6"></script>
+</body>
+</html>
+                   

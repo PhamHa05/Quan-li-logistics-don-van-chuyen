@@ -337,6 +337,18 @@
         }
       }
     },
+    "/api/GiaoDichCOD": {
+      "get": {
+        "tags": [
+          "GiaoDichCOD"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/NguoiDung/login": {
       "post": {
         "tags": [
@@ -782,6 +794,60 @@
         }
       }
     },
+    "/api/TuyenDuong/delete/{id}": {
+      "delete": {
+        "tags": [
+          "TuyenDuong"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/TuyenDuong/search": {
+      "post": {
+        "tags": [
+          "TuyenDuong"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TuyenDuongSearchRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TuyenDuongSearchRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TuyenDuongSearchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/WeatherForecast": {
       "get": {
         "tags": [
@@ -1175,6 +1241,29 @@
           "soDonHoanThanh": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TuyenDuongSearchRequest": {
+        "type": "object",
+        "properties": {
+          "pageIndex": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maTuyen": {
+            "type": "string",
+            "nullable": true
+          },
+          "idTaiXe": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
           }
         },
         "additionalProperties": false

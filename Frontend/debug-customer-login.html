@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Debug Customer Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .box {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1 { color: #667eea; margin-bottom: 15px; }
+        h2 { color: #2c3e50; margin-top: 20px; font-size: 18px; }
+        .btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+            font-weight: bold;
+        }
+        .btn:hover { background: #5568d3; }
+        .btn-danger { background: #e74c3c; }
+        .btn-danger:hover { background: #c0392b; }
+        .btn-success { background: #2ecc71; }
+        .btn-success:hover { background: #27ae60; }
+        pre {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 12px;
+            border-left: 4px solid #667eea;
+        }
+        .status {
+            padding: 12px;
+            border-radius: 6px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>🔍 Debug Customer Login Issue</h1>
+        
+        <div id="status"></div>
+        
+        <h2>Step 1: Clear Everything</h2>
+        <button class="btn btn-danger" onclick="clearEverything()">🗑️ Clear All Storage & Cookies</button>
+        
+        <h2>Step 2: Check Current Storage</h2>
+        <button class="btn" onclick="checkStorage()">📦 Check Storage</button>
+        <pre id="storage">Click button to check...</pre>
+        
+        <h2>Step 3: Simulate API Login</h2>
+        <button class="btn btn-success" onclick="simulateApiLogin()">🚀 Simulate API Login (KHACH role)</button>
+        
+        <h2>Step 4: Check What Would Happen</h2>
+        <button class="btn" onclick="testRedirect()">🔍 Test Redirect Logic</button>
+        <pre id="redirect">Click button to test...</pre>
+        
+        <h2>Step 5: Go to Login Page</h2>
+        <button class="btn btn-success" onclick="goToLogin()">→ Go to Login Page</button>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5257/api';
+        
+        function showStatus(msg, type = 'info') {
+            const div = document.getElementById('status');
+            div.className = `status ${type}`;
+            div.textContent = msg;
+            console.log(`[${type.toUpperCase()}] ${msg}`);
+        }
+        
+        function clearEverything() {
+            localStorage.clear();
+            sessionStorage.clear();
+            
+            // Clear cookies
+            document.cookie.split(";").forEach(c => { 
+                document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+            });
+            
+            showStatus('✅ Cleared all storage and cookies!', 'success');
+            checkStorage();
+        }
+        
+        function checkStorage() {
+            const data = {
+                'localStorage.currentUser': localStorage.getItem('currentUser'),
+                'localStorage.loggedInUser': localStorage.getItem('loggedInUser'),
+                'sessionStorage.loggedInUser': sessionStorage.getItem('loggedInUser'),
+                'localStorage.rememberMe': localStorage.getItem('rememberMe')
+            };
+            
+            const parsed = {};
+            Object.keys(data).forEach(key => {
+                if (data[key]) {
+                    try {
+                        parsed[key] = JSON.parse(data[key]);
+                    } catch(e) {
+                        parsed[key] = data[key];
+                    }
+                } else {
+                    parsed[key] = null;
+                }
+            });
+            
+            document.getElementById('storage').textContent = JSON.stringify(parsed, null, 2);
+            
+            const hasData = Object.values(data).some(v => v !== null);
+            if (hasData) {
+                showStatus('📦 Found data in storage', 'info');
+            } else {
+                showStatus('✅ Storage is clean', 'success');
+            }
+        }
+        
+        async function simulateApiLogin() {
+            try {
+                showStatus('🔄 Calling API login...', 'info');
+                
+                const response = await fetch(`${API_BASE}/NguoiDung/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        tenDangNhap: 'nguyenvana',
+                        matKhau: '123456'
+                    })
+                });
+                
+                if (response.ok) {
+                    const user = await response.json();
+                    console.log('[API] Login response:', user);
+                    
+                    // Simulate saveUserDataAndRedirect logic
+                    const userData = {
+                        username: user.tenDangNhap || user.TenDangNhap || user.username,
+                        fullName: user.hoTen || user.HoTen || user.fullName,
+                        role: (user.vaiTro || user.VaiTro || user.role || '').toUpperCase(),
+                        email: user.email || user.Email || '',
+                        phone: user.soDienThoai || user.SoDienThoai || user.phone || '',
+                        address: user.diaChi || user.DiaChi || user.address || '',
+                        userId: user.maNguoiDung || user.MaNguoiDung || user.userId || user.id,
+                        id: user.maNguoiDung || user.MaNguoiDung || user.userId || user.id,
+                        loginTime: new Date().toISOString()
+                    };
+                    
+                    console.log('[Simulated] userData to save:', userData);
+                    
+                    // Save to storage (NOT remember me)
+                    sessionStorage.setItem('loggedInUser', JSON.stringify(userData));
+                    localStorage.setItem('currentUser', JSON.stringify(userData));
+                    
+                    showStatus(`✅ Login successful! Role: ${userData.role}`, 'success');
+                    checkStorage();
+                    testRedirect();
+                } else {
+                    const error = await response.text();
+                    showStatus(`❌ API error: ${response.status} - ${error}`, 'error');
+                }
+            } catch (e) {
+                showStatus(`❌ Error: ${e.message}`, 'error');
+                console.error(e);
+            }
+        }
+        
+        function testRedirect() {
+            const user = sessionStorage.getItem('loggedInUser') || localStorage.getItem('loggedInUser');
+            
+            if (!user) {
+                document.getElementById('redirect').textContent = '❌ No user data found!';
+                return;
+            }
+            
+            const userData = JSON.parse(user);
+            const results = [];
+            
+            results.push('=== REDIRECT TEST ===\n');
+            results.push(`User: ${userData.username}`);
+            results.push(`Full Name: ${userData.fullName}`);
+            results.push(`Role from storage: "${userData.role}"`);
+            results.push(`Role type: ${typeof userData.role}`);
+            
+            // Test saveUserDataAndRedirect logic
+            results.push('\n=== SAVEUSERDATA LOGIC ===');
+            const roleMap1 = {
+                'TAIXE': 'driver',
+                'KHACH': 'customer',
+                'ADMIN': 'admin'
+            };
+            const redirectRole = roleMap1[userData.role] || 'admin';
+            results.push(`roleMap[${userData.role}] = ${roleMap1[userData.role]}`);
+            results.push(`redirectRole = ${redirectRole}`);
+            
+            let targetPage = '';
+            switch(redirectRole) {
+                case 'admin':
+                    targetPage = 'index.html';
+                    break;
+                case 'driver':
+                    targetPage = 'index-driver.html';
+                    break;
+                case 'customer':
+                    targetPage = 'index-customer.html';
+                    break;
+                default:
+                    targetPage = 'index.html';
+            }
+            results.push(`Target page: ${targetPage}`);
+            
+            // Test checkAuth logic
+            results.push('\n=== CHECKAUTH LOGIC ===');
+            const userRole = String(userData.role || userData.vaiTro || '').toLowerCase().trim();
+            results.push(`Lowercase role: "${userRole}"`);
+            
+            const roleMap2 = {
+                'taixe': 'driver',
+                'tai xe': 'driver',
+                'driver': 'driver',
+                'khach': 'customer',
+                'khachhang': 'customer',
+                'khach hang': 'customer',
+                'customer': 'customer',
+                'admin': 'admin',
+                'quantri': 'admin',
+                'quan tri': 'admin'
+            };
+            const normalizedRole = roleMap2[userRole] || userRole;
+            results.push(`roleMap[${userRole}] = ${roleMap2[userRole]}`);
+            results.push(`normalizedRole = ${normalizedRole}`);
+            
+            let checkAuthPage = '';
+            switch(normalizedRole) {
+                case 'admin':
+                    checkAuthPage = 'index.html';
+                    break;
+                case 'driver':
+                    checkAuthPage = 'index-driver.html';
+                    break;
+                case 'customer':
+                    checkAuthPage = 'index-customer.html';
+                    break;
+                default:
+                    checkAuthPage = 'index.html';
+            }
+            results.push(`checkAuth page: ${checkAuthPage}`);
+            
+            // Final verdict
+            results.push('\n=== VERDICT ===');
+            if (targetPage === checkAuthPage && targetPage === 'index-customer.html') {
+                results.push('✅ PASS: Both logic redirect to index-customer.html');
+                showStatus('✅ Redirect logic is correct!', 'success');
+            } else {
+                results.push('❌ FAIL: Mismatch detected!');
+                results.push(`  saveUserDataAndRedirect → ${targetPage}`);
+                results.push(`  checkAuth → ${checkAuthPage}`);
+                showStatus('❌ Redirect logic has issues!', 'error');
+            }
+            
+            document.getElementById('redirect').textContent = results.join('\n');
+        }
+        
+        function goToLogin() {
+            showStatus('🚀 Going to login page...', 'info');
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 1000);
+        }
+        
+        window.onload = () => {
+            checkStorage();
+            showStatus('🔍 Debug tool ready', 'info');
+        };
+    </script>
+</body>
+</html>

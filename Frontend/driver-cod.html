@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="vi" ng-app="logisticsApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý COD - Tài xế</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="admin-style.css">
+</head>
+<body ng-controller="DriverCODController">
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-truck"></i> Driver Portal</h2>
+            </div>
+            <div class="sidebar-menu">
+                <ul>
+                    <li><a href="index-driver.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="driver-orders.html"><i class="fas fa-box"></i> Đơn hàng của tôi</a></li>
+                    <li><a href="driver-routes.html"><i class="fas fa-route"></i> Tuyến đường hôm nay</a></li>
+                    <li class="active"><a href="driver-cod.html"><i class="fas fa-money-bill-wave"></i> Quản lý COD</a></li>
+                    <li><a href="driver-history.html"><i class="fas fa-history"></i> Lịch sử giao hàng</a></li>
+                    <li><a href="driver-profile.html"><i class="fas fa-user"></i> Thông tin cá nhân</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="header-left">
+                    <h1>Quản lý COD</h1>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <div class="user-avatar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">{{(driverInfo.hoTen || currentUser.hoTen || 'TX').substring(0,2).toUpperCase()}}</div>
+                        <div>
+                            <div class="user-name">{{driverInfo.hoTen || currentUser.hoTen || currentUser.username || 'Tài xế'}}</div>
+                            <div class="user-role">Nhân viên giao hàng</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" ng-click="logout()" style="border-radius: 8px;">
+                        <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                    </button>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="content">
+                <!-- Loading State -->
+                <div ng-if="isLoading" style="text-align: center; padding: 60px;">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 3rem; color: #667eea;"></i>
+                    <p style="margin-top: 20px; color: #7f8c8d; font-size: 1.1rem;">Đang tải dữ liệu COD...</p>
+                </div>
+                
+                <!-- COD Stats Cards -->
+                <div ng-if="!isLoading" class="dashboard-cards">
+                    <div class="card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                        <div class="card-header">
+                            <div class="card-title" style="color: white; opacity: 0.95;">Tổng COD đã thu</div>
+                            <div class="card-icon" style="background: rgba(255,255,255,0.2);">
+                                <i class="fas fa-hand-holding-usd"></i>
+                            </div>
+                        </div>
+                        <div class="card-value" style="color: white;">{{formatCurrency(stats.totalCollected)}}</div>
+                        <div class="card-description" style="color: rgba(255,255,255,0.9);">Từ {{myOrders.length}} đơn hàng</div>
+                    </div>
+                    
+                    <div class="card" style="background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%); color: white;">
+                        <div class="card-header">
+                            <div class="card-title" style="color: white; opacity: 0.95;">Đã nộp</div>
+                            <div class="card-icon" style="background: rgba(255,255,255,0.2);">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+                        <div class="card-value" style="color: white;">{{formatCurrency(stats.totalSubmitted)}}</div>
+                        <div class="card-description" style="color: rgba(255,255,255,0.9);">
+                            {{stats.submittedCount}} đơn đã nộp
+                        </div>
+                    </div>
+                    
+                    <div class="card" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white;">
+                        <div class="card-header">
+                            <div class="card-title" style="color: white; opacity: 0.95;">Chưa nộp</div>
+                            <div class="card-icon" style="background: rgba(255,255,255,0.2);">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                        </div>
+                        <div class="card-value" style="color: white;">{{formatCurrency(stats.totalPending)}}</div>
+                        <div class="card-description" style="color: rgba(255,255,255,0.9);">
+                            {{stats.pendingCount}} đơn cần nộp
+                        </div>
+                    </div>
+                    
+                    <div class="card" ng-click="submitCOD()" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; cursor: pointer; transition: all 0.3s;">
+                        <div class="card-header">
+                            <div class="card-title" style="color: white; opacity: 0.95;">Nộp COD</div>
+                            <div class="card-icon" style="background: rgba(255,255,255,0.2);">
+                                <i class="fas fa-paper-plane"></i>
+                            </div>
+                        </div>
+                        <div class="card-value" style="font-size: 1.8rem; color: white;">
+                            <i class="fas fa-arrow-circle-up"></i>
+                        </div>
+                        <div class="card-description" style="color: rgba(255,255,255,0.9);">Click để nộp COD</div>
+                    </div>
+                </div>
+                
+                <!-- Submit COD Section -->
+                <div ng-if="!isLoading && stats.pendingCount > 0" class="card" style="margin-top: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px;">
+                    <div style="text-align: center;">
+                        <i class="fas fa-money-bill-wave" style="font-size: 3rem; margin-bottom: 15px; opacity: 0.9;"></i>
+                        <h2 style="margin: 0 0 10px 0; color: white;">Nộp COD ngay</h2>
+                        <p style="font-size: 1.1rem; opacity: 0.9; margin-bottom: 20px;">
+                            Bạn có <strong>{{stats.pendingCount}} đơn</strong> với tổng số tiền <strong>{{formatCurrency(stats.totalPending)}}</strong> cần nộp
+                        </p>
+                        <button class="btn btn-success" ng-click="submitCOD()" style="font-size: 1.2rem; padding: 15px 40px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                            <i class="fas fa-paper-plane"></i> Nộp tất cả COD
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- No Pending Message -->
+                <div ng-if="!isLoading && stats.pendingCount === 0" class="card" style="margin-top: 20px; padding: 40px; text-align: center;">
+                    <i class="fas fa-check-circle" style="font-size: 4rem; color: #27ae60; margin-bottom: 20px;"></i>
+                    <h3 style="color: #27ae60; margin: 0 0 10px 0;">Hoàn thành!</h3>
+                    <p style="color: #7f8c8d; font-size: 1.1rem; margin: 0;">Bạn đã nộp tất cả COD</p>
+                </div>
+                
+                <!-- COD List -->
+                <div ng-if="!isLoading" class="card" style="margin-top: 20px;">
+                    <div style="padding: 20px; border-bottom: 1px solid #ecf0f1; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                        <h3 style="margin: 0; color: #2c3e50;">
+                            <i class="fas fa-list"></i> Danh sách COD
+                        </h3>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <button class="btn" ng-class="{'btn-primary': filterStatus === 'ALL', 'btn-secondary': filterStatus !== 'ALL'}" 
+                                    ng-click="filterStatus = 'ALL'" style="border-radius: 8px;">
+                                <i class="fas fa-th-list"></i> Tất cả
+                            </button>
+                            <button class="btn" ng-class="{'btn-warning': filterStatus === 'PENDING', 'btn-secondary': filterStatus !== 'PENDING'}" 
+                                    ng-click="filterStatus = 'PENDING'" style="border-radius: 8px;">
+                                <i class="fas fa-clock"></i> Chưa nộp ({{stats.pendingCount}})
+                            </button>
+                            <button class="btn" ng-class="{'btn-success': filterStatus === 'SUBMITTED', 'btn-secondary': filterStatus !== 'SUBMITTED'}" 
+                                    ng-click="filterStatus = 'SUBMITTED'" style="border-radius: 8px;">
+                                <i class="fas fa-check"></i> Đã nộp ({{stats.submittedCount}})
+                            </button>
+                            <button class="btn btn-secondary" ng-click="refresh()" style="border-radius: 8px;">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div style="padding: 20px;">
+                        <!-- Empty State -->
+                        <div ng-if="getFilteredOrders().length === 0" style="text-align: center; padding: 40px; color: #7f8c8d;">
+                            <i class="fas fa-inbox" style="font-size: 3rem; opacity: 0.3; margin-bottom: 15px;"></i>
+                            <p style="font-size: 1.1rem;">Không có dữ liệu</p>
+                        </div>
+                        
+                        <!-- COD Items -->
+                        <div ng-if="getFilteredOrders().length > 0">
+                            <div ng-repeat="order in getFilteredOrders()" 
+                                 style="padding: 20px; border: 1px solid #ecf0f1; border-radius: 12px; margin-bottom: 15px; transition: all 0.3s;"
+                                 ng-style="order.codSubmitted ? {'border-left': '5px solid #27ae60', 'background': 'linear-gradient(to right, #f0fff4 0%, white 100%)'} : {'border-left': '5px solid #f39c12', 'background': 'linear-gradient(to right, #fffbf0 0%, white 100%)'}">
+                                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+                                    <div style="flex: 1; min-width: 300px;">
+                                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                                            <div style="width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: white;"
+                                                 ng-style="order.codSubmitted ? {'background': 'linear-gradient(135deg, #27ae60, #2ecc71)'} : {'background': 'linear-gradient(135deg, #f39c12, #e67e22)'}">
+                                                <i class="fas" ng-class="order.codSubmitted ? 'fa-check-circle' : 'fa-clock'"></i>
+                                            </div>
+                                            <div>
+                                                <h4 style="margin: 0 0 5px 0; color: #2c3e50;">
+                                                    <i class="fas fa-box"></i> {{order.maVanDon}}
+                                                </h4>
+                                                <div style="color: #7f8c8d; font-size: 0.9rem;">
+                                                    <i class="fas fa-user"></i> {{order.tenNguoiNhan}}
+                                                    <span style="margin-left: 15px;"><i class="fas fa-phone"></i> {{order.sdtNguoiNhan}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+                                            <div>
+                                                <div style="color: #7f8c8d; font-size: 0.85rem; margin-bottom: 5px;">Ngày cập nhật</div>
+                                                <div style="font-weight: 600; color: #2c3e50;">
+                                                    <i class="fas fa-calendar"></i> {{formatDate(order.thoiGianCapNhat)}}
+                                                </div>
+                                            </div>
+                                            <div ng-if="order.codSubmittedDate">
+                                                <div style="color: #7f8c8d; font-size: 0.85rem; margin-bottom: 5px;">Ngày nộp</div>
+                                                <div style="font-weight: 600; color: #27ae60;">
+                                                    <i class="fas fa-check"></i> {{formatDate(order.codSubmittedDate)}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="text-align: right; min-width: 200px;">
+                                        <div style="margin-bottom: 10px;">
+                                            <span class="badge" ng-class="getStatusBadgeClass(order.codSubmitted)" style="font-size: 0.9rem; padding: 8px 15px;">
+                                                {{getStatusLabel(order.codSubmitted)}}
+                                            </span>
+                                        </div>
+                                        <div style="font-size: 2rem; font-weight: 700; color: #e74c3c; margin-bottom: 10px;">
+                                            {{formatCurrency(order.tienThuHo)}}
+                                        </div>
+                                        <button ng-if="!order.codSubmitted" 
+                                                ng-click="submitSingleCOD(order)"
+                                                class="btn btn-success"
+                                                style="padding: 8px 20px; border-radius: 8px;">
+                                            <i class="fas fa-check"></i> Đánh dấu đã nộp
+                                        </button>
+                                        <div ng-if="order.codSubmitted" style="color: #27ae60; font-size: 0.9rem;">
+                                            <i class="fas fa-check-circle"></i> Đã nộp COD
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.config.js?v=10"></script>
+    <script src="services/api.service.js?v=10"></script>
+    <script src="controllers/driver-cod.controller.js?v=3"></script>
+    <script>
+        // Suppress AngularJS unhandled rejection warnings
+        angular.module('logisticsApp').config(['$qProvider', function($qProvider) {
+            $qProvider.errorOnUnhandledRejections(false);
+        }]);
+        
+        // Custom exception handler
+        angular.module('logisticsApp').factory('$exceptionHandler', function() {
+            return function(exception, cause) {
+                console.warn('[Handled Exception]:', exception.message || exception);
+                if (cause) console.warn('Cause:', cause);
+            };
+        });
+    </script>
+</body>
+</html>

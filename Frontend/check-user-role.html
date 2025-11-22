@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiểm tra User Role</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        .info {
+            background: #e8f5e9;
+            padding: 15px;
+            border-left: 4px solid #4CAF50;
+            margin: 20px 0;
+        }
+        .error {
+            background: #ffebee;
+            padding: 15px;
+            border-left: 4px solid #f44336;
+            margin: 20px 0;
+        }
+        pre {
+            background: #263238;
+            color: #aed581;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        button.secondary {
+            background: #2196F3;
+        }
+        button.danger {
+            background: #f44336;
+        }
+        .field {
+            margin: 10px 0;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 4px;
+        }
+        .field strong {
+            color: #1976D2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Kiểm tra User Role trong localStorage</h1>
+        
+        <div id="result"></div>
+        
+        <div style="margin-top: 20px;">
+            <button onclick="checkUser()">Kiểm tra User hiện tại</button>
+            <button onclick="fixRole()" class="secondary">Sửa Role thành "driver"</button>
+            <button onclick="clearUser()" class="danger">Xóa User (Đăng xuất)</button>
+        </div>
+        
+        <div style="margin-top: 30px;">
+            <h2>Hướng dẫn sửa lỗi:</h2>
+            <ol>
+                <li><strong>Nếu role = "taixe" hoặc tiếng Việt:</strong> Click "Sửa Role thành driver"</li>
+                <li><strong>Nếu không có user:</strong> Đăng nhập lại</li>
+                <li><strong>Nếu vẫn lỗi:</strong> Xóa user và đăng nhập lại</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        function checkUser() {
+            const resultDiv = document.getElementById('result');
+            
+            try {
+                const userStr = localStorage.getItem('currentUser') || sessionStorage.getItem('loggedInUser');
+                
+                if (!userStr) {
+                    resultDiv.innerHTML = `
+                        <div class="error">
+                            <strong>❌ Không tìm thấy user trong localStorage!</strong>
+                            <p>Bạn cần đăng nhập lại.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                const user = JSON.parse(userStr);
+                
+                // Check role
+                const role = user.role || user.vaiTro || user.VaiTro || 'KHÔNG CÓ';
+                const roleNormalized = String(role).toLowerCase().trim();
+                
+                const isValidDriver = (roleNormalized === 'driver' || 
+                                      roleNormalized === 'taixe' || 
+                                      roleNormalized === 'tai xe' || 
+                                      roleNormalized === 'tài xế');
+                
+                const isAdmin = (roleNormalized === 'admin' || 
+                                roleNormalized === 'quantri');
+                
+                let html = '<div class="' + (isValidDriver || isAdmin ? 'info' : 'error') + '">';
+                
+                if (isValidDriver || isAdmin) {
+                    html += '<strong>✅ User role HỢP LỆ!</strong>';
+                } else {
+                    html += '<strong>❌ User role KHÔNG HỢP LỆ!</strong>';
+                }
+                
+                html += '</div>';
+                
+                html += '<div class="field"><strong>Username:</strong> ' + (user.username || 'N/A') + '</div>';
+                html += '<div class="field"><strong>Full Name:</strong> ' + (user.fullName || user.fullname || 'N/A') + '</div>';
+                html += '<div class="field"><strong>Role (original):</strong> <span style="color: red; font-weight: bold;">' + role + '</span></div>';
+                html += '<div class="field"><strong>Role (normalized):</strong> ' + roleNormalized + '</div>';
+                html += '<div class="field"><strong>Is Valid Driver?</strong> ' + (isValidDriver ? '✓ Yes' : '✗ No') + '</div>';
+                html += '<div class="field"><strong>Is Admin?</strong> ' + (isAdmin ? '✓ Yes' : '✗ No') + '</div>';
+                
+                html += '<h3>Raw User Object:</h3>';
+                html += '<pre>' + JSON.stringify(user, null, 2) + '</pre>';
+                
+                resultDiv.innerHTML = html;
+                
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="error">
+                        <strong>❌ Lỗi khi đọc user data!</strong>
+                        <p>${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+        
+        function fixRole() {
+            try {
+                const userStr = localStorage.getItem('currentUser') || sessionStorage.getItem('loggedInUser');
+                
+                if (!userStr) {
+                    alert('Không tìm thấy user trong localStorage!');
+                    return;
+                }
+                
+                const user = JSON.parse(userStr);
+                
+                // Fix role
+                user.role = 'driver';
+                user.vaiTro = 'driver';
+                user.VaiTro = 'driver';
+                
+                // Save back
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                if (sessionStorage.getItem('loggedInUser')) {
+                    sessionStorage.setItem('loggedInUser', JSON.stringify(user));
+                }
+                
+                alert('✓ Đã sửa role thành "driver"!\nReload lại trang để áp dụng.');
+                checkUser();
+                
+            } catch (error) {
+                alert('Lỗi: ' + error.message);
+            }
+        }
+        
+        function clearUser() {
+            if (confirm('Bạn có chắc muốn xóa user và đăng xuất?')) {
+                localStorage.removeItem('currentUser');
+                sessionStorage.removeItem('loggedInUser');
+                alert('Đã xóa user. Vui lòng đăng nhập lại.');
+                checkUser();
+            }
+        }
+        
+        // Auto check on load
+        window.addEventListener('load', checkUser);
+    </script>
+</body>
+</html>

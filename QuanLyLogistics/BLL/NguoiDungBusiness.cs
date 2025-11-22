@@ -47,5 +47,15 @@ namespace BLL
         {
             return _res.GetAll(hoTen, tenDangNhap);
         }
+
+        public bool UpdatePassword(int maNguoiDung, string matKhauMoi)
+        {
+            return _res.UpdatePassword(maNguoiDung, matKhauMoi);
+        }
+
+        public bool UpdateStatus(int maNguoiDung, string trangThai)
+        {
+            return _res.UpdateStatus(maNguoiDung, trangThai);
+        }
     }
 }

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Quick Clear & Redirect Test</title>
+    <style>
+        body {
+            font-family: Arial;
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+        }
+        .box {
+            background: white;
+            color: #333;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        h1 { margin: 0 0 20px 0; color: #667eea; }
+        .big-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 15px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        .big-btn:hover {
+            background: #5568d3;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+        .danger { background: #e74c3c; }
+        .danger:hover { background: #c0392b; }
+        .success { background: #2ecc71; }
+        .success:hover { background: #27ae60; }
+        #countdown {
+            font-size: 48px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 20px 0;
+        }
+        .status {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        .info { background: #d1ecf1; color: #0c5460; }
+        .error { background: #f8d7da; color: #721c24; }
+        .done { background: #d4edda; color: #155724; }
+        .step {
+            text-align: left;
+            margin: 15px 0;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>🚀 Quick Fix Tool</h1>
+        <p style="font-size: 16px; color: #666;">Xóa cache và test login customer</p>
+        
+        <div id="status" class="status info">
+            ⚡ Nhấn nút bên dưới để bắt đầu
+        </div>
+        
+        <div id="countdown"></div>
+        
+        <button class="big-btn danger" onclick="clearAndTest()">
+            🗑️ CLEAR & GO TO LOGIN
+        </button>
+        
+        <div style="margin-top: 30px;">
+            <div class="step">
+                <strong>Step 1:</strong> Click nút trên để xóa tất cả cache
+            </div>
+            <div class="step">
+                <strong>Step 2:</strong> Tự động chuyển đến trang login
+            </div>
+            <div class="step">
+                <strong>Step 3:</strong> Nhấn <strong>Ctrl+Shift+R</strong> để hard refresh
+            </div>
+            <div class="step">
+                <strong>Step 4:</strong> Login với <strong>nguyenvana / 123456</strong>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function clearAndTest() {
+            const statusDiv = document.getElementById('status');
+            const countdownDiv = document.getElementById('countdown');
+            
+            // Clear storage
+            localStorage.clear();
+            sessionStorage.clear();
+            
+            // Clear cookies
+            document.cookie.split(";").forEach(c => { 
+                document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+            });
+            
+            statusDiv.className = 'status done';
+            statusDiv.textContent = '✅ Đã xóa tất cả! Đang chuyển đến trang login...';
+            
+            // Countdown
+            let count = 3;
+            countdownDiv.textContent = count;
+            
+            const interval = setInterval(() => {
+                count--;
+                if (count > 0) {
+                    countdownDiv.textContent = count;
+                } else {
+                    clearInterval(interval);
+                    window.location.href = 'login.html';
+                }
+            }, 1000);
+        }
+        
+        // Auto check storage on load
+        window.onload = function() {
+            const hasData = localStorage.length > 0 || sessionStorage.length > 0;
+            const statusDiv = document.getElementById('status');
+            
+            if (hasData) {
+                statusDiv.className = 'status error';
+                statusDiv.textContent = '⚠️ Phát hiện data cũ trong storage - Cần clear!';
+            } else {
+                statusDiv.className = 'status done';
+                statusDiv.textContent = '✅ Storage clean - Có thể test ngay!';
+            }
+        };
+    </script>
+</body>
+</html>

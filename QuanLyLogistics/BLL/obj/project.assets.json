@@ -4390,23 +4390,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\TRAN HA\\.nuget\\packages\\": {},
+    "C:\\Users\\Admin\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\BLL.csproj",
+      "projectUniqueName": "D:\\WebAPI\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\BLL.csproj",
       "projectName": "BLL",
-      "projectPath": "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\BLL.csproj",
-      "packagesPath": "C:\\Users\\TRAN HA\\.nuget\\packages\\",
-      "outputPath": "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\obj\\",
+      "projectPath": "D:\\WebAPI\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\BLL.csproj",
+      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+      "outputPath": "D:\\WebAPI\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\BLL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\TRAN HA\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -4415,17 +4415,18 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\DAL.csproj": {
-              "projectPath": "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\DAL.csproj"
+            "D:\\WebAPI\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\DAL.csproj": {
+              "projectPath": "D:\\WebAPI\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\DAL\\DAL.csproj"
             },
-            "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\Models.csproj": {
-              "projectPath": "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\Models.csproj"
+            "D:\\WebAPI\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\Models.csproj": {
+              "projectPath": "D:\\WebAPI\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Models\\Models.csproj"
             }
           }
         }
@@ -4487,7 +4488,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Tài xế - Logistics</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="admin-style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="driver-avatar" id="driver-avatar">TX</div>
+                <div class="driver-info">
+                    <div class="driver-name" id="driver-name">Tài xế</div>
+                    <div class="driver-role">Giao nhận viên</div>
+                </div>
+            </div>
+            <div class="sidebar-menu">
+                <ul>
+                    <li class="active"><a href="index-driver.html"><i class="fas fa-truck-moving"></i> Dashboard</a></li>
+                    <li><a href="driver-orders.html"><i class="fas fa-clipboard-list"></i> Đơn hàng của tôi</a></li>
+                    <li><a href="driver-routes.html"><i class="fas fa-route"></i> Tuyến đường hôm nay</a></li>
+                    <li><a href="driver-cod.html"><i class="fas fa-money-bill-wave"></i> Quản lý COD</a></li>
+                    <li><a href="driver-history.html"><i class="fas fa-history"></i> Lịch sử giao hàng</a></li>
+                    <li><a href="driver-profile.html"><i class="fas fa-user"></i> Thông tin cá nhân</a></li>
+                </ul>
+            </div>
+            <div class="sidebar-footer">
+                <button class="btn btn-danger btn-block" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                </button>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="header-left">
+                    <h1><i class="fas fa-truck-moving"></i> Dashboard Tài xế</h1>
+                </div>
+                <div class="header-right">
+                    <div class="driver-detail">
+                        <div><strong>Xe:</strong> <span id="vehicle-number">-</span></div>
+                        <div><strong>GPLX:</strong> <span id="license-number">-</span></div>
+                        <div><strong>SĐT:</strong> <span id="driver-phone">-</span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Content -->
+            <div class="content">
+                <!-- DASHBOARD PAGE -->
+                <div id="dashboardPage" class="page-content active">
+                <!-- DASHBOARD PAGE -->
+                <div id="dashboardPage" class="page-content active">
+                    <!-- Thông tin tài xế -->
+                    <div class="card" style="margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 20px; border-bottom: 1px solid #ecf0f1;">
+                            <h3 style="margin: 0;"><i class="fas fa-id-card"></i> Thông tin tài xế</h3>
+                            <span class="badge badge-success" style="font-size: 1rem; padding: 8px 16px;">
+                                <i class="fas fa-circle" style="font-size: 0.6rem;"></i> Đang hoạt động
+                            </span>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 20px;">
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <div style="width: 50px; height: 50px; background: #3498db; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                                    <i class="fas fa-truck"></i>
+                                </div>
+                                <div>
+                                    <div style="color: #7f8c8d; font-size: 0.9rem;">Biển số xe</div>
+                                    <div style="font-weight: 600; font-size: 1.1rem;" id="vehicle-number">-</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <div style="width: 50px; height: 50px; background: #27ae60; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                                    <i class="fas fa-id-card-alt"></i>
+                                </div>
+                                <div>
+                                    <div style="color: #7f8c8d; font-size: 0.9rem;">Số GPLX</div>
+                                    <div style="font-weight: 600; font-size: 1.1rem;" id="license-number">-</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 15px;">
+                                <div style="width: 50px; height: 50px; background: #e74c3c; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div>
+                                    <div style="color: #7f8c8d; font-size: 0.9rem;">Số điện thoại</div>
+                                    <div style="font-weight: 600; font-size: 1.1rem;" id="driver-phone">-</div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+
+                    <!-- Dashboard Cards -->
+                    <div class="dashboard-cards">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">Đơn hôm nay</div>
+                                <div class="card-icon warning">
+                                    <i class="fas fa-box"></i>
+                                </div>
+                            </div>
+                            <div class="card-value" id="today-orders">0</div>
+                            <div class="card-description">Cần giao trong hôm nay</div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">Đang giao</div>
+                                <div class="card-icon primary">
+                                    <i class="fas fa-shipping-fast"></i>
+                                </div>
+                            </div>
+                            <div class="card-value" id="delivering-orders">0</div>
+                            <div class="card-description">Đang trên đường giao</div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">Đã giao</div>
+                                <div class="card-icon success">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                            </div>
+                            <div class="card-value" id="completed-orders">0</div>
+                            <div class="card-description">Hoàn thành hôm nay</div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">COD đã thu</div>
+                                <div class="card-icon danger">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                </div>
+                            </div>
+                            <div class="card-value" id="cod-collected">0 đ</div>
+                            <div class="card-description">Hôm nay</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Actions -->
+                    <div class="card">
+                        <div class="card-title" style="padding: 20px; border-bottom: 1px solid #ecf0f1;">
+                            <h3 style="margin: 0;"><i class="fas fa-bolt"></i> Thao tác nhanh</h3>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; padding: 20px;">
+                            <button class="btn btn-primary" onclick="switchPage('orders')" style="padding: 15px;">
+                                <i class="fas fa-clipboard-list"></i> Xem đơn hàng
+                            </button>
+                            <button class="btn btn-success" onclick="switchPage('routes')" style="padding: 15px;">
+                                <i class="fas fa-route"></i> Tuyến đường
+                            </button>
+                            <button class="btn btn-warning" onclick="switchPage('cod')" style="padding: 15px;">
+                                <i class="fas fa-money-bill-wave"></i> Quản lý COD
+                            </button>
+                            <button class="btn btn-info" onclick="switchPage('history')" style="padding: 15px;">
+                                <i class="fas fa-history"></i> Lịch sử
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                
+                <!-- ORDERS PAGE -->
+                <div id="ordersPage" class="page-content">
+                    <!-- Statistics Cards -->
+                    <div class="dashboard-cards" style="margin-bottom: 20px;">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">Tổng đơn hàng</div>
+                                <div class="card-icon info">
+                                    <i class="fas fa-boxes"></i>
+                                </div>
+                            </div>
+                            <div class="card-value" id="orders-total">0</div>
+                            <div class="card-description">Tất cả đơn hàng</div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">Chờ lấy hàng</div>
+                                <div class="card-icon secondary">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                            </div>
+                            <div class="card-value" id="orders-pending">0</div>
+                            <div class="card-description">Cần lấy hàng</div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">Đang giao</div>
+                                <div class="card-icon warning">
+                                    <i class="fas fa-shipping-fast"></i>
+                                </div>
+                            </div>
+                            <div class="card-value" id="orders-intransit">0</div>
+                            <div class="card-description">Đang vận chuyển</div>
+                        </div>
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">Đã giao</div>
+                                <div class="card-icon success">
+                                    <i class="fas fa-check-double"></i>
+                                </div>
+                            </div>
+                            <div class="card-value" id="orders-delivered">0</div>
+                            <div class="card-description">Hoàn thành</div>
+                        </div>
+                    </div>
+                
+                    <!-- Filters and Search -->
+                    <div class="card" style="margin-bottom: 20px;">
+                        <div style="padding: 20px;">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; align-items: end;">
+                                <!-- Search -->
+                                <div>
+                                    <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #2c3e50;">
+                                        <i class="fas fa-search"></i> Tìm kiếm
+                                    </label>
+                                    <input type="text" class="input" id="orderSearchInput" placeholder="Mã đơn, tên người nhận, SĐT..." onkeyup="filterOrders()">
+                                </div>
+                                
+                                <!-- Status Filter -->
+                                <div>
+                                    <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #2c3e50;">
+                                        <i class="fas fa-filter"></i> Trạng thái
+                                    </label>
+                                    <select class="input" id="orderStatusFilter" onchange="filterOrders()">
+                                        <option value="">Tất cả trạng thái</option>
+                                        <option value="pending">Chờ lấy hàng</option>
+                                        <option value="picked_up">Đã lấy hàng</option>
+                                        <option value="in_transit">Đang giao</option>
+                                        <option value="delivered">Đã giao</option>
+                                        <option value="failed">Giao thất bại</option>
+                                    </select>
+                                </div>
+                                
+                                <!-- COD Filter -->
+                                <div>
+                                    <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #2c3e50;">
+                                        <i class="fas fa-money-bill-wave"></i> COD
+                                    </label>
+                                    <select class="input" id="orderCODFilter" onchange="filterOrders()">
+                                        <option value="">Tất cả</option>
+                                        <option value="hasCOD">Có COD</option>
+                                        <option value="noCOD">Không COD</option>
+                                    </select>
+                                </div>
+                                
+                                <!-- Sort -->
+                                <div>
+                                    <label style="display: block; margin-bottom: 5px; font-weight: 600; color: #2c3e50;">
+                                        <i class="fas fa-sort"></i> Sắp xếp
+                                    </label>
+                                    <select class="input" id="orderSortBy" onchange="filterOrders()">
+                                        <option value="dateDesc">Ngày tạo (Mới nhất)</option>
+                                        <option value="dateAsc">Ngày tạo (Cũ nhất)</option>
+                                        <option value="codDesc">COD (Cao → Thấp)</option>
+                                        <option value="codAsc">COD (Thấp → Cao)</option>
+                                        <option value="status">Trạng thái</option>
+                                    </select>
+                                </div>
+                                
+                                <!-- Actions -->
+                                <div style="display: flex; gap: 10px;">
+                                    <button class="btn btn-primary" onclick="refreshOrders()" style="flex: 1;">
+                                        <i class="fas fa-sync"></i> Làm mới
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="clearOrderFilters()" style="flex: 1;">
+                                        <i class="fas fa-times"></i> Xóa lọc
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- Orders Table -->
+                    <div class="card">
+                        <div class="card-title" style="padding: 20px; border-bottom: 1px solid #ecf0f1; display: flex; justify-content: space-between; align-items: center;">
+                            <h3 style="margin: 0;">
+                                <i class="fas fa-list"></i> Danh sách đơn hàng 
+                                <span id="orders-count-badge" class="badge badge-info" style="font-size: 0.9rem; margin-left: 10px;">0</span>
+                            </h3>
+                            <div style="color: #7f8c8d; font-size: 0.9rem;">
+                                <i class="fas fa-info-circle"></i> Click vào đơn hàng để xem chi tiết
+                            </div>
+                        </div>
+                        <div style="padding: 20px;">
+                            <div style="overflow-x: auto;">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 140px;">Mã đơn</th>
+                                            <th style="width: 180px;">Người nhận</th>
+                                            <th style="min-width: 250px;">Địa chỉ giao hàng</th>
+                                            <th style="width: 130px;">SĐT</th>
+                                            <th style="width: 120px;">COD</th>
+                                            <th style="width: 150px;">Trạng thái</th>
+                                            <th style="width: 200px;">Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="orders-table">
+                                        <tr>
+                                            <td colspan="7" style="text-align: center; padding: 40px; color: #7f8c8d;">
+                                                <i class="fas fa-box-open" style="font-size: 3rem; margin-bottom: 10px; opacity: 0.3;"></i>
+                                                <p>Đang tải dữ liệu...</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <!-- Pagination -->
+                            <div id="orders-pagination" style="display: none; margin-top: 20px; text-align: center; padding-top: 20px; border-top: 1px solid #ecf0f1;">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div style="color: #7f8c8d;">
+                                        Hiển thị <span id="orders-showing-start">0</span> - <span id="orders-showing-end">0</span> trong tổng số <span id="orders-showing-total">0</span> đơn hàng
+                                    </div>
+                                    <div style="display: flex; gap: 5px;" id="orders-pagination-buttons">
+                                        <!-- Pagination buttons will be inserted here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ROUTES PAGE -->
+                <div id="routesPage" class="page-content">
+                    <div class="card">
+                        <div class="card-title" style="padding: 20px; border-bottom: 1px solid #ecf0f1; display: flex; justify-content: space-between; align-items: center;">
+                            <h3 style="margin: 0;"><i class="fas fa-map-marked-alt"></i> Tuyến đường hôm nay</h3>
+                            <button class="btn btn-primary" onclick="optimizeRoute()">
+                                <i class="fas fa-route"></i> Tối ưu tuyến đường
+                            </button>
+                        </div>
+                        <div style="padding: 20px;">
+                            <!-- Route Stats -->
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 10px; color: white;">
+                                    <div style="display: flex; align-items: center; gap: 15px;">
+                                        <i class="fas fa-map-marker-alt" style="font-size: 2.5rem; opacity: 0.8;"></i>
+                                        <div>
+                                            <div style="font-size: 2rem; font-weight: 700;" id="route-stops">0</div>
+                                            <div style="opacity: 0.9;">Điểm dừng</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 20px; border-radius: 10px; color: white;">
+                                    <div style="display: flex; align-items: center; gap: 15px;">
+                                        <i class="fas fa-road" style="font-size: 2.5rem; opacity: 0.8;"></i>
+                                        <div>
+                                            <div style="font-size: 2rem; font-weight: 700;" id="route-distance">0 km</div>
+                                            <div style="opacity: 0.9;">Tổng quãng đường</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 20px; border-radius: 10px; color: white;">
+                                    <div style="display: flex; align-items: center; gap: 15px;">
+                                        <i class="fas fa-clock" style="font-size: 2.5rem; opacity: 0.8;"></i>
+                                        <div>
+                                            <div style="font-size: 2rem; font-weight: 700;" id="route-time">0 giờ</div>
+                                            <div style="opacity: 0.9;">Thời gian dự kiến</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Route List -->
+                            <h4 style="margin-bottom: 15px;"><i class="fas fa-list-ol"></i> Danh sách điểm giao hàng</h4>
+                            <div id="route-list">
+                                <div style="text-align: center; padding: 40px; color: #7f8c8d;">
+                                    <i class="fas fa-route" style="font-size: 3rem; margin-bottom: 10px; opacity: 0.3;"></i>
+                                    <p>Đang tải tuyến đường...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                
+                <!-- COD PAGE -->
+                <div id="codPage" class="page-content">
+                    <div class="card">
+                        <div class="card-title" style="padding: 20px; border-bottom: 1px solid #ecf0f1; display: flex; justify-content: space-between; align-items: center;">
+                            <h3 style="margin: 0;"><i class="fas fa-money-check-alt"></i> Quản lý COD</h3>
+                            <button class="btn btn-success" onclick="submitAllCOD()">
+                                <i class="fas fa-paper-plane"></i> Nộp tất cả COD
+                            </button>
+                        </div>
+                        <div style="padding: 20px;">
+                            <!-- COD Summary -->
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 30px;">
+                                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px; border-radius: 10px; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                                    <div style="display: flex; align-items: center; gap: 15px;">
+                                        <i class="fas fa-wallet" style="font-size: 3rem; opacity: 0.8;"></i>
+                                        <div style="flex: 1;">
+                                            <div style="opacity: 0.9; margin-bottom: 5px;">Tổng COD đã thu</div>
+                                            <div style="font-size: 1.8rem; font-weight: 700;" id="cod-total">0 đ</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 25px; border-radius: 10px; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                                    <div style="display: flex; align-items: center; gap: 15px;">
+                                        <i class="fas fa-hand-holding-usd" style="font-size: 3rem; opacity: 0.8;"></i>
+                                        <div style="flex: 1;">
+                                            <div style="opacity: 0.9; margin-bottom: 5px;">Chưa nộp</div>
+                                            <div style="font-size: 1.8rem; font-weight: 700;" id="cod-pending">0 đ</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 25px; border-radius: 10px; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+                                    <div style="display: flex; align-items: center; gap: 15px;">
+                                        <i class="fas fa-check-circle" style="font-size: 3rem; opacity: 0.8;"></i>
+                                        <div style="flex: 1;">
+                                            <div style="opacity: 0.9; margin-bottom: 5px;">Đã nộp</div>
+                                            <div style="font-size: 1.8rem; font-weight: 700;" id="cod-submitted">0 đ</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- COD Details -->
+                            <h4 style="margin-bottom: 15px;"><i class="fas fa-list"></i> Chi tiết COD</h4>
+                            <div style="overflow-x: auto;">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Mã đơn</th>
+                                            <th>Người nhận</th>
+                                            <th>Số tiền COD</th>
+                                            <th>Thời gian giao</th>
+                                            <th>Trạng thái</th>
+                                            <th>Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="cod-table">
+                                        <tr>
+                                            <td colspan="6" style="text-align: center; padding: 40px; color: #7f8c8d;">
+                                                <i class="fas fa-money-bill-wave" style="font-size: 3rem; margin-bottom: 10px; opacity: 0.3;"></i>
+                                                <p>Đang tải dữ liệu COD...</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- HISTORY PAGE -->
+                <div id="historyPage" class="page-content">
+                    <div class="card">
+                        <div class="card-title" style="padding: 20px; border-bottom: 1px solid #ecf0f1; display: flex; justify-content: space-between; align-items: center;">
+                            <h3 style="margin: 0;"><i class="fas fa-history"></i> Lịch sử giao hàng</h3>
+                            <div style="display: flex; gap: 10px;">
+                                <input type="date" class="input" id="historyDateFrom" onchange="filterHistory()">
+                                <input type="date" class="input" id="historyDateTo" onchange="filterHistory()">
+                                <button class="btn btn-primary" onclick="filterHistory()">
+                                    <i class="fas fa-filter"></i> Lọc
+                                </button>
+                            </div>
+                        </div>
+                        <div style="padding: 20px;">
+                            <div style="overflow-x: auto;">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Ngày</th>
+                                            <th>Mã đơn</th>
+                                            <th>Người nhận</th>
+                                            <th>Địa chỉ</th>
+                                            <th>COD</th>
+                                            <th>Trạng thái</th>
+                                            <th>Ghi chú</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="history-table">
+                                        <tr>
+                                            <td colspan="7" style="text-align: center; padding: 40px; color: #7f8c8d;">
+                                                <i class="fas fa-history" style="font-size: 3rem; margin-bottom: 10px; opacity: 0.3;"></i>
+                                                <p>Đang tải lịch sử...</p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- PROFILE PAGE -->
+                <div id="profilePage" class="page-content">
+                    <div class="card">
+                        <div class="card-title" style="padding: 20px; border-bottom: 1px solid #ecf0f1;">
+                            <h3 style="margin: 0;"><i class="fas fa-user-circle"></i> Thông tin cá nhân</h3>
+                        </div>
+                        <div style="padding: 30px;">
+                            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 40px;">
+                                <!-- Avatar Section -->
+                                <div style="text-align: center;">
+                                    <div style="width: 150px; height: 150px; margin: 0 auto 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 4rem; font-weight: 700;">
+                                        <span id="profile-avatar">TX</span>
+                                    </div>
+                                    <h3 id="profile-name" style="margin: 0 0 10px 0;">Tài xế</h3>
+                                    <p style="color: #7f8c8d; margin: 0;">Giao nhận viên</p>
+                                    <button class="btn btn-primary" style="margin-top: 20px;" onclick="changePassword()">
+                                        <i class="fas fa-key"></i> Đổi mật khẩu
+                                    </button>
+                                </div>
+                                
+                                <!-- Info Section -->
+                                <div>
+                                    <h4 style="margin: 0 0 20px 0; padding-bottom: 10px; border-bottom: 2px solid #3498db;">
+                                        <i class="fas fa-info-circle"></i> Thông tin chi tiết
+                                    </h4>
+                                    <div style="display: grid; gap: 20px;">
+                                        <div>
+                                            <label style="display: block; color: #7f8c8d; margin-bottom: 5px; font-size: 0.9rem;">Họ và tên</label>
+                                            <input type="text" class="input" id="profile-fullname" readonly>
+                                        </div>
+                                        <div>
+                                            <label style="display: block; color: #7f8c8d; margin-bottom: 5px; font-size: 0.9rem;">Email</label>
+                                            <input type="email" class="input" id="profile-email" readonly>
+                                        </div>
+                                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                            <div>
+                                                <label style="display: block; color: #7f8c8d; margin-bottom: 5px; font-size: 0.9rem;">Số điện thoại</label>
+                                                <input type="tel" class="input" id="profile-phone" readonly>
+                                            </div>
+                                            <div>
+                                                <label style="display: block; color: #7f8c8d; margin-bottom: 5px; font-size: 0.9rem;">Biển số xe</label>
+                                                <input type="text" class="input" id="profile-vehicle" readonly>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <label style="display: block; color: #7f8c8d; margin-bottom: 5px; font-size: 0.9rem;">Số GPLX</label>
+                                            <input type="text" class="input" id="profile-license" readonly>
+                                        </div>
+                                        <div>
+                                            <label style="display: block; color: #7f8c8d; margin-bottom: 5px; font-size: 0.9rem;">Trạng thái</label>
+                                            <span class="badge badge-success" style="font-size: 1rem; padding: 8px 16px;">
+                                                <i class="fas fa-check-circle"></i> Đang hoạt động
+                                            </span>
+                                        </div>
+                                    </div>
+                                    
+                                    <h4 style="margin: 30px 0 20px 0; padding-bottom: 10px; border-bottom: 2px solid #27ae60;">
+                                        <i class="fas fa-chart-line"></i> Thống kê
+                                    </h4>
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                        <div style="background: #ecf0f1; padding: 15px; border-radius: 8px;">
+                                            <div style="color: #7f8c8d; font-size: 0.9rem;">Tổng đơn đã giao</div>
+                                            <div style="font-size: 1.8rem; font-weight: 700; color: #2c3e50;" id="profile-total-orders">0</div>
+                                        </div>
+                                        <div style="background: #ecf0f1; padding: 15px; border-radius: 8px;">
+                                            <div style="color: #7f8c8d; font-size: 0.9rem;">Tỷ lệ thành công</div>
+                                            <div style="font-size: 1.8rem; font-weight: 700; color: #27ae60;" id="profile-success-rate">0%</div>
+                                        </div>
+                                        <div style="background: #ecf0f1; padding: 15px; border-radius: 8px;">
+                                            <div style="color: #7f8c8d; font-size: 0.9rem;">Tổng COD đã nộp</div>
+                                            <div style="font-size: 1.8rem; font-weight: 700; color: #3498db;" id="profile-total-cod">0 đ</div>
+                                        </div>
+                                        <div style="background: #ecf0f1; padding: 15px; border-radius: 8px;">
+                                            <div style="color: #7f8c8d; font-size: 0.9rem;">Đánh giá</div>
+                                            <div style="font-size: 1.8rem; font-weight: 700; color: #f39c12;">
+                                                <i class="fas fa-star"></i> 4.8/5
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Detail Modal -->
+    <div id="orderDetailModal" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-box-open"></i> Chi tiết đơn hàng <span id="modal-order-id"></span></h3>
+                <span class="close" onclick="closeOrderDetailModal()">&times;</span>
+            </div>
+            <div class="modal-body" id="order-detail-content">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Change Password Modal -->
+    <div id="changePasswordModal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h3><i class="fas fa-key"></i> Đổi mật khẩu</h3>
+                <span class="close" onclick="closeChangePasswordModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form onsubmit="handleChangePassword(event)">
+                    <div class="form-group">
+                        <label>Mật khẩu hiện tại</label>
+                        <input type="password" class="input" id="current-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Mật khẩu mới</label>
+                        <input type="password" class="input" id="new-password" required minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label>Xác nhận mật khẩu mới</label>
+                        <input type="password" class="input" id="confirm-password" required minlength="6">
+                    </div>
+                    <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                        <button type="button" class="btn btn-secondary" onclick="closeChangePasswordModal()">
+                            <i class="fas fa-times"></i> Hủy
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-check"></i> Đổi mật khẩu
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="data-sync.js"></script>
+    <script src="driver-script.js"></script>
+</body>
+</html>

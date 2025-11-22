@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Customer Authentication</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-box {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        .status {
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #667eea;
+        }
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #5568d3;
+        }
+        .clear-btn {
+            background: #dc3545;
+        }
+        .clear-btn:hover {
+            background: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-box">
+        <h1>🧪 Test Customer Authentication Flow</h1>
+        
+        <div id="status"></div>
+        
+        <h2>Step 1: Simulate Login</h2>
+        <button onclick="simulateLogin()">Simulate Customer Login (KHACH role)</button>
+        <button onclick="simulateLoginLowercase()">Simulate Customer Login (customer role)</button>
+        <button class="clear-btn" onclick="clearStorage()">Clear All Storage</button>
+        
+        <h2>Step 2: Check Stored Data</h2>
+        <button onclick="checkStorage()">Check LocalStorage & SessionStorage</button>
+        
+        <h2>Step 3: Test Role Validation</h2>
+        <button onclick="testRoleValidation()">Test Role Check Logic</button>
+        
+        <h2>Storage Data:</h2>
+        <pre id="storageData">Click "Check LocalStorage & SessionStorage" to see data</pre>
+        
+        <h2>Test Results:</h2>
+        <pre id="testResults">Click "Test Role Check Logic" to see results</pre>
+    </div>
+
+    <script>
+        function log(message, type = 'info') {
+            const statusDiv = document.getElementById('status');
+            const className = type === 'success' ? 'success' : type === 'error' ? 'error' : 'info';
+            statusDiv.innerHTML = `<div class="status ${className}">${message}</div>`;
+            console.log(`[${type.toUpperCase()}] ${message}`);
+        }
+
+        function simulateLogin() {
+            const userData = {
+                username: 'nguyenvana',
+                fullName: 'Nguyễn Văn A',
+                role: 'KHACH',  // Uppercase Vietnamese - from database
+                email: 'vana@gmail.com',
+                phone: '0911222333',
+                address: 'Quận 1, TP.HCM',
+                userId: 2,
+                id: 2,
+                loginTime: new Date().toISOString()
+            };
+            
+            localStorage.setItem('currentUser', JSON.stringify(userData));
+            sessionStorage.setItem('loggedInUser', JSON.stringify(userData));
+            
+            log('✅ Simulated customer login with KHACH role', 'success');
+            checkStorage();
+        }
+
+        function simulateLoginLowercase() {
+            const userData = {
+                username: 'nguyenvana',
+                fullName: 'Nguyễn Văn A',
+                role: 'customer',  // Lowercase English
+                email: 'vana@gmail.com',
+                phone: '0911222333',
+                address: 'Quận 1, TP.HCM',
+                userId: 2,
+                id: 2,
+                loginTime: new Date().toISOString()
+            };
+            
+            localStorage.setItem('currentUser', JSON.stringify(userData));
+            sessionStorage.setItem('loggedInUser', JSON.stringify(userData));
+            
+            log('✅ Simulated customer login with customer role', 'success');
+            checkStorage();
+        }
+
+        function clearStorage() {
+            localStorage.removeItem('currentUser');
+            localStorage.removeItem('loggedInUser');
+            sessionStorage.removeItem('loggedInUser');
+            
+            log('🗑️ Cleared all storage', 'info');
+            checkStorage();
+        }
+
+        function checkStorage() {
+            const currentUser = localStorage.getItem('currentUser');
+            const loggedInUser = localStorage.getItem('loggedInUser') || sessionStorage.getItem('loggedInUser');
+            
+            const data = {
+                localStorage: {
+                    currentUser: currentUser ? JSON.parse(currentUser) : null
+                },
+                sessionStorage: {
+                    loggedInUser: sessionStorage.getItem('loggedInUser') ? JSON.parse(sessionStorage.getItem('loggedInUser')) : null
+                },
+                combined: {
+                    loggedInUser: loggedInUser ? JSON.parse(loggedInUser) : null
+                }
+            };
+            
+            document.getElementById('storageData').textContent = JSON.stringify(data, null, 2);
+            
+            if (currentUser || loggedInUser) {
+                log('📦 Storage data loaded - see below', 'success');
+            } else {
+                log('⚠️ No user data found in storage', 'error');
+            }
+        }
+
+        function testRoleValidation() {
+            const results = [];
+            
+            // Get stored user
+            const userStr = localStorage.getItem('currentUser') || sessionStorage.getItem('loggedInUser');
+            
+            if (!userStr) {
+                results.push('❌ NO USER DATA - Please simulate login first!');
+                document.getElementById('testResults').textContent = results.join('\n');
+                log('⚠️ No user data to test', 'error');
+                return;
+            }
+            
+            const currentUser = JSON.parse(userStr);
+            results.push('✅ User data loaded:');
+            results.push(JSON.stringify(currentUser, null, 2));
+            results.push('\n' + '='.repeat(50));
+            
+            // Test 1: Get role from different properties
+            const roleFromRole = currentUser.role;
+            const roleFromVaiTro = currentUser.vaiTro;
+            const roleFromVaiTroUpper = currentUser.VaiTro;
+            
+            results.push('\n📝 Role Properties:');
+            results.push(`  - currentUser.role = "${roleFromRole}"`);
+            results.push(`  - currentUser.vaiTro = "${roleFromVaiTro}"`);
+            results.push(`  - currentUser.VaiTro = "${roleFromVaiTroUpper}"`);
+            
+            // Test 2: Normalize role (same logic as controller)
+            const userRole = String(currentUser.role || currentUser.vaiTro || currentUser.VaiTro || '').toUpperCase().trim();
+            results.push(`\n🔧 Normalized Role (toUpperCase): "${userRole}"`);
+            
+            // Test 3: Check against allowed customer roles
+            const isCustomer = (
+                userRole === 'CUSTOMER' || 
+                userRole === 'KHACHHANG' || 
+                userRole === 'KHACH HANG' || 
+                userRole === 'KHACH'
+            );
+            
+            results.push('\n🔍 Role Check Results:');
+            results.push(`  - userRole === 'CUSTOMER': ${userRole === 'CUSTOMER'}`);
+            results.push(`  - userRole === 'KHACHHANG': ${userRole === 'KHACHHANG'}`);
+            results.push(`  - userRole === 'KHACH HANG': ${userRole === 'KHACH HANG'}`);
+            results.push(`  - userRole === 'KHACH': ${userRole === 'KHACH'}`);
+            results.push(`\n✅ isCustomer = ${isCustomer}`);
+            
+            // Test 4: Test login.js checkAuth() logic
+            results.push('\n' + '='.repeat(50));
+            results.push('\n📋 Testing login.js checkAuth() logic:');
+            
+            const userRoleLower = String(currentUser.role || currentUser.vaiTro || '').toLowerCase().trim();
+            results.push(`  - Lowercase role: "${userRoleLower}"`);
+            
+            const roleMap = {
+                'taixe': 'driver',
+                'tai xe': 'driver',
+                'driver': 'driver',
+                'khach': 'customer',
+                'khachhang': 'customer',
+                'khach hang': 'customer',
+                'customer': 'customer',
+                'admin': 'admin',
+                'quantri': 'admin',
+                'quan tri': 'admin'
+            };
+            
+            const mappedRole = roleMap[userRoleLower] || userRoleLower;
+            results.push(`  - Mapped role: "${mappedRole}"`);
+            results.push(`  - Should redirect to: ${mappedRole === 'customer' ? 'index-customer.html' : 'OTHER'}`);
+            
+            // Final verdict
+            results.push('\n' + '='.repeat(50));
+            if (isCustomer && mappedRole === 'customer') {
+                results.push('\n✅ PASS: User should be able to access customer portal!');
+                log('✅ Test PASSED - Customer authentication should work', 'success');
+            } else {
+                results.push('\n❌ FAIL: Authentication will fail!');
+                results.push(`   - Controller check (isCustomer): ${isCustomer}`);
+                results.push(`   - Login redirect (mappedRole): ${mappedRole}`);
+                log('❌ Test FAILED - Check the results below', 'error');
+            }
+            
+            document.getElementById('testResults').textContent = results.join('\n');
+        }
+
+        // Auto-check on page load
+        window.onload = function() {
+            log('🚀 Test page loaded - Ready to test!', 'info');
+            checkStorage();
+        };
+    </script>
+</body>
+</html>

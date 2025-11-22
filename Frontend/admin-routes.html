@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="vi" ng-app="logisticsApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý tuyến đường - Logistics Manager</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="admin-style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body ng-controller="AdminRoutesController">
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Logistics Manager</h2>
+            </div>
+            <div class="sidebar-menu">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="admin-orders.html"><i class="fas fa-shipping-fast"></i> Đơn hàng</a></li>
+                    <li class="active"><a href="admin-routes.html"><i class="fas fa-route"></i> Tuyến đường</a></li>
+                    <li><a href="admin-drivers.html"><i class="fas fa-users"></i> Tài xế</a></li>
+                    <li><a href="admin-cod.html"><i class="fas fa-money-bill-wave"></i> COD</a></li>
+                    <li><a href="admin-users.html"><i class="fas fa-user-cog"></i> Người dùng</a></li>
+                    <li><a href="admin-reports.html"><i class="fas fa-chart-bar"></i> Báo cáo</a></li>
+                    <li><a href="admin-settings.html"><i class="fas fa-cog"></i> Cài đặt</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="header-left">
+                    <h1>Quản lý tuyến đường</h1>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <div class="user-avatar">{{currentUser.fullName.substring(0,2).toUpperCase()}}</div>
+                        <div>
+                            <div class="user-name">{{currentUser.fullName}}</div>
+                            <div class="user-role">Quản trị viên</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" ng-click="logout()"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
+                </div>
+            </div>
+            
+            <!-- Content -->
+            <div class="content">
+                <!-- Quick Stats -->
+                <div class="dashboard-cards">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Tuyến hoạt động</div>
+                            <div class="card-icon primary">
+                                <i class="fas fa-route"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">{{(routes | filter:{trangThai:'DANG_GIAO'}).length}}</div>
+                        <div class="card-description">Đang thực hiện</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Tổng tuyến</div>
+                            <div class="card-icon warning">
+                                <i class="fas fa-box"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">{{routes.length}}</div>
+                        <div class="card-description">Tất cả tuyến</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Đã lập kế hoạch</div>
+                            <div class="card-icon success">
+                                <i class="fas fa-road"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">{{(routes | filter:{trangThai:'DA_LAP_KE_HOACH'}).length}}</div>
+                        <div class="card-description">Sẵn sàng</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Hoàn thành</div>
+                            <div class="card-icon success">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">{{(routes | filter:{trangThai:'HOAN_THANH'}).length}}</div>
+                        <div class="card-description">Tuyến đã xong</div>
+                    </div>
+                </div>
+
+                <!-- Filters and Actions -->
+                <div class="content-section">
+                    <div class="section-header">
+                        <div class="section-title"><i class="fas fa-filter"></i> Bộ lọc & Hiển thị</div>
+                        <button class="btn btn-primary" ng-click="showAddModal()">
+                            <i class="fas fa-plus"></i> Tạo tuyến đường mới
+                        </button>
+                    </div>
+                    <div class="section-body">
+                        <div class="filter-section">
+                            <div class="filter-row">
+                                <div class="form-col">
+                                    <input type="text" ng-model="searchFilters.maTuyen" ng-change="applyFilters()" class="form-control" placeholder="Tìm theo mã tuyến...">
+                                </div>
+                                <div class="form-col">
+                                    <select ng-model="searchFilters.status" ng-change="applyFilters()" class="form-control">
+                                        <option value="">Tất cả trạng thái</option>
+                                        <option value="DA_LAP_KE_HOACH">Đã lập kế hoạch</option>
+                                        <option value="DANG_GIAO">Đang giao</option>
+                                        <option value="HOAN_THANH">Hoàn thành</option>
+                                    </select>
+                                </div>
+                                <div class="form-col">
+                                    <select ng-model="searchFilters.idTaiXe" ng-change="applyFilters()" class="form-control">
+                                        <option value="">Tất cả tài xế</option>
+                                        <option ng-repeat="driver in drivers" value="{{driver.id}}">{{driver.hoTen}}</option>
+                                    </select>
+                                </div>
+                                <div class="form-col">
+                                    <button class="btn btn-secondary" ng-click="loadRoutes()">
+                                        <i class="fas fa-redo"></i> Làm mới
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- List View -->
+                <div id="listView" class="content-section">
+                    <div class="section-header">
+                        <div class="section-title"><i class="fas fa-list"></i> Danh sách tuyến đường</div>
+                    </div>
+                    <div class="section-body" style="padding: 0;">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Mã tuyến</th>
+                                    <th>Tên tuyến</th>
+                                    <th>Tài xế</th>
+                                    <th>Ngày thực hiện</th>
+                                    <th>Số đơn hàng</th>
+                                    <th>Quãng đường</th>
+                                    <th>Trạng thái</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="routesTableBody">
+                                <tr ng-if="loading">
+                                    <td colspan="8" style="text-align: center; padding: 30px; color: #999;">
+                                        <i class="fas fa-spinner fa-spin" style="font-size: 2rem;"></i>
+                                        <p>Đang tải dữ liệu...</p>
+                                    </td>
+                                </tr>
+                                <tr ng-if="!loading && getPaginatedRoutes().length === 0">
+                                    <td colspan="8" style="text-align: center; padding: 30px; color: #999;">
+                                        <i class="fas fa-inbox" style="font-size: 2rem;"></i>
+                                        <p>Không có tuyến đường nào</p>
+                                    </td>
+                                </tr>
+                                <tr ng-repeat="route in getPaginatedRoutes()">
+                                    <td>{{route.maTuyen}}</td>
+                                    <td>{{route.maTuyen}}</td>
+                                    <td>{{getDriverName(route.idTaiXe)}}</td>
+                                    <td>{{route.ngayGiaoHang | date:'dd/MM/yyyy'}}</td>
+                                    <td>
+                                        <span>{{route.soDonHoanThanh || 0}}/{{route.tongSoDon || 0}}</span>
+                                    </td>
+                                    <td>0 km</td>
+                                    <td>
+                                        <span class="badge" ng-class="{
+                                            'badge-info': route.trangThai === 'DA_LAP_KE_HOACH',
+                                            'badge-primary': route.trangThai === 'DANG_GIAO',
+                                            'badge-success': route.trangThai === 'HOAN_THANH'
+                                        }">{{getStatusText(route.trangThai)}}</span>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm btn-info" ng-click="showEditModal(route)" title="Chỉnh sửa">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-danger" ng-click="deleteRoute(route)" title="Xóa">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Pagination -->
+                    <div style="display: flex; justify-content: center; align-items: center; gap: 15px; margin: 20px;" ng-show="totalPages > 1">
+                        <button class="btn btn-secondary btn-sm" ng-click="prevPage()" ng-disabled="currentPage === 1">
+                            <i class="fas fa-chevron-left"></i> Trước
+                        </button>
+                        <span>Trang {{currentPage}} / {{totalPages}}</span>
+                        <button class="btn btn-secondary btn-sm" ng-click="nextPage()" ng-disabled="currentPage === totalPages">
+                            Sau <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Map View -->
+                <div id="mapView" class="content-section" style="display: none;">
+                    <div class="section-header">
+                        <div class="section-title"><i class="fas fa-map"></i> Bản đồ tuyến đường</div>
+                    </div>
+                    <div class="section-body">
+                        <div id="map" style="height: 600px; border-radius: 8px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create/Edit Route Modal -->
+    <div class="modal" ng-class="{'ng-hide': !showModal}">
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3 ng-if="!isEditMode"><i class="fas fa-plus"></i> Tạo tuyến đường mới</h3>
+                <h3 ng-if="isEditMode"><i class="fas fa-edit"></i> Cập nhật tuyến đường</h3>
+                <span class="close" ng-click="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form name="routeFormElement" ng-submit="saveRoute()">
+                    <div class="form-row">
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label>Mã tuyến *</label>
+                                <input type="text" ng-model="routeForm.maTuyen" class="form-control" required placeholder="VD: TD001">
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label>Chọn tài xế *</label>
+                                <select ng-model="routeForm.idTaiXe" class="form-control" required>
+                                    <option value="">-- Chọn tài xế --</option>
+                                    <option ng-repeat="driver in drivers" value="{{driver.id}}">{{driver.hoTen}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label>Ngày giao hàng *</label>
+                                <input type="date" ng-model="routeForm.ngayGiaoHang" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label>Trạng thái</label>
+                                <select ng-model="routeForm.trangThai" class="form-control">
+                                    <option value="DA_LAP_KE_HOACH">Đã lập kế hoạch</option>
+                                    <option value="DANG_GIAO">Đang giao</option>
+                                    <option value="HOAN_THANH">Hoàn thành</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label>Tổng số đơn</label>
+                                <input type="number" ng-model="routeForm.tongSoDon" class="form-control" min="0" placeholder="0">
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <div class="form-group">
+                                <label>Số đơn hoàn thành</label>
+                                <input type="number" ng-model="routeForm.soDonHoanThanh" class="form-control" min="0" placeholder="0">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions" style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+                        <button type="button" class="btn btn-secondary" ng-click="closeModal()">
+                            <i class="fas fa-times"></i> Hủy
+                        </button>
+                        <button type="submit" class="btn btn-primary" ng-disabled="isLoading">
+                            <i class="fas fa-check"></i> <span ng-if="!isEditMode">Tạo tuyến</span><span ng-if="isEditMode">Cập nhật</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    
+    <!-- App Configuration & Services -->
+    <script src="app.config.js"></script>
+    <script src="services/api.service.js"></script>
+    
+    <!-- Controllers -->
+    <script src="controllers/admin-routes.controller.js"></script>
+</body>
+</html>

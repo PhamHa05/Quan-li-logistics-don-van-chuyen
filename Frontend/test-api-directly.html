@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API Trực Tiếp</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+        .error {
+            background: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+        .success {
+            background: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Test API Trực Tiếp</h1>
+    
+    <div>
+        <h3>Backend API: http://localhost:5257/api</h3>
+        <button onclick="testOrders()">Test Đơn Hàng</button>
+        <button onclick="testDrivers()">Test Tài Xế</button>
+        <button onclick="testRoutes()">Test Tuyến Đường</button>
+        <button onclick="testCOD()">Test COD</button>
+        <button onclick="testUsers()">Test Người Dùng</button>
+    </div>
+    
+    <div id="result" class="result" style="display:none;"></div>
+    
+    <script>
+        const API_BASE = 'http://localhost:5257/api';
+        
+        function showResult(title, data, isError = false) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.className = 'result ' + (isError ? 'error' : 'success');
+            resultDiv.innerHTML = `
+<strong>${title}</strong>
+
+${JSON.stringify(data, null, 2)}
+            `;
+        }
+        
+        async function testOrders() {
+            try {
+                const response = await fetch(`${API_BASE}/DonVanChuyen/search`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        PageIndex: 1,
+                        PageSize: 100,
+                        MaVanDon: '',
+                        TrangThai: ''
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                showResult('✅ Đơn Hàng API Response:', data);
+                
+                if (data.totalItems > 0) {
+                    console.log(`Tìm thấy ${data.totalItems} đơn hàng:`, data.data);
+                } else {
+                    console.warn('Database chưa có dữ liệu đơn hàng!');
+                }
+            } catch (error) {
+                showResult('❌ Lỗi Test Đơn Hàng:', {
+                    error: error.message,
+                    note: 'Kiểm tra backend có đang chạy không?'
+                }, true);
+                console.error('Error:', error);
+            }
+        }
+        
+        async function testDrivers() {
+            try {
+                const response = await fetch(`${API_BASE}/TaiXe/search`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        PageIndex: 1,
+                        PageSize: 100,
+                        HoTen: '',
+                        SoDienThoai: ''
+                    })
+                });
+                
+                const data = await response.json();
+                showResult('✅ Tài Xế API Response:', data);
+            } catch (error) {
+                showResult('❌ Lỗi Test Tài Xế:', { error: error.message }, true);
+            }
+        }
+        
+        async function testRoutes() {
+            try {
+                const response = await fetch(`${API_BASE}/TuyenDuong/search`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        PageIndex: 1,
+                        PageSize: 100,
+                        MaTuyen: '',
+                        IdTaiXe: null
+                    })
+                });
+                
+                const data = await response.json();
+                showResult('✅ Tuyến Đường API Response:', data);
+            } catch (error) {
+                showResult('❌ Lỗi Test Tuyến Đường:', { error: error.message }, true);
+            }
+        }
+        
+        async function testCOD() {
+            try {
+                const response = await fetch(`${API_BASE}/GiaoDichCOD`, {
+                    method: 'GET'
+                });
+                
+                const data = await response.json();
+                showResult('✅ COD API Response:', data);
+            } catch (error) {
+                showResult('❌ Lỗi Test COD:', { error: error.message }, true);
+            }
+        }
+        
+        async function testUsers() {
+            try {
+                const response = await fetch(`${API_BASE}/NguoiDung`, {
+                    method: 'GET'
+                });
+                
+                const data = await response.json();
+                showResult('✅ Người Dùng API Response:', data);
+            } catch (error) {
+                showResult('❌ Lỗi Test Người Dùng:', { error: error.message }, true);
+            }
+        }
+        
+        // Auto test on load
+        window.onload = function() {
+            console.log('Page loaded. Click buttons to test APIs.');
+            console.log('Backend should be running at:', API_BASE);
+        };
+    </script>
+</body>
+</html>

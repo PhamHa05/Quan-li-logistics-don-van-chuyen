@@ -15,6 +15,8 @@ namespace BLL.Interfaces
         bool Delete(int id);
         NguoiDungModel GetDatabyID(int id);
         List<NguoiDungModel> GetAll(string hoTen, string tenDangNhap);
+        bool UpdatePassword(int maNguoiDung, string matKhauMoi);
+        bool UpdateStatus(int maNguoiDung, string trangThai);
 
     }
 }
