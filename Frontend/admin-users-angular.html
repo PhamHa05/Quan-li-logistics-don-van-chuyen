@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="vi" ng-app="logisticsApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Quản lý người dùng</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body ng-controller="AdminUsersController">
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-truck-moving"></i>
+                <h2>Logistics Admin</h2>
+            </div>
+            <nav class="nav-menu">
+                <a href="index.html"><i class="fas fa-dashboard"></i> Dashboard</a>
+                <a href="admin-users.html" class="active"><i class="fas fa-users"></i> Người dùng</a>
+                <a href="admin-orders.html"><i class="fas fa-box"></i> Đơn hàng</a>
+                <a href="admin-drivers.html"><i class="fas fa-truck"></i> Tài xế</a>
+                <a href="admin-routes.html"><i class="fas fa-route"></i> Tuyến đường</a>
+                <a href="admin-cod.html"><i class="fas fa-money-bill"></i> COD</a>
+            </nav>
+            <div class="user-profile">
+                <i class="fas fa-user-circle"></i>
+                <div>
+                    <p>{{currentUser.fullName}}</p>
+                    <small>{{currentUser.role}}</small>
+                </div>
+                <button ng-click="logout()"><i class="fas fa-sign-out-alt"></i></button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="page-header">
+                <h1>Quản lý người dùng</h1>
+                <button class="btn btn-primary" ng-click="showAddModal()">
+                    <i class="fas fa-plus"></i> Thêm người dùng
+                </button>
+            </header>
+
+            <!-- Search Filters -->
+            <div class="filters-section">
+                <div class="filter-group">
+                    <input type="text" ng-model="searchFilters.name" ng-change="applyFilters()" 
+                           placeholder="Tìm theo tên...">
+                </div>
+                <div class="filter-group">
+                    <input type="text" ng-model="searchFilters.username" ng-change="applyFilters()" 
+                           placeholder="Tìm theo tên đăng nhập...">
+                </div>
+                <div class="filter-group">
+                    <select ng-model="searchFilters.role" ng-change="applyFilters()">
+                        <option value="">Tất cả vai trò</option>
+                        <option value="admin">Quản trị viên</option>
+                        <option value="driver">Tài xế</option>
+                        <option value="customer">Khách hàng</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Loading -->
+            <div ng-show="isLoading" class="loading-overlay">
+                <i class="fas fa-spinner fa-spin"></i> Đang tải...
+            </div>
+
+            <!-- Users Table -->
+            <div class="table-container" ng-show="!isLoading">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tên đăng nhập</th>
+                            <th>Họ tên</th>
+                            <th>Email</th>
+                            <th>Số điện thoại</th>
+                            <th>Vai trò</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="user in getPaginatedUsers()">
+                            <td>{{user.maNguoiDung}}</td>
+                            <td>{{user.tenDangNhap}}</td>
+                            <td>{{user.hoTen}}</td>
+                            <td>{{user.email}}</td>
+                            <td>{{user.soDienThoai}}</td>
+                            <td>
+                                <span class="badge badge-{{user.vaiTro}}">
+                                    {{getRoleText(user.vaiTro)}}
+                                </span>
+                            </td>
+                            <td class="actions">
+                                <button class="btn-icon btn-edit" ng-click="showEditModal(user)">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn-icon btn-delete" ng-click="deleteUser(user)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr ng-if="filteredUsers.length === 0">
+                            <td colspan="7" class="text-center">Không có dữ liệu</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Pagination -->
+                <div class="pagination" ng-show="totalPages > 1">
+                    <button ng-click="prevPage()" ng-disabled="currentPage === 1">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <span>Trang {{currentPage}} / {{totalPages}}</span>
+                    <button ng-click="nextPage()" ng-disabled="currentPage === totalPages">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Add/Edit User -->
+    <div class="modal-overlay" ng-show="showModal" ng-click="closeModal()">
+        <div class="modal-content" ng-click="$event.stopPropagation()">
+            <div class="modal-header">
+                <h2>{{isEditMode ? 'Cập nhật' : 'Thêm'}} người dùng</h2>
+                <button class="close-btn" ng-click="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form ng-submit="saveUser()">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Tên đăng nhập *</label>
+                        <input type="text" ng-model="userForm.tenDangNhap" 
+                               ng-disabled="isEditMode" required>
+                    </div>
+                    <div class="form-group" ng-show="!isEditMode">
+                        <label>Mật khẩu *</label>
+                        <input type="password" ng-model="userForm.matKhau" 
+                               ng-required="!isEditMode">
+                    </div>
+                    <div class="form-group">
+                        <label>Họ tên *</label>
+                        <input type="text" ng-model="userForm.hoTen" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email *</label>
+                        <input type="email" ng-model="userForm.email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Số điện thoại</label>
+                        <input type="tel" ng-model="userForm.soDienThoai">
+                    </div>
+                    <div class="form-group">
+                        <label>Địa chỉ</label>
+                        <textarea ng-model="userForm.diaChi"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Vai trò *</label>
+                        <select ng-model="userForm.vaiTro" required>
+                            <option value="">-- Chọn vai trò --</option>
+                            <option value="admin">Quản trị viên</option>
+                            <option value="driver">Tài xế</option>
+                            <option value="customer">Khách hàng</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" ng-click="closeModal()">
+                        Hủy
+                    </button>
+                    <button type="submit" class="btn btn-primary" ng-disabled="isLoading">
+                        {{isEditMode ? 'Cập nhật' : 'Thêm mới'}}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    
+    <!-- App Config and Services -->
+    <script src="app.config.js"></script>
+    <script src="services/api.service.js"></script>
+    
+    <!-- Controllers -->
+    <script src="controllers/admin-users.controller.js"></script>
+</body>
+</html>

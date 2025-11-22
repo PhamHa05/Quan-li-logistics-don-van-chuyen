@@ -86,6 +86,10 @@ namespace DAL
             total = 0;
             int offset = (pageIndex - 1) * pageSize;
 
+            // Convert empty string to null for proper SQL query
+            hoTen = string.IsNullOrWhiteSpace(hoTen) ? null : hoTen;
+            soDienThoai = string.IsNullOrWhiteSpace(soDienThoai) ? null : soDienThoai;
+
             string sql = @"
                         SELECT *, COUNT(*) OVER() AS RecordCount
                         FROM TaiXe

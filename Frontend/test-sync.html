@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Data Sync - Kiểm tra đồng bộ dữ liệu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .info-card strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: #f1f3f5;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            margin: 5px;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-success {
+            background: #27ae60;
+        }
+
+        .btn-success:hover {
+            background: #229954;
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .status-success {
+            background: #d4edda;
+            color: #27ae60;
+        }
+
+        .status-warning {
+            background: #fff3cd;
+            color: #f39c12;
+        }
+
+        .status-error {
+            background: #f8d7da;
+            color: #e74c3c;
+        }
+
+        .actions {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 2px;
+        }
+
+        .badge-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .badge-success {
+            background: #27ae60;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-sync-alt"></i> Kiểm tra Đồng bộ Dữ liệu</h1>
+
+        <div class="section">
+            <h2><i class="fas fa-info-circle"></i> Thông tin Hệ thống</h2>
+            <div class="info">
+                <div class="info-card">
+                    <strong>Tổng Users:</strong>
+                    <span id="total-users">0</span>
+                </div>
+                <div class="info-card">
+                    <strong>Tổng Drivers:</strong>
+                    <span id="total-drivers">0</span>
+                </div>
+                <div class="info-card">
+                    <strong>Tổng Orders:</strong>
+                    <span id="total-orders">0</span>
+                </div>
+                <div class="info-card">
+                    <strong>DataSync Status:</strong>
+                    <span id="datasync-status">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-users"></i> Danh sách Drivers</h2>
+            <table id="drivers-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Họ tên</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Xe</th>
+                        <th>GPLX</th>
+                        <th>Status</th>
+                        <th>Trường dữ liệu</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-box"></i> Orders của Drivers</h2>
+            <table id="orders-table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Driver ID</th>
+                        <th>Driver Name</th>
+                        <th>Status</th>
+                        <th>COD</th>
+                        <th>Created At</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-code"></i> Raw Data (JSON)</h2>
+            <h3 style="margin-bottom: 10px;">Drivers:</h3>
+            <pre id="raw-drivers"></pre>
+            <h3 style="margin: 20px 0 10px 0;">Orders:</h3>
+            <pre id="raw-orders"></pre>
+        </div>
+
+        <div class="actions">
+            <button class="btn btn-success" onclick="refreshData()">
+                <i class="fas fa-sync"></i> Refresh Data
+            </button>
+            <button class="btn" onclick="window.location.href='index.html'">
+                <i class="fas fa-home"></i> Admin Dashboard
+            </button>
+            <button class="btn" onclick="window.location.href='index-driver.html'">
+                <i class="fas fa-truck"></i> Driver Dashboard
+            </button>
+            <button class="btn btn-danger" onclick="clearAllData()">
+                <i class="fas fa-trash"></i> Clear All Data
+            </button>
+        </div>
+    </div>
+
+    <script src="data-sync.js"></script>
+    <script>
+        function loadData() {
+            console.log('[Test Sync] Loading data...');
+
+            // Check DataSync
+            const hasDataSync = typeof DataSync !== 'undefined';
+            document.getElementById('datasync-status').innerHTML = hasDataSync 
+                ? '<span class="status status-success">Available</span>' 
+                : '<span class="status status-error">Not Available</span>';
+
+            // Load drivers
+            let drivers = [];
+            if (hasDataSync) {
+                drivers = DataSync.get('drivers') || [];
+            } else {
+                drivers = JSON.parse(localStorage.getItem('drivers') || '[]');
+            }
+
+            // Load orders
+            let orders = [];
+            if (hasDataSync) {
+                orders = DataSync.get('orders') || [];
+            } else {
+                orders = JSON.parse(localStorage.getItem('orders') || '[]');
+            }
+
+            // Load users
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+
+            // Update stats
+            document.getElementById('total-users').textContent = users.length;
+            document.getElementById('total-drivers').textContent = drivers.length;
+            document.getElementById('total-orders').textContent = orders.length;
+
+            // Render drivers table
+            const driversTableBody = document.querySelector('#drivers-table tbody');
+            driversTableBody.innerHTML = '';
+
+            if (drivers.length === 0) {
+                driversTableBody.innerHTML = '<tr><td colspan="9" style="text-align:center; color:#999;">Không có dữ liệu drivers</td></tr>';
+            } else {
+                drivers.forEach(driver => {
+                    const fields = [];
+                    if (driver.username) fields.push('username');
+                    if (driver.fullname) fields.push('fullname');
+                    if (driver.email) fields.push('email');
+                    if (driver.vehiclePlate) fields.push('vehiclePlate');
+                    if (driver.driverLicense) fields.push('driverLicense');
+                    if (driver.password) fields.push('password');
+                    if (driver.role) fields.push('role');
+
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${driver.id || '-'}</td>
+                        <td><strong>${driver.username || '-'}</strong></td>
+                        <td>${driver.fullname || driver.name || '-'}</td>
+                        <td>${driver.email || '-'}</td>
+                        <td>${driver.phone || driver.phoneNumber || '-'}</td>
+                        <td>${driver.vehiclePlate || driver.vehicle || '-'}</td>
+                        <td>${driver.driverLicense || driver.license || '-'}</td>
+                        <td><span class="status status-success">${driver.status || 'active'}</span></td>
+                        <td>${fields.map(f => `<span class="badge badge-primary">${f}</span>`).join(' ')}</td>
+                    `;
+                    driversTableBody.appendChild(row);
+                });
+            }
+
+            // Render orders table
+            const ordersTableBody = document.querySelector('#orders-table tbody');
+            ordersTableBody.innerHTML = '';
+
+            if (orders.length === 0) {
+                ordersTableBody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#999;">Không có dữ liệu orders</td></tr>';
+            } else {
+                orders.forEach(order => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td><strong>${order.id}</strong></td>
+                        <td>${order.driverId || '-'}</td>
+                        <td>${order.driver || '-'}</td>
+                        <td><span class="status status-${order.status === 'delivered' ? 'success' : 'warning'}">${order.status}</span></td>
+                        <td>${order.codAmount ? formatCurrency(order.codAmount) : '-'}</td>
+                        <td>${order.createdAt ? new Date(order.createdAt).toLocaleString('vi-VN') : '-'}</td>
+                    `;
+                    ordersTableBody.appendChild(row);
+                });
+            }
+
+            // Show raw JSON
+            document.getElementById('raw-drivers').textContent = JSON.stringify(drivers, null, 2);
+            document.getElementById('raw-orders').textContent = JSON.stringify(orders.slice(0, 5), null, 2) + '\n... (showing first 5)';
+
+            console.log('[Test Sync] Data loaded:', {
+                drivers: drivers.length,
+                orders: orders.length,
+                users: users.length
+            });
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('vi-VN').format(amount) + ' đ';
+        }
+
+        function refreshData() {
+            console.log('[Test Sync] Refreshing...');
+            loadData();
+            alert('Đã làm mới dữ liệu!');
+        }
+
+        function clearAllData() {
+            if (confirm('Bạn có chắc chắn muốn xóa TẤT CẢ dữ liệu? Hành động này không thể hoàn tác!')) {
+                if (confirm('Xác nhận lần nữa: XÓA TOÀN BỘ drivers, orders, users?')) {
+                    localStorage.removeItem('drivers');
+                    localStorage.removeItem('orders');
+                    localStorage.removeItem('users');
+                    localStorage.removeItem('currentUser');
+                    localStorage.removeItem('loggedInUser');
+                    sessionStorage.clear();
+                    
+                    alert('Đã xóa toàn bộ dữ liệu! Trang sẽ reload...');
+                    window.location.reload();
+                }
+            }
+        }
+
+        // Load on page load
+        document.addEventListener('DOMContentLoaded', loadData);
+
+        // Listen for DataSync events
+        if (typeof DataSync !== 'undefined') {
+            window.addEventListener('dataSync', function(event) {
+                console.log('[Test Sync] DataSync event received:', event.detail.key);
+                loadData();
+            });
+        }
+    </script>
+</body>
+</html>

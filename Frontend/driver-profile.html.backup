@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin cá nhân - Driver Portal</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="admin-style.css">
+    <style>
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .profile-container {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 30px;
+            animation: fadeInUp 0.6s ease-out;
+        }
+        @media (max-width: 1200px) {
+            .profile-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        .profile-sidebar {
+            background: white;
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            text-align: center;
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+            animation: slideIn 0.5s ease-out;
+        }
+        .profile-avatar-large {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 3.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            position: relative;
+            animation: pulse 3s infinite;
+        }
+        .profile-avatar-large::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: #27ae60;
+            border: 4px solid white;
+            border-radius: 50%;
+            bottom: 5px;
+            right: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .profile-name {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        .profile-role {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+        .profile-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        .profile-stat {
+            background: linear-gradient(135deg, #f5f7fa, #e8f4f8);
+            padding: 18px 15px;
+            border-radius: 12px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .profile-stat:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        .profile-stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #3498db;
+            margin-bottom: 5px;
+        }
+        .profile-stat-label {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            font-weight: 500;
+        }
+        .profile-content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        .info-card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            animation: fadeInUp 0.7s ease-out;
+        }
+        .info-card:hover {
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+        .info-card h3 {
+            margin: 0 0 25px 0;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #3498db;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.3rem;
+        }
+        .info-card h3 i {
+            color: #3498db;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+        .info-item:hover {
+            background: #e8f4f8;
+            transform: translateX(5px);
+        }
+        .info-label {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .info-value {
+            color: #2c3e50;
+            font-size: 1.15rem;
+            font-weight: 600;
+        }
+        .edit-mode .info-value {
+            display: none;
+        }
+        .edit-mode input[type="text"],
+        .edit-mode input[type="tel"],
+        .edit-mode input[type="email"],
+        .edit-mode input[type="date"] {
+            display: block !important;
+        }
+        .info-item input,
+        .info-item select {
+            display: none;
+            padding: 10px 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        .info-item input:focus,
+        .info-item select:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+        .password-strength {
+            margin-top: 15px;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .password-strength.weak {
+            background: linear-gradient(to right, rgba(231, 76, 60, 0.1), transparent);
+            color: #c0392b;
+            border-left: 4px solid #e74c3c;
+        }
+        .password-strength.medium {
+            background: linear-gradient(to right, rgba(243, 156, 18, 0.1), transparent);
+            color: #856404;
+            border-left: 4px solid #f39c12;
+        }
+        .password-strength.strong {
+            background: linear-gradient(to right, rgba(46, 204, 113, 0.1), transparent);
+            color: #155724;
+            border-left: 4px solid #27ae60;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 10px;
+        }
+        .stat-card {
+            padding: 25px;
+            border-radius: 12px;
+            color: white;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+        }
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .stat-label {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+        }
+        .vehicle-info-edit {
+            display: none;
+        }
+        .edit-mode-vehicle .vehicle-info-display {
+            display: none;
+        }
+        .edit-mode-vehicle .vehicle-info-edit {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-truck"></i> Driver Portal</h2>
+            </div>
+            <div class="sidebar-menu">
+                <ul>
+                    <li><a href="index-driver.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="driver-orders.html"><i class="fas fa-box"></i> Đơn hàng của tôi</a></li>
+                    <li><a href="driver-routes.html"><i class="fas fa-route"></i> Tuyến đường hôm nay</a></li>
+                    <li><a href="driver-cod.html"><i class="fas fa-money-bill-wave"></i> Quản lý COD</a></li>
+                    <li><a href="driver-history.html"><i class="fas fa-history"></i> Lịch sử giao hàng</a></li>
+                    <li class="active"><a href="driver-profile.html"><i class="fas fa-user"></i> Thông tin cá nhân</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <h1><i class="fas fa-user"></i> Thông tin cá nhân</h1>
+                <div class="header-right">
+                    <div class="user-info">
+                        <div class="user-avatar" id="driver-avatar">TX</div>
+                        <div>
+                            <div class="user-name" id="driver-name">Tài xế</div>
+                            <div class="user-role">Nhân viên giao hàng</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                    </button>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="content">
+                <div class="profile-container">
+                    <!-- Profile Sidebar -->
+                    <div class="profile-sidebar">
+                        <div class="profile-avatar-large" id="profile-avatar-large">TX</div>
+                        <div class="profile-name" id="profile-name">Tài xế</div>
+                        <div class="profile-role">Nhân viên giao hàng</div>
+                        <div style="margin: 20px 0;">
+                            <span class="badge badge-success"><i class="fas fa-check-circle"></i> Đang hoạt động</span>
+                        </div>
+                        
+                        <div class="profile-stats">
+                            <div class="profile-stat">
+                                <div class="profile-stat-value" id="total-orders-stat">0</div>
+                                <div class="profile-stat-label">Tổng đơn</div>
+                            </div>
+                            <div class="profile-stat">
+                                <div class="profile-stat-value" id="success-rate-stat">0%</div>
+                                <div class="profile-stat-label">Tỷ lệ TC</div>
+                            </div>
+                            <div class="profile-stat">
+                                <div class="profile-stat-value" id="total-cod-stat">0đ</div>
+                                <div class="profile-stat-label">COD đã thu</div>
+                            </div>
+                            <div class="profile-stat">
+                                <div class="profile-stat-value" id="rating-stat">5.0</div>
+                                <div class="profile-stat-label">Đánh giá</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Content -->
+                    <div class="profile-content">
+                        <!-- Personal Information -->
+                        <div class="info-card" id="personal-info-card">
+                            <h3><i class="fas fa-user"></i> Thông tin cá nhân</h3>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <label class="info-label">Họ và tên</label>
+                                    <div class="info-value" id="fullname-display">-</div>
+                                    <input type="text" class="form-control" id="fullname-input" value="">
+                                </div>
+                                <div class="info-item">
+                                    <label class="info-label">Tên đăng nhập</label>
+                                    <div class="info-value" id="username-display">-</div>
+                                </div>
+                                <div class="info-item">
+                                    <label class="info-label">Email</label>
+                                    <div class="info-value" id="email-display">-</div>
+                                    <input type="email" class="form-control" id="email-input" value="">
+                                </div>
+                                <div class="info-item">
+                                    <label class="info-label">Số điện thoại</label>
+                                    <div class="info-value" id="phone-display">-</div>
+                                    <input type="tel" class="form-control" id="phone-input" value="">
+                                </div>
+                                <div class="info-item">
+                                    <label class="info-label">Ngày sinh</label>
+                                    <div class="info-value" id="dob-display">-</div>
+                                    <input type="date" class="form-control" id="dob-input" value="">
+                                </div>
+                                <div class="info-item">
+                                    <label class="info-label">Địa chỉ</label>
+                                    <div class="info-value" id="address-display">-</div>
+                                    <input type="text" class="form-control" id="address-input" value="">
+                                </div>
+                            </div>
+                            <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: flex-end;" class="action-buttons">
+                                <button class="btn btn-primary" id="edit-btn" onclick="toggleEditMode()">
+                                    <i class="fas fa-edit"></i> Chỉnh sửa
+                                </button>
+                                <button class="btn btn-success" id="save-btn" onclick="saveProfile()" style="display: none;">
+                                    <i class="fas fa-save"></i> Lưu thay đổi
+                                </button>
+                                <button class="btn btn-secondary" id="cancel-btn" onclick="cancelEdit()" style="display: none;">
+                                    <i class="fas fa-times"></i> Hủy
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Vehicle Information -->
+                        <div class="info-card" id="vehicle-info-card">
+                            <h3><i class="fas fa-truck"></i> Thông tin phương tiện</h3>
+                            <div class="info-grid vehicle-info-display">
+                                <div class="info-item">
+                                    <label class="info-label">Biển số xe</label>
+                                    <div class="info-value" id="vehicle-plate">-</div>
+                                </div>
+                                <div class="info-item">
+                                    <label class="info-label">Loại xe</label>
+                                    <div class="info-value" id="vehicle-type">-</div>
+                                </div>
+                                <div class="info-item">
+                                    <label class="info-label">Giấy phép lái xe</label>
+                                    <div class="info-value" id="driver-license">-</div>
+                                </div>
+                                <div class="info-item">
+                                    <label class="info-label">Ngày cấp GPLX</label>
+                                    <div class="info-value" id="license-date">-</div>
+                                </div>
+                            </div>
+                            <div class="info-grid vehicle-info-edit">
+                                <div class="info-item">
+                                    <label class="info-label">Biển số xe</label>
+                                    <input type="text" class="form-control" id="vehicle-plate-input" placeholder="Nhập biển số xe" style="display: block;">
+                                </div>
+                                <div class="info-item">
+                                    <label class="info-label">Loại xe</label>
+                                    <select class="form-control" id="vehicle-type-input" style="display: block;">
+                                        <option value="">Chọn loại xe</option>
+                                        <option value="Xe máy">Xe máy</option>
+                                        <option value="Xe máy số">Xe máy số</option>
+                                        <option value="Xe tay ga">Xe tay ga</option>
+                                        <option value="Xe ba gác">Xe ba gác</option>
+                                        <option value="Xe tải nhỏ">Xe tải nhỏ</option>
+                                        <option value="Xe Van">Xe Van</option>
+                                    </select>
+                                </div>
+                                <div class="info-item">
+                                    <label class="info-label">Giấy phép lái xe</label>
+                                    <input type="text" class="form-control" id="driver-license-input" placeholder="Nhập số GPLX" style="display: block;">
+                                </div>
+                                <div class="info-item">
+                                    <label class="info-label">Ngày cấp GPLX</label>
+                                    <input type="date" class="form-control" id="license-date-input" style="display: block;">
+                                </div>
+                            </div>
+                            <div class="action-buttons" style="margin-top: 20px;">
+                                <button class="btn btn-primary" id="edit-vehicle-btn" onclick="toggleEditVehicle()">
+                                    <i class="fas fa-edit"></i> Chỉnh sửa
+                                </button>
+                                <button class="btn btn-success" id="save-vehicle-btn" onclick="saveVehicle()" style="display: none;">
+                                    <i class="fas fa-save"></i> Lưu thay đổi
+                                </button>
+                                <button class="btn btn-secondary" id="cancel-vehicle-btn" onclick="cancelEditVehicle()" style="display: none;">
+                                    <i class="fas fa-times"></i> Hủy
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Change Password -->
+                        <div class="info-card">
+                            <h3><i class="fas fa-lock"></i> Đổi mật khẩu</h3>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <label class="info-label">Mật khẩu hiện tại</label>
+                                    <input type="password" class="form-control" id="current-password" placeholder="Nhập mật khẩu hiện tại">
+                                </div>
+                                <div class="info-item">
+                                    <label class="info-label">Mật khẩu mới</label>
+                                    <input type="password" class="form-control" id="new-password" placeholder="Nhập mật khẩu mới" oninput="checkPasswordStrength()">
+                                </div>
+                                <div class="info-item">
+                                    <label class="info-label">Xác nhận mật khẩu mới</label>
+                                    <input type="password" class="form-control" id="confirm-password" placeholder="Nhập lại mật khẩu mới">
+                                </div>
+                            </div>
+                            <div id="password-strength-indicator"></div>
+                            <div style="margin-top: 20px;">
+                                <button class="btn btn-warning" onclick="changePassword()">
+                                    <i class="fas fa-key"></i> Đổi mật khẩu
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Work Statistics -->
+                        <div class="info-card">
+                            <h3><i class="fas fa-chart-bar"></i> Thống kê công việc</h3>
+                            <div class="stats-grid">
+                                <div class="stat-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                    <div class="stat-icon"><i class="fas fa-calendar-check"></i></div>
+                                    <div class="stat-value" id="days-worked">0</div>
+                                    <div class="stat-label">Ngày làm việc</div>
+                                </div>
+                                <div class="stat-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                    <div class="stat-icon"><i class="fas fa-box"></i></div>
+                                    <div class="stat-value" id="total-deliveries">0</div>
+                                    <div class="stat-label">Đơn đã giao</div>
+                                </div>
+                                <div class="stat-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                    <div class="stat-icon"><i class="fas fa-star"></i></div>
+                                    <div class="stat-value" id="avg-rating">5.0</div>
+                                    <div class="stat-label">Đánh giá TB</div>
+                                </div>
+                                <div class="stat-card" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                                    <div class="stat-icon"><i class="fas fa-money-bill-wave"></i></div>
+                                    <div class="stat-value" id="total-cod-collected">0 đ</div>
+                                    <div class="stat-label">COD đã thu</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="data-sync.js"></script>
+    <script src="driver-profile.js"></script>
+</body>
+</html>

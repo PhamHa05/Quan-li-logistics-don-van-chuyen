@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Fix - Clear Cache & Test Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        .subtitle {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        .step {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        .step-number {
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .step-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        .step-content {
+            color: #546e7a;
+            line-height: 1.6;
+        }
+        .btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            width: 100%;
+            margin: 10px 0;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .btn:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .btn-success {
+            background: #2ecc71;
+        }
+        .btn-success:hover {
+            background: #27ae60;
+        }
+        .btn-danger {
+            background: #e74c3c;
+        }
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+        .btn-secondary {
+            background: #95a5a6;
+        }
+        .btn-secondary:hover {
+            background: #7f8c8d;
+        }
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-weight: bold;
+            display: none;
+        }
+        .status.show {
+            display: block;
+        }
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .status-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .icon {
+            font-size: 20px;
+        }
+        .code {
+            background: #2c3e50;
+            color: #2ecc71;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        .test-result {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+        .test-result.show {
+            display: block;
+        }
+        .test-result h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        .test-item {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .test-pass {
+            background: #d4edda;
+            color: #155724;
+        }
+        .test-fail {
+            background: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Quick Fix Tool</h1>
+        <p class="subtitle">Công cụ sửa lỗi "Nháy liên tục" khi đăng nhập khách hàng</p>
+        
+        <div id="status" class="status"></div>
+        
+        <div class="step">
+            <div class="step-title">
+                <span class="step-number">1</span>
+                Clear Browser Cache & Storage
+            </div>
+            <div class="step-content">
+                Xóa tất cả cache và storage data cũ để đảm bảo code mới được load.
+            </div>
+        </div>
+        
+        <button class="btn btn-danger" onclick="clearAllData()">
+            <span class="icon">🗑️</span>
+            Clear All Cache & Storage
+        </button>
+        
+        <div class="step">
+            <div class="step-title">
+                <span class="step-number">2</span>
+                Test Authentication Logic
+            </div>
+            <div class="step-content">
+                Kiểm tra xem logic authentication có hoạt động đúng không.
+            </div>
+        </div>
+        
+        <button class="btn btn-secondary" onclick="testAuthLogic()">
+            <span class="icon">🧪</span>
+            Test Auth Logic
+        </button>
+        
+        <div id="testResults" class="test-result"></div>
+        
+        <div class="step">
+            <div class="step-title">
+                <span class="step-number">3</span>
+                Login với tài khoản Customer
+            </div>
+            <div class="step-content">
+                Sau khi clear cache, đăng nhập với tài khoản customer để test.
+                <div class="code">
+                    Username: nguyenvana<br>
+                    Password: 123456
+                </div>
+            </div>
+        </div>
+        
+        <button class="btn btn-success" onclick="goToLogin()">
+            <span class="icon">🚀</span>
+            Go to Login Page
+        </button>
+        
+        <div class="step">
+            <div class="step-title">
+                <span class="step-number">4</span>
+                Debug Info
+            </div>
+            <div class="step-content">
+                Xem thông tin debug chi tiết về authentication flow.
+            </div>
+        </div>
+        
+        <button class="btn" onclick="showDebugInfo()">
+            <span class="icon">🐛</span>
+            Show Debug Info
+        </button>
+    </div>
+
+    <script>
+        function showStatus(message, type = 'info') {
+            const statusDiv = document.getElementById('status');
+            statusDiv.className = `status status-${type} show`;
+            statusDiv.textContent = message;
+            
+            setTimeout(() => {
+                statusDiv.classList.remove('show');
+            }, 5000);
+        }
+
+        function clearAllData() {
+            try {
+                // Clear all storage
+                localStorage.clear();
+                sessionStorage.clear();
+                
+                // Clear cookies
+                document.cookie.split(";").forEach(function(c) { 
+                    document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+                });
+                
+                showStatus('✅ Đã xóa tất cả cache và storage! Bây giờ nhấn Ctrl+Shift+R để hard refresh trang.', 'success');
+                
+                console.log('✅ All storage cleared');
+                console.log('📝 Next step: Press Ctrl+Shift+R to hard refresh the page');
+                
+            } catch (e) {
+                showStatus('❌ Lỗi khi xóa cache: ' + e.message, 'error');
+                console.error('Error clearing storage:', e);
+            }
+        }
+
+        function testAuthLogic() {
+            const results = [];
+            let allPassed = true;
+            
+            // Test 1: Role mapping in login.js
+            console.log('🧪 Testing role mapping...');
+            
+            const testRoles = [
+                { input: 'KHACH', expected: 'customer' },
+                { input: 'khach', expected: 'customer' },
+                { input: 'KHACHHANG', expected: 'customer' },
+                { input: 'khachhang', expected: 'customer' },
+                { input: 'customer', expected: 'customer' },
+                { input: 'TAIXE', expected: 'driver' },
+                { input: 'ADMIN', expected: 'admin' }
+            ];
+            
+            const roleMap = {
+                'taixe': 'driver',
+                'tai xe': 'driver',
+                'driver': 'driver',
+                'khach': 'customer',
+                'khachhang': 'customer',
+                'khach hang': 'customer',
+                'customer': 'customer',
+                'admin': 'admin',
+                'quantri': 'admin',
+                'quan tri': 'admin'
+            };
+            
+            testRoles.forEach(test => {
+                const normalized = test.input.toLowerCase().trim();
+                const mapped = roleMap[normalized] || normalized;
+                const passed = mapped === test.expected;
+                
+                results.push({
+                    name: `Role mapping: "${test.input}" → "${mapped}"`,
+                    passed: passed,
+                    details: passed ? '✅ Correct' : `❌ Expected "${test.expected}", got "${mapped}"`
+                });
+                
+                if (!passed) allPassed = false;
+            });
+            
+            // Test 2: Controller role check
+            console.log('🧪 Testing controller role check...');
+            
+            const testControllerCheck = (role) => {
+                const userRole = String(role || '').toUpperCase().trim();
+                return (
+                    userRole === 'CUSTOMER' || 
+                    userRole === 'KHACHHANG' || 
+                    userRole === 'KHACH HANG' || 
+                    userRole === 'KHACH'
+                );
+            };
+            
+            const controllerTests = [
+                { role: 'KHACH', shouldPass: true },
+                { role: 'khach', shouldPass: true },
+                { role: 'CUSTOMER', shouldPass: true },
+                { role: 'customer', shouldPass: true },
+                { role: 'KHACHHANG', shouldPass: true },
+                { role: 'TAIXE', shouldPass: false },
+                { role: 'ADMIN', shouldPass: false }
+            ];
+            
+            controllerTests.forEach(test => {
+                const result = testControllerCheck(test.role);
+                const passed = result === test.shouldPass;
+                
+                results.push({
+                    name: `Controller check: "${test.role}"`,
+                    passed: passed,
+                    details: passed ? `✅ ${result ? 'Allowed' : 'Blocked'} (correct)` : `❌ ${result ? 'Allowed' : 'Blocked'} (wrong)`
+                });
+                
+                if (!passed) allPassed = false;
+            });
+            
+            // Display results
+            const resultsDiv = document.getElementById('testResults');
+            resultsDiv.innerHTML = '<h3>🧪 Test Results:</h3>';
+            
+            results.forEach(result => {
+                const div = document.createElement('div');
+                div.className = `test-item ${result.passed ? 'test-pass' : 'test-fail'}`;
+                div.innerHTML = `<strong>${result.name}</strong>: ${result.details}`;
+                resultsDiv.appendChild(div);
+            });
+            
+            resultsDiv.classList.add('show');
+            
+            if (allPassed) {
+                showStatus('✅ Tất cả tests đều PASS! Authentication logic hoạt động đúng.', 'success');
+            } else {
+                showStatus('❌ Có test FAIL! Vui lòng kiểm tra lại code.', 'error');
+            }
+            
+            console.log('Test results:', results);
+        }
+
+        function goToLogin() {
+            showStatus('🚀 Đang chuyển đến trang login...', 'info');
+            setTimeout(() => {
+                window.location.href = 'login.html';
+            }, 1000);
+        }
+
+        function showDebugInfo() {
+            const info = {
+                localStorage: {
+                    currentUser: localStorage.getItem('currentUser'),
+                    loggedInUser: localStorage.getItem('loggedInUser')
+                },
+                sessionStorage: {
+                    loggedInUser: sessionStorage.getItem('loggedInUser')
+                },
+                userAgent: navigator.userAgent,
+                currentURL: window.location.href,
+                timestamp: new Date().toISOString()
+            };
+            
+            console.group('🐛 Debug Info');
+            console.log('Storage Data:', info);
+            console.log('LocalStorage keys:', Object.keys(localStorage));
+            console.log('SessionStorage keys:', Object.keys(sessionStorage));
+            console.groupEnd();
+            
+            showStatus('📋 Debug info đã được log vào Console (F12)', 'info');
+            
+            alert('Debug info đã được log vào Console.\n\nNhấn F12 để xem chi tiết.');
+        }
+
+        // Auto-run test on page load
+        window.onload = function() {
+            console.log('🔧 Quick Fix Tool loaded');
+            console.log('📝 Steps:');
+            console.log('  1. Clear cache & storage');
+            console.log('  2. Test auth logic');
+            console.log('  3. Go to login page');
+            console.log('  4. Login with: nguyenvana / 123456');
+            
+            showStatus('🔧 Tool ready! Click "Clear All Cache & Storage" để bắt đầu.', 'info');
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Khách hàng - Logistics</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="customer-style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fa-solid fa-bag-shopping"></i> Khách hàng</h2>
+            </div>
+            <div class="sidebar-menu">
+                <ul>
+                    <li class="active"><a href="index-customer.html"><i class="fas fa-home"></i> Trang chủ</a></li>
+                    <li><a href="customer-create-order.html"><i class="fas fa-plus-circle"></i> Tạo đơn hàng</a></li>
+                    <li><a href="customer-my-orders.html"><i class="fas fa-box"></i> Đơn hàng của tôi</a></li>
+                    <li><a href="#"><i class="fas fa-search"></i> Tra cứu đơn hàng</a></li>
+                    <li><a href="customer-payment-history.html"><i class="fas fa-receipt"></i> Lịch sử thanh toán</a></li>
+                    <li><a href="customer-account.html"><i class="fas fa-user-circle"></i> Tài khoản</a></li>
+                    <li><a href="customer-support.html"><i class="fas fa-headset"></i> Hỗ trợ</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="header-left">
+                    <h1><i class="fas fa-store"></i> Chào mừng trở lại!</h1>
+                </div>
+                <div class="header-right" style="display: flex; gap: 10px; align-items: center;">
+                    <button class="btn btn-success" onclick="window.location.href='customer-create-order.html'">
+                        <i class="fas fa-plus"></i> Tạo đơn mới
+                    </button>
+                    <div class="user-info">
+                        <div class="user-avatar">KH</div>
+                        <div>
+                            <div class="user-name">Khách hàng</div>
+                            <div class="user-role">Tài khoản cá nhân</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
+                </div>
+            </div>
+            
+            <!-- Content -->
+            <div class="content">
+                <!-- Customer Info Card -->
+                <div class="customer-welcome-card">
+                    <div class="welcome-left">
+                        <h2>Xin chào, <span id="customer-name">Khách hàng</span>!</h2>
+                        <p>Chúng tôi luôn sẵn sàng phục vụ nhu cầu vận chuyển của bạn</p>
+                        <button class="btn btn-light" onclick="window.location.href='customer-create-order.html'">
+                            <i class="fas fa-paper-plane"></i> Gửi hàng ngay
+                        </button>
+                    </div>
+                    <div class="welcome-right">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                </div>
+
+                <!-- Dashboard Cards -->
+                <div class="dashboard-cards">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Tổng đơn hàng</div>
+                            <div class="card-icon primary">
+                                <i class="fas fa-box"></i>
+                            </div>
+                        </div>
+                        <div class="card-value" id="total-orders">24</div>
+                        <div class="card-description">Tất cả thời gian</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Đang vận chuyển</div>
+                            <div class="card-icon warning">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                        </div>
+                        <div class="card-value" id="shipping-orders">3</div>
+                        <div class="card-description">Đơn hàng đang giao</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Hoàn thành</div>
+                            <div class="card-icon success">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+                        <div class="card-value" id="completed-orders">21</div>
+                        <div class="card-description">Giao thành công</div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Chi phí tháng này</div>
+                            <div class="card-icon danger">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                        </div>
+                        <div class="card-value" id="month-cost">1.2M</div>
+                        <div class="card-description">VNĐ</div>
+                    </div>
+                </div>
+                
+                <!-- Tracking Section -->
+                <div class="content-section">
+                    <div class="section-header">
+                        <div class="section-title"><i class="fas fa-search"></i> Tra cứu vận đơn</div>
+                    </div>
+                        <div class="section-body">
+                            <div class="tracking-search">
+                                <input type="text" class="form-control" id="tracking-code" placeholder="Nhập mã vận đơn (VD: VD123456789)">
+                                <button class="btn btn-primary" onclick="searchTracking()">
+                                    <i class="fas fa-search"></i> Tra cứu
+                                </button>
+                            </div>
+                            
+                            <div id="tracking-result" style="display: none;">
+                                <div class="tracking-info">
+                                    <h3>Thông tin vận đơn: <span id="tracking-order-id"></span></h3>
+                                    <div class="tracking-timeline">
+                                        <div class="timeline-item completed">
+                                            <div class="timeline-icon">
+                                                <i class="fas fa-check"></i>
+                                            </div>
+                                            <div class="timeline-content">
+                                                <h5>Đã tiếp nhận đơn hàng</h5>
+                                                <p>08/11/2025 - 14:30</p>
+                                                <small>Đơn hàng đã được tạo và xác nhận</small>
+                                            </div>
+                                        </div>
+                                        <div class="timeline-item completed">
+                                            <div class="timeline-icon">
+                                                <i class="fas fa-box"></i>
+                                            </div>
+                                            <div class="timeline-content">
+                                                <h5>Đã lấy hàng</h5>
+                                                <p>08/11/2025 - 16:00</p>
+                                                <small>Tài xế Trần Văn Tài đã lấy hàng</small>
+                                            </div>
+                                        </div>
+                                        <div class="timeline-item active">
+                                            <div class="timeline-icon">
+                                                <i class="fas fa-truck"></i>
+                                            </div>
+                                            <div class="timeline-content">
+                                                <h5>Đang giao hàng</h5>
+                                                <p>09/11/2025 - 09:00</p>
+                                                <small>Đơn hàng đang trên đường giao đến bạn</small>
+                                            </div>
+                                        </div>
+                                        <div class="timeline-item">
+                                            <div class="timeline-icon">
+                                                <i class="fas fa-home"></i>
+                                            </div>
+                                            <div class="timeline-content">
+                                                <h5>Giao hàng thành công</h5>
+                                                <p>Dự kiến: 09/11/2025 - 15:00</p>
+                                                <small>Đơn hàng sẽ được giao trong hôm nay</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="data-sync.js"></script>
+    <script src="customer-script.js"></script>
+</body>
+</html>

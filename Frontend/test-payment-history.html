@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Payment History - Debug Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+        
+        .test-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            color: #2c3e50;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .btn-success {
+            background: #27ae60;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #229954;
+            transform: translateY(-2px);
+        }
+        
+        .btn-warning {
+            background: #f39c12;
+            color: white;
+        }
+        
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .result-box {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .result-box pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            margin: 5px;
+        }
+        
+        .status-success {
+            background: #d4edda;
+            color: #27ae60;
+        }
+        
+        .status-error {
+            background: #f8d7da;
+            color: #e74c3c;
+        }
+        
+        .status-warning {
+            background: #fff3cd;
+            color: #f39c12;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #7f8c8d;
+        }
+        
+        .loading::after {
+            content: '...';
+            animation: dots 1.5s infinite;
+        }
+        
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧪 Test Payment History - Debug Tool</h1>
+            <p class="subtitle">Test lịch sử thanh toán COD của khách hàng từ database</p>
+            <p style="margin-top: 10px; color: #e74c3c; font-weight: 600;">
+                ⚠️ Test với user: nguyenvana (ID=2, Phone: 0911222333)
+            </p>
+        </div>
+
+        <!-- Step 1: Check Backend -->
+        <div class="test-section">
+            <div class="section-title">📡 Bước 1: Kiểm tra Backend API</div>
+            <div class="button-group">
+                <button class="btn-primary" onclick="checkBackend()">✓ Check Backend</button>
+                <button class="btn-primary" onclick="testGiaoDichCODAPI()">Test GiaoDichCOD API</button>
+            </div>
+            <div id="backend-result" class="result-box" style="display:none;"></div>
+        </div>
+
+        <!-- Step 2: Load Customer -->
+        <div class="test-section">
+            <div class="section-title">👤 Bước 2: Load thông tin khách hàng</div>
+            <div class="button-group">
+                <button class="btn-primary" onclick="loadCustomer()">Load Customer (ID=2)</button>
+            </div>
+            <div id="customer-result" class="result-box" style="display:none;"></div>
+        </div>
+
+        <!-- Step 3: Load Customer Orders -->
+        <div class="test-section">
+            <div class="section-title">📦 Bước 3: Load đơn hàng của khách hàng</div>
+            <div class="button-group">
+                <button class="btn-primary" onclick="loadCustomerOrders()">Load Customer Orders</button>
+            </div>
+            <div id="orders-result" class="result-box" style="display:none;"></div>
+        </div>
+
+        <!-- Step 4: Load COD Transactions -->
+        <div class="test-section">
+            <div class="section-title">💰 Bước 4: Load COD Transactions</div>
+            <div class="button-group">
+                <button class="btn-primary" onclick="loadCODTransactions()">Load All COD</button>
+                <button class="btn-success" onclick="filterCustomerPayments()">Filter Customer Payments</button>
+            </div>
+            <div id="cod-result" class="result-box" style="display:none;"></div>
+        </div>
+
+        <!-- Step 5: Final Results -->
+        <div class="test-section">
+            <div class="section-title">📊 Bước 5: Kết quả cuối cùng</div>
+            <div class="button-group">
+                <button class="btn-success" onclick="runFullTest()">▶️ Run Full Test</button>
+                <button class="btn-warning" onclick="clearResults()">🗑️ Clear All</button>
+            </div>
+            <div id="final-result" class="result-box" style="display:none;"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5257/api';
+        let customerData = null;
+        let customerOrders = [];
+        let allCODTransactions = [];
+        let customerPayments = [];
+
+        function log(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            element.style.display = 'block';
+            
+            const timestamp = new Date().toLocaleTimeString('vi-VN');
+            const icon = type === 'success' ? '✓' : type === 'error' ? '✗' : 'ℹ';
+            const statusClass = type === 'success' ? 'status-success' : type === 'error' ? 'status-error' : 'status-warning';
+            
+            element.innerHTML += `<div class="status ${statusClass}">${icon} [${timestamp}] ${message}</div>\n`;
+        }
+
+        function logJSON(elementId, title, data) {
+            const element = document.getElementById(elementId);
+            element.style.display = 'block';
+            element.innerHTML += `<pre><strong>${title}:</strong>\n${JSON.stringify(data, null, 2)}</pre>\n`;
+        }
+
+        async function checkBackend() {
+            log('backend-result', 'Checking backend health...', 'info');
+            
+            try {
+                const response = await fetch(`${API_BASE}/NguoiDung`);
+                if (response.ok) {
+                    log('backend-result', `Backend API is running! Status: ${response.status}`, 'success');
+                } else {
+                    log('backend-result', `Backend returned status: ${response.status}`, 'error');
+                }
+            } catch (error) {
+                log('backend-result', `Cannot connect to backend: ${error.message}`, 'error');
+            }
+        }
+
+        async function testGiaoDichCODAPI() {
+            log('backend-result', 'Testing GiaoDichCOD API...', 'info');
+            
+            try {
+                const response = await fetch(`${API_BASE}/GiaoDichCOD`);
+                const data = await response.json();
+                log('backend-result', `GiaoDichCOD API works! Found ${data.length} transactions`, 'success');
+                logJSON('backend-result', 'Sample COD Transaction', data[0] || {});
+            } catch (error) {
+                log('backend-result', `GiaoDichCOD API error: ${error.message}`, 'error');
+            }
+        }
+
+        async function loadCustomer() {
+            log('customer-result', 'Loading customer ID=2 (nguyenvana)...', 'info');
+            
+            try {
+                const response = await fetch(`${API_BASE}/NguoiDung/get-by-id/2`);
+                customerData = await response.json();
+                
+                log('customer-result', `Customer loaded: ${customerData.hoTen}`, 'success');
+                log('customer-result', `Phone: ${customerData.soDienThoai}`, 'success');
+                logJSON('customer-result', 'Customer Data', customerData);
+            } catch (error) {
+                log('customer-result', `Error loading customer: ${error.message}`, 'error');
+            }
+        }
+
+        async function loadCustomerOrders() {
+            if (!customerData) {
+                log('orders-result', 'Please load customer first!', 'error');
+                return;
+            }
+            
+            log('orders-result', 'Loading all orders from database...', 'info');
+            
+            try {
+                const response = await fetch(`${API_BASE}/DonVanChuyen/search`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({})
+                });
+                
+                const allOrders = await response.json();
+                log('orders-result', `Total orders in database: ${allOrders.length}`, 'info');
+                
+                // Filter by customer phone
+                customerOrders = allOrders.filter(order => 
+                    order.sdtNguoiGui === customerData.soDienThoai
+                );
+                
+                log('orders-result', `Customer orders found: ${customerOrders.length}`, 'success');
+                
+                if (customerOrders.length > 0) {
+                    const orderIds = customerOrders.map(o => o.id).join(', ');
+                    log('orders-result', `Order IDs: ${orderIds}`, 'info');
+                    logJSON('orders-result', 'Sample Order', customerOrders[0]);
+                } else {
+                    log('orders-result', 'No orders found for this customer', 'warning');
+                }
+            } catch (error) {
+                log('orders-result', `Error loading orders: ${error.message}`, 'error');
+            }
+        }
+
+        async function loadCODTransactions() {
+            log('cod-result', 'Loading all COD transactions...', 'info');
+            
+            try {
+                const response = await fetch(`${API_BASE}/GiaoDichCOD`);
+                allCODTransactions = await response.json();
+                
+                log('cod-result', `Total COD transactions: ${allCODTransactions.length}`, 'success');
+                
+                if (allCODTransactions.length > 0) {
+                    logJSON('cod-result', 'Sample COD Transaction', allCODTransactions[0]);
+                }
+            } catch (error) {
+                log('cod-result', `Error loading COD transactions: ${error.message}`, 'error');
+            }
+        }
+
+        async function filterCustomerPayments() {
+            if (customerOrders.length === 0) {
+                log('cod-result', 'Please load customer orders first!', 'error');
+                return;
+            }
+            
+            if (allCODTransactions.length === 0) {
+                log('cod-result', 'Please load COD transactions first!', 'error');
+                return;
+            }
+            
+            log('cod-result', 'Filtering COD transactions for customer orders...', 'info');
+            
+            const orderIds = customerOrders.map(o => o.id);
+            customerPayments = allCODTransactions.filter(cod => 
+                orderIds.includes(cod.idDonVanChuyen)
+            );
+            
+            log('cod-result', `Customer payments found: ${customerPayments.length}`, 'success');
+            
+            // Calculate stats
+            const totalAmount = customerPayments.reduce((sum, p) => sum + (p.soTienDuKien || 0), 0);
+            const paidAmount = customerPayments.reduce((sum, p) => {
+                if (p.daDoiSoat || p.trangThaiThanhToan === 'Đã thanh toán') {
+                    return sum + (p.soTienThucTe || p.soTienDuKien || 0);
+                }
+                return sum;
+            }, 0);
+            const pendingAmount = totalAmount - paidAmount;
+            
+            log('cod-result', `Total Amount: ${formatCurrency(totalAmount)}`, 'info');
+            log('cod-result', `Paid Amount: ${formatCurrency(paidAmount)}`, 'success');
+            log('cod-result', `Pending Amount: ${formatCurrency(pendingAmount)}`, 'warning');
+            
+            if (customerPayments.length > 0) {
+                logJSON('cod-result', 'Customer Payments', customerPayments);
+            }
+        }
+
+        async function runFullTest() {
+            document.getElementById('final-result').innerHTML = '';
+            log('final-result', '🚀 Starting full test...', 'info');
+            
+            // Step 1: Backend
+            log('final-result', 'Step 1: Checking backend...', 'info');
+            await checkBackend();
+            await new Promise(r => setTimeout(r, 500));
+            
+            // Step 2: Customer
+            log('final-result', 'Step 2: Loading customer...', 'info');
+            await loadCustomer();
+            await new Promise(r => setTimeout(r, 500));
+            
+            if (!customerData) {
+                log('final-result', 'Failed to load customer. Stopping test.', 'error');
+                return;
+            }
+            
+            // Step 3: Orders
+            log('final-result', 'Step 3: Loading customer orders...', 'info');
+            await loadCustomerOrders();
+            await new Promise(r => setTimeout(r, 500));
+            
+            // Step 4: COD Transactions
+            log('final-result', 'Step 4: Loading COD transactions...', 'info');
+            await loadCODTransactions();
+            await new Promise(r => setTimeout(r, 500));
+            
+            // Step 5: Filter
+            log('final-result', 'Step 5: Filtering customer payments...', 'info');
+            await filterCustomerPayments();
+            
+            // Final summary
+            log('final-result', '✅ Test completed!', 'success');
+            
+            const summary = {
+                customer: {
+                    id: customerData?.maNguoiDung,
+                    name: customerData?.hoTen,
+                    phone: customerData?.soDienThoai
+                },
+                orders: customerOrders.length,
+                payments: customerPayments.length,
+                stats: {
+                    total: customerPayments.reduce((sum, p) => sum + (p.soTienDuKien || 0), 0),
+                    paid: customerPayments.reduce((sum, p) => {
+                        if (p.daDoiSoat || p.trangThaiThanhToan === 'Đã thanh toán') {
+                            return sum + (p.soTienThucTe || p.soTienDuKien || 0);
+                        }
+                        return sum;
+                    }, 0)
+                }
+            };
+            
+            logJSON('final-result', 'FINAL SUMMARY', summary);
+            
+            // Display table
+            if (customerPayments.length > 0) {
+                displayPaymentsTable();
+            }
+        }
+
+        function displayPaymentsTable() {
+            const element = document.getElementById('final-result');
+            
+            let html = '<h3>Payment History Table:</h3><table>';
+            html += '<thead><tr><th>Mã VĐ</th><th>Số tiền</th><th>Trạng thái</th><th>Đối soát</th><th>Thời gian</th></tr></thead>';
+            html += '<tbody>';
+            
+            customerPayments.forEach(payment => {
+                const order = customerOrders.find(o => o.id === payment.idDonVanChuyen);
+                const status = payment.daDoiSoat || payment.trangThaiThanhToan === 'Đã thanh toán' ? 'Đã thanh toán' : 'Chờ thanh toán';
+                const statusClass = status === 'Đã thanh toán' ? 'status-success' : 'status-warning';
+                
+                html += `<tr>
+                    <td>${order?.maVanDon || 'N/A'}</td>
+                    <td><strong>${formatCurrency(payment.soTienThucTe || payment.soTienDuKien)}</strong></td>
+                    <td><span class="status ${statusClass}">${status}</span></td>
+                    <td>${payment.daDoiSoat ? '✓ Đã đối soát' : '⏳ Chờ đối soát'}</td>
+                    <td>${formatDate(payment.thoiGianThuTien)}</td>
+                </tr>`;
+            });
+            
+            html += '</tbody></table>';
+            element.innerHTML += html;
+        }
+
+        function formatCurrency(amount) {
+            if (!amount && amount !== 0) return '0 ₫';
+            return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+        }
+
+        function formatDate(dateString) {
+            if (!dateString) return '-';
+            const date = new Date(dateString);
+            return date.toLocaleString('vi-VN');
+        }
+
+        function clearResults() {
+            ['backend-result', 'customer-result', 'orders-result', 'cod-result', 'final-result'].forEach(id => {
+                const element = document.getElementById(id);
+                element.innerHTML = '';
+                element.style.display = 'none';
+            });
+            
+            customerData = null;
+            customerOrders = [];
+            allCODTransactions = [];
+            customerPayments = [];
+        }
+
+        // Auto-run backend check on load
+        window.onload = () => {
+            console.log('Test Payment History tool loaded');
+        };
+    </script>
+</body>
+</html>

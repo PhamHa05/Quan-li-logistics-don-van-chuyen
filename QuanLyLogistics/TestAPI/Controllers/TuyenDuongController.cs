@@ -1,6 +1,7 @@
 ﻿using BLL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using TestAPI.SearchRequest;
 
 namespace Logistics.API.Controllers
 {
@@ -40,6 +41,19 @@ namespace Logistics.API.Controllers
             return Ok(new { success = result });
         }
 
-        // Các controller khác cho DiemGiaoHang, SuKienTrangThai...
+        [HttpDelete("delete/{id}")]
+        public IActionResult Delete(long id)
+        {
+            var result = _tuyenDuongBusiness.Delete(id);
+            return Ok(new { success = result });
+        }
+
+        [HttpPost("search")]
+        public IActionResult Search([FromBody] TuyenDuongSearchRequest request)
+        {
+            long total;
+            var data = _tuyenDuongBusiness.Search(request.PageIndex, request.PageSize, out total, request.MaTuyen, request.IdTaiXe);
+            return Ok(new { TotalItems = total, Data = data });
+        }
     }
 }

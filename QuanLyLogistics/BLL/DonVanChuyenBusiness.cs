@@ -9,7 +9,8 @@ namespace BLL
     public class DonVanChuyenBusiness : IDonVanChuyenBusiness
     {
         private readonly IDonVanChuyenRepository _res;
-        private readonly string[] allowedStatus = { "CHO_LAY_HANG", "DANG_GIAO", "HOAN_THANH" };
+        // Các trạng thái hợp lệ theo constraint trong database
+        private readonly string[] allowedStatus = { "CHO_LAY_HANG", "DA_LAY_HANG", "DANG_GIAO", "GIAO_THANH_CONG", "THAT_BAI" };
 
         public DonVanChuyenBusiness(IDonVanChuyenRepository res)
         {
@@ -36,6 +37,7 @@ namespace BLL
 
         public bool Update(DonVanChuyenModel model)
         {
+            // Validate trạng thái theo constraint trong database
             if (!string.IsNullOrEmpty(model.TrangThai) && !allowedStatus.Contains(model.TrangThai))
                 throw new Exception($"TrangThai không hợp lệ. Chỉ được phép: {string.Join(", ", allowedStatus)}");
 
@@ -51,6 +53,16 @@ namespace BLL
         public DonVanChuyenModel GetDatabyID(long id)
         {
             return _res.GetDatabyID(id);
+        }
+
+        public List<DonVanChuyenModel> GetAll()
+        {
+            return _res.GetAll();
+        }
+
+        public List<DonVanChuyenModel> GetByIdTaiXe(long idTaiXe)
+        {
+            return _res.GetByIdTaiXe(idTaiXe);
         }
 
         public List<DonVanChuyenModel> Search(int pageIndex, int pageSize, out long total, string maVanDon, string trangThai)

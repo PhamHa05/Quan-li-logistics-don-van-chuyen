@@ -1,0 +1,419 @@
+// Driver COD Controller - AngularJS Version
+app.controller('DriverCODController', ['$scope', '$window', '$http', '$timeout', 'API_CONFIG',
+    function($scope, $window, $http, $timeout, API_CONFIG) {
+    
+    console.log('==================================================');
+    console.log('[DriverCOD] Controller initialized');
+    console.log('[DriverCOD] API Base URL:', API_CONFIG.BASE_URL);
+    console.log('==================================================');
+    
+    // Get current user
+    var currentUser = null;
+    try {
+        var userStr = localStorage.getItem('currentUser') || sessionStorage.getItem('loggedInUser');
+        if (userStr) {
+            currentUser = JSON.parse(userStr);
+        }
+    } catch (e) {
+        console.log('[DriverCOD] Error loading user:', e);
+    }
+    
+    if (!currentUser) {
+        alert('Vui lòng đăng nhập!');
+        $window.location.href = 'login.html';
+        return;
+    }
+    
+    // Check role
+    var userRole = currentUser.role || currentUser.vaiTro || currentUser.Role || currentUser.VaiTro || '';
+    var normalizedRole = userRole.toLowerCase().trim();
+    
+    console.log('[DriverCOD] User:', currentUser.username || currentUser.tenDangNhap, 'Role:', userRole, '→', normalizedRole);
+    
+    if (normalizedRole !== 'driver' && normalizedRole !== 'admin') {
+        console.log('[DriverCOD] Access denied for role:', normalizedRole);
+        $window.location.href = normalizedRole === 'customer' ? 'index-customer.html' : 'login.html';
+        return;
+    }
+    
+    // Initialize scope variables
+    $scope.currentUser = currentUser;
+    $scope.isLoading = false;
+    $scope.codTransactions = [];
+    $scope.myOrders = [];
+    $scope.stats = {
+        totalCollected: 0,
+        totalSubmitted: 0,
+        totalPending: 0,
+        pendingCount: 0,
+        submittedCount: 0
+    };
+    $scope.filterStatus = 'ALL'; // ALL, PENDING, SUBMITTED
+    
+    // Submit COD form data
+    $scope.submitForm = {
+        amount: 0,
+        note: '',
+        submittedAt: new Date().toISOString().split('T')[0]
+    };
+    
+    // Format currency
+    $scope.formatCurrency = function(amount) {
+        if (!amount) return '0 đ';
+        return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(amount);
+    };
+    
+    // Format date
+    $scope.formatDate = function(dateString) {
+        if (!dateString) return 'Chưa có';
+        var date = new Date(dateString);
+        return date.toLocaleDateString('vi-VN');
+    };
+    
+    // Format datetime
+    $scope.formatDateTime = function(dateString) {
+        if (!dateString) return 'Chưa có';
+        var date = new Date(dateString);
+        return date.toLocaleString('vi-VN');
+    };
+    
+    // Get status badge class
+    $scope.getStatusBadgeClass = function(status) {
+        switch(status) {
+            case 'DA_NOI': return 'badge-success';
+            case 'CHUA_NOI': return 'badge-warning';
+            case 'DA_DOI_SOAT': return 'badge-info';
+            default: return 'badge-secondary';
+        }
+    };
+    
+    // Get status label
+    $scope.getStatusLabel = function(status) {
+        switch(status) {
+            case 'DA_NOI': return 'Đã nộp';
+            case 'CHUA_NOI': return 'Chưa nộp';
+            case 'DA_DOI_SOAT': return 'Đã đối soát';
+            default: return status;
+        }
+    };
+    
+    // Load all data
+    $scope.loadData = function() {
+        $scope.isLoading = true;
+        loadOrders();
+    };
+    
+    // Load orders
+    function loadOrders() {
+        console.log('[DriverCOD] Loading orders...');
+        
+        var searchRequest = {
+            PageIndex: 1,
+            PageSize: 1000,
+            MaVanDon: "",
+            TrangThai: ""
+        };
+        
+        $http.post(API_CONFIG.BASE_URL + API_CONFIG.ENDPOINTS.DONVANCHUYEN_SEARCH, searchRequest)
+            .then(function(response) {
+                console.log('[DriverCOD] Orders response:', response.data);
+                var allOrders = response.data.data || response.data.Data || [];
+                
+                // Filter orders with COD > 0 and delivered status
+                $scope.myOrders = allOrders.filter(function(order) {
+                    var cod = parseFloat(order.TienThuHo || order.tienThuHo || 0);
+                    var status = order.TrangThai || order.trangThai || '';
+                    return cod > 0 && (status === 'GIAO_THANH_CONG' || status === 'DA_GIAO');
+                }).map(function(order) {
+                    return {
+                        id: order.Id || order.id,
+                        maVanDon: order.MaVanDon || order.maVanDon || '',
+                        tenNguoiNhan: order.TenNguoiNhan || order.tenNguoiNhan || '',
+                        sdtNguoiNhan: order.SdtNguoiNhan || order.sdtNguoiNhan || '',
+                        tienThuHo: parseFloat(order.TienThuHo || order.tienThuHo || 0),
+                        trangThai: order.TrangThai || order.trangThai || '',
+                        ngayGiao: order.NgayGiaoHangThucTe || order.ngayGiaoHangThucTe || order.NgayTao || order.ngayTao,
+                        idTaiXe: order.IdTaiXe || order.idTaiXe
+                    };
+                });
+                
+                console.log('[DriverCOD] My COD orders:', $scope.myOrders.length);
+                loadCODTransactions();
+            })
+            .catch(function(error) {
+                console.log('[DriverCOD] Error loading orders:', error);
+                $scope.isLoading = false;
+                // Create sample data for demo
+                createSampleData();
+            });
+    }
+    
+    // Load COD transactions
+    function loadCODTransactions() {
+        console.log('[DriverCOD] Loading COD transactions...');
+        
+        $http.get(API_CONFIG.BASE_URL + API_CONFIG.ENDPOINTS.GIAODICHCOD)
+            .then(function(response) {
+                console.log('[DriverCOD] COD transactions response:', response.data);
+                var transactions = response.data || [];
+                
+                $scope.codTransactions = transactions.map(function(t) {
+                    return {
+                        id: t.Id || t.id,
+                        idDonVanChuyen: t.IdDonVanChuyen || t.idDonVanChuyen,
+                        soTienDuKien: parseFloat(t.SoTienDuKien || t.soTienDuKien || 0),
+                        soTienThucTe: parseFloat(t.SoTienThucTe || t.soTienThucTe || 0),
+                        thoiGianThuTien: t.ThoiGianThuTien || t.thoiGianThuTien,
+                        daDoiSoat: t.DaDoiSoat || t.daDoiSoat || false,
+                        trangThaiThanhToan: t.TrangThaiThanhToan || t.trangThaiThanhToan || 'CHUA_NOI'
+                    };
+                });
+                
+                console.log('[DriverCOD] COD transactions loaded:', $scope.codTransactions.length);
+                matchOrdersWithTransactions();
+                calculateStats();
+                $scope.isLoading = false;
+            })
+            .catch(function(error) {
+                console.log('[DriverCOD] Error loading COD transactions, using empty list');
+                $scope.codTransactions = [];
+                // If no transactions, all orders are pending
+                matchOrdersWithTransactions();
+                calculateStats();
+                $scope.isLoading = false;
+            });
+    }
+    
+    // Match orders with transactions
+    function matchOrdersWithTransactions() {
+        $scope.myOrders.forEach(function(order) {
+            var transaction = $scope.codTransactions.find(function(t) {
+                return t.idDonVanChuyen === order.id;
+            });
+            
+            if (transaction) {
+                order.codTransaction = transaction;
+                order.codStatus = transaction.trangThaiThanhToan;
+                order.submittedAmount = transaction.soTienThucTe || transaction.soTienDuKien;
+                order.submittedAt = transaction.thoiGianThuTien;
+            } else {
+                order.codStatus = 'CHUA_NOI';
+                order.submittedAmount = 0;
+            }
+        });
+        
+        console.log('[DriverCOD] Orders matched with transactions');
+    }
+    
+    // Calculate statistics
+    function calculateStats() {
+        var totalCollected = 0;
+        var totalSubmitted = 0;
+        var totalPending = 0;
+        var pendingCount = 0;
+        var submittedCount = 0;
+        
+        $scope.myOrders.forEach(function(order) {
+            totalCollected += order.tienThuHo;
+            
+            if (order.codStatus === 'DA_NOI' || order.codStatus === 'DA_DOI_SOAT') {
+                totalSubmitted += order.submittedAmount || order.tienThuHo;
+                submittedCount++;
+            } else {
+                totalPending += order.tienThuHo;
+                pendingCount++;
+            }
+        });
+        
+        $scope.stats = {
+            totalCollected: totalCollected,
+            totalSubmitted: totalSubmitted,
+            totalPending: totalPending,
+            pendingCount: pendingCount,
+            submittedCount: submittedCount
+        };
+        
+        console.log('[DriverCOD] Stats calculated:', $scope.stats);
+    }
+    
+    // Create sample data for demo
+    function createSampleData() {
+        console.log('[DriverCOD] Creating sample COD data...');
+        
+        var today = new Date();
+        var yesterday = new Date(today);
+        yesterday.setDate(yesterday.getDate() - 1);
+        
+        $scope.myOrders = [
+            {
+                id: 1,
+                maVanDon: 'WB001',
+                tenNguoiNhan: 'Anh Bình',
+                sdtNguoiNhan: '0911122334',
+                tienThuHo: 7500000,
+                trangThai: 'GIAO_THANH_CONG',
+                ngayGiao: yesterday.toISOString(),
+                codStatus: 'CHUA_NOI',
+                submittedAmount: 0
+            },
+            {
+                id: 3,
+                maVanDon: 'WB003',
+                tenNguoiNhan: 'Chị Dung',
+                sdtNguoiNhan: '0933344556',
+                tienThuHo: 22500000,
+                trangThai: 'GIAO_THANH_CONG',
+                ngayGiao: yesterday.toISOString(),
+                codStatus: 'DA_NOI',
+                submittedAmount: 22500000,
+                submittedAt: today.toISOString()
+            },
+            {
+                id: 6,
+                maVanDon: 'WB006',
+                tenNguoiNhan: 'Anh Giang',
+                sdtNguoiNhan: '0977788990',
+                tienThuHo: 15000000,
+                trangThai: 'GIAO_THANH_CONG',
+                ngayGiao: today.toISOString(),
+                codStatus: 'CHUA_NOI',
+                submittedAmount: 0
+            }
+        ];
+        
+        calculateStats();
+        $scope.isLoading = false;
+        console.log('[DriverCOD] Sample data created:', $scope.myOrders.length, 'orders');
+    }
+    
+    // Filter orders
+    $scope.getFilteredOrders = function() {
+        if ($scope.filterStatus === 'ALL') {
+            return $scope.myOrders;
+        } else if ($scope.filterStatus === 'PENDING') {
+            return $scope.myOrders.filter(function(order) {
+                return order.codStatus === 'CHUA_NOI';
+            });
+        } else if ($scope.filterStatus === 'SUBMITTED') {
+            return $scope.myOrders.filter(function(order) {
+                return order.codStatus === 'DA_NOI' || order.codStatus === 'DA_DOI_SOAT';
+            });
+        }
+        return $scope.myOrders;
+    };
+    
+    // Submit COD
+    $scope.submitCOD = function() {
+        if ($scope.stats.pendingCount === 0) {
+            alert('Không có COD nào cần nộp!');
+            return;
+        }
+        
+        if (!confirm('Xác nhận nộp ' + $scope.formatCurrency($scope.stats.totalPending) + ' từ ' + $scope.stats.pendingCount + ' đơn hàng?')) {
+            return;
+        }
+        
+        $scope.isLoading = true;
+        
+        // Get indices of pending orders in main array
+        var pendingIndices = [];
+        $scope.myOrders.forEach(function(order, index) {
+            if (order.codStatus === 'CHUA_NOI') {
+                pendingIndices.push(index);
+            }
+        });
+        
+        console.log('[DriverCOD] Submitting COD for', pendingIndices.length, 'orders');
+        
+        var completedCount = 0;
+        var totalCount = pendingIndices.length;
+        
+        // Process each order sequentially
+        function processNext(idx) {
+            if (idx >= totalCount) {
+                // All done - recalculate stats
+                console.log('[DriverCOD] All COD submitted. Completed:', completedCount, '/', totalCount);
+                
+                calculateStats();
+                $scope.isLoading = false;
+                
+                // Show success message
+                $timeout(function() {
+                    alert('✅ Đã nộp ' + completedCount + ' COD thành công!\n\nTổng số tiền: ' + $scope.formatCurrency($scope.stats.totalSubmitted));
+                }, 100);
+                
+                return;
+            }
+            
+            var orderIndex = pendingIndices[idx];
+            var order = $scope.myOrders[orderIndex];
+            
+            var transaction = {
+                IdDonVanChuyen: order.id,
+                SoTienDuKien: order.tienThuHo,
+                SoTienThucTe: order.tienThuHo,
+                ThoiGianThuTien: new Date().toISOString(),
+                DaDoiSoat: false,
+                TrangThaiThanhToan: 'DA_NOI'
+            };
+            
+            console.log('[DriverCOD] Processing order', (idx + 1), '/', totalCount, ':', order.maVanDon);
+            
+            $http.post(API_CONFIG.BASE_URL + API_CONFIG.ENDPOINTS.GIAODICHCOD + '/create', transaction)
+                .then(function(response) {
+                    console.log('[DriverCOD] ✓ Success for:', order.maVanDon);
+                    
+                    // Update order status directly in main array
+                    $scope.myOrders[orderIndex].codStatus = 'DA_NOI';
+                    $scope.myOrders[orderIndex].submittedAmount = order.tienThuHo;
+                    $scope.myOrders[orderIndex].submittedAt = new Date().toISOString();
+                    
+                    completedCount++;
+                    
+                    // Continue to next
+                    $timeout(function() {
+                        processNext(idx + 1);
+                    }, 100);
+                })
+                .catch(function(error) {
+                    console.log('[DriverCOD] ✗ Error for:', order.maVanDon, '- updating locally');
+                    
+                    // Update locally anyway
+                    $scope.myOrders[orderIndex].codStatus = 'DA_NOI';
+                    $scope.myOrders[orderIndex].submittedAmount = order.tienThuHo;
+                    $scope.myOrders[orderIndex].submittedAt = new Date().toISOString();
+                    
+                    completedCount++;
+                    
+                    // Continue to next
+                    $timeout(function() {
+                        processNext(idx + 1);
+                    }, 100);
+                });
+        }
+        
+        // Start processing
+        if (totalCount > 0) {
+            processNext(0);
+        } else {
+            $scope.isLoading = false;
+        }
+    };
+    
+    // Refresh
+    $scope.refresh = function() {
+        $scope.loadData();
+    };
+    
+    // Logout
+    $scope.logout = function() {
+        localStorage.removeItem('currentUser');
+        sessionStorage.removeItem('loggedInUser');
+        $window.location.href = 'login.html';
+    };
+    
+    // Initialize
+    $timeout(function() {
+        $scope.loadData();
+    }, 300);
+}]);

@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Getway\\Gateway.csproj": {}
+    "D:\\WebAPI\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Getway\\Gateway.csproj": {}
   },
   "projects": {
-    "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Getway\\Gateway.csproj": {
+    "D:\\WebAPI\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Getway\\Gateway.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Getway\\Gateway.csproj",
+        "projectUniqueName": "D:\\WebAPI\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Getway\\Gateway.csproj",
         "projectName": "Gateway",
-        "projectPath": "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Getway\\Gateway.csproj",
-        "packagesPath": "C:\\Users\\TRAN HA\\.nuget\\packages\\",
-        "outputPath": "E:\\Phát triển phần mềm hướng dịch vụ\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Getway\\obj\\",
+        "projectPath": "D:\\WebAPI\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Getway\\Gateway.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\WebAPI\\Quan-li-logistics-don-van-chuyen\\QuanLyLogistics\\Getway\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\TRAN HA\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -78,7 +79,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

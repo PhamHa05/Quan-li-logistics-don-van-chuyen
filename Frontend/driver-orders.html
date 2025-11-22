@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="vi" ng-app="logisticsApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đơn hàng của tôi - Tài xế</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="admin-style.css">
+</head>
+<body ng-controller="DriverOrdersController">
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-truck"></i> Driver Portal</h2>
+            </div>
+            <div class="sidebar-menu">
+                <ul>
+                    <li><a href="index-driver.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li class="active"><a href="driver-orders.html"><i class="fas fa-clipboard-list"></i> Đơn hàng của tôi</a></li>
+                    <li><a href="driver-routes.html"><i class="fas fa-route"></i> Tuyến đường hôm nay</a></li>
+                    <li><a href="driver-cod.html"><i class="fas fa-money-bill-wave"></i> Quản lý COD</a></li>
+                    <li><a href="driver-history.html"><i class="fas fa-history"></i> Lịch sử giao hàng</a></li>
+                    <li><a href="driver-profile.html"><i class="fas fa-user"></i> Thông tin cá nhân</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="header-left">
+                    <h1>Đơn hàng của tôi</h1>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <div class="user-avatar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">{{(driverInfo.hoTen || currentUser.hoTen || 'TX').substring(0,2).toUpperCase()}}</div>
+                        <div>
+                            <div class="user-name">{{driverInfo.hoTen || currentUser.hoTen || 'Tài xế'}}</div>
+                            <div class="user-role">Nhân viên giao hàng</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" ng-click="logout()" style="border-radius: 8px;"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
+                </div>
+            </div>
+            
+            <!-- Content -->
+            <div class="content">
+                <!-- Statistics Cards -->
+                <div class="dashboard-cards">
+                    <div class="card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; cursor: pointer;" ng-click="filterByStatus('')">
+                        <div class="card-header">
+                            <div class="card-title" style="color: white; opacity: 0.95;">Tổng đơn hàng</div>
+                            <div class="card-icon" style="background: rgba(255,255,255,0.2);">
+                                <i class="fas fa-boxes"></i>
+                            </div>
+                        </div>
+                        <div class="card-value" style="color: white;">{{stats.totalOrders}}</div>
+                        <div class="card-description" style="color: rgba(255,255,255,0.9);">Tất cả đơn hàng được giao</div>
+                    </div>
+                    
+                    <div class="card" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white; cursor: pointer;" ng-click="filterByStatus('CHO_LAY_HANG')">
+                        <div class="card-header">
+                            <div class="card-title" style="color: white; opacity: 0.95;">Đang xử lý</div>
+                            <div class="card-icon" style="background: rgba(255,255,255,0.2);">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                        </div>
+                        <div class="card-value" style="color: white;">{{stats.pendingOrders}}</div>
+                        <div class="card-description" style="color: rgba(255,255,255,0.9);">Chờ lấy & đang giao</div>
+                    </div>
+                    
+                    <div class="card" style="background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%); color: white; cursor: pointer;" ng-click="filterByStatus('GIAO_THANH_CONG')">
+                        <div class="card-header">
+                            <div class="card-title" style="color: white; opacity: 0.95;">Thành công</div>
+                            <div class="card-icon" style="background: rgba(255,255,255,0.2);">
+                                <i class="fas fa-check-double"></i>
+                            </div>
+                        </div>
+                        <div class="card-value" style="color: white;">{{stats.completedOrders}}</div>
+                        <div class="card-description" style="color: rgba(255,255,255,0.9);">Đã giao thành công</div>
+                    </div>
+                    
+                    <div class="card" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white; cursor: pointer;" ng-click="filterByStatus('THAT_BAI')">
+                        <div class="card-header">
+                            <div class="card-title" style="color: white; opacity: 0.95;">Thất bại</div>
+                            <div class="card-icon" style="background: rgba(255,255,255,0.2);">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                        </div>
+                        <div class="card-value" style="color: white;">{{stats.failedOrders}}</div>
+                        <div class="card-description" style="color: rgba(255,255,255,0.9);">Giao không thành công</div>
+                    </div>
+                    
+                    <div class="card" style="background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%); color: white;">
+                        <div class="card-header">
+                            <div class="card-title" style="color: white; opacity: 0.95;">Tổng COD</div>
+                            <div class="card-icon" style="background: rgba(255,255,255,0.2);">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                        </div>
+                        <div class="card-value" style="color: white; font-size: 1.5rem;">{{formatCurrency(stats.totalCOD)}}</div>
+                        <div class="card-description" style="color: rgba(255,255,255,0.9);">Từ đơn đã giao</div>
+                    </div>
+                </div>
+                
+                <!-- Orders Section -->
+                <div class="content-section" style="display: flex; flex-direction: column; gap: 20px">
+                    <div class="section-header" style="display: flex; justify-content: space-between; align-items: center;">
+                        <h2>
+                            <i class="fas fa-list"></i> Danh sách đơn hàng 
+                            <span style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.9rem; margin-left: 10px; font-weight: 600;">
+                                {{filteredOrders.length}}
+                            </span>
+                        </h2>
+                        <div style="display: flex; gap: 10px;">
+                            <button class="btn btn-success" ng-click="loadOrders()" style="border-radius: 8px; font-weight: 500;">
+                                <i class="fas fa-sync-alt"></i> Làm mới
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Advanced Filters -->
+                    <div class="filters-container" style="display: flex; gap: 15px; flex-wrap: wrap; align-items: center;">
+                        <div class="filter-group" style="flex: 2; min-width: 300px;">
+                            <input type="text" 
+                                   ng-model="searchText"
+                                   ng-change="applyFilters()"
+                                   class="form-control" 
+                                   placeholder="🔍 Tìm theo mã đơn, tên, SĐT, địa chỉ..."
+                                   style="border-radius: 8px; border: 2px solid #e9ecef; padding: 12px;">
+                        </div>
+                        
+                        <div class="filter-group">
+                            <select ng-model="filterStatus" ng-change="applyFilters()" class="form-control"
+                                    style="border-radius: 8px; border: 2px solid #e9ecef; padding: 12px;">
+                                <option value="">Tất cả trạng thái</option>
+                                <option value="CHO_LAY_HANG">📋 Chờ lấy hàng</option>
+                                <option value="DA_LAY_HANG">📦 Đã lấy hàng</option>
+                                <option value="DANG_GIAO">🚚 Đang giao hàng</option>
+                                <option value="GIAO_THANH_CONG">✅ Giao thành công</option>
+                                <option value="THAT_BAI">❌ Thất bại</option>
+                            </select>
+                        </div>
+                        
+                        <div class="filter-group">
+                            <input type="date" ng-model="filterDate" ng-change="applyFilters()" class="form-control"
+                        <div class="filter-group">
+                            <input type="date" ng-model="filterDate" ng-change="applyFilters()" class="form-control"
+                                    style="border-radius: 8px; border: 2px solid #e9ecef; padding: 12px;">
+                        </div>
+                        
+                        <div class="filter-group">
+                            <button class="btn btn-secondary" ng-click="searchText = ''; filterStatus = ''; filterDate = ''; applyFilters()"
+                                    style="border-radius: 8px; padding: 12px 20px; font-weight: 500;">
+                                <i class="fas fa-times"></i> Xóa bộ lọc
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Orders Table -->
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                                    <th style="border: none;"><i class="fas fa-barcode"></i> Mã đơn hàng</th>
+                                    <th style="border: none;"><i class="fas fa-user"></i> Người gửi/nhận</th>
+                                    <th style="border: none;"><i class="fas fa-map-marker-alt"></i> Địa chỉ</th>
+                                    <th style="border: none;"><i class="fas fa-phone"></i> Liên hệ</th>
+                                    <th style="border: none;"><i class="fas fa-money-bill-wave"></i> COD</th>
+                                    <th style="border: none;"><i class="fas fa-toggle-on"></i> Trạng thái</th>
+                                    <th style="border: none; text-align: center;"><i class="fas fa-tools"></i> Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-if="isLoading">
+                                    <td colspan="7" style="text-align:center; padding:40px; color:#999;">
+                                        <i class="fas fa-spinner fa-spin" style="font-size:3rem; color: #667eea; margin-bottom: 15px;"></i>
+                                        <p style="font-size: 1.1rem; margin: 0;">Đang tải dữ liệu đơn hàng...</p>
+                                    </td>
+                                </tr>
+                                <tr ng-if="!isLoading && paginatedOrders.length === 0">
+                                    <td colspan="7" style="text-align:center; padding:40px; color:#999;">
+                                        <i class="fas fa-inbox" style="font-size:3rem; color: #95a5a6; margin-bottom: 15px;"></i>
+                                        <p style="font-size: 1.1rem; margin: 0;">Không có đơn hàng nào</p>
+                                    </td>
+                                </tr>
+                                <tr ng-repeat="order in paginatedOrders" ng-show="!isLoading"
+                                    style="border-left: 4px solid {{order.trangThai === 'GIAO_THANH_CONG' ? '#2ecc71' : (order.trangThai === 'CHO_LAY_HANG' ? '#f39c12' : '#3498db')}}; transition: all 0.3s;"
+                                    ng-mouseenter="$event.currentTarget.style.backgroundColor='#f8f9fa'"
+                                    ng-mouseleave="$event.currentTarget.style.backgroundColor='white'">
+                                    <td>
+                                        <div style="background: #f8f9fa; padding: 8px 12px; border-radius: 8px; border-left: 3px solid #3498db;">
+                                            <strong style="color: #2c3e50; font-size: 14px;">
+                                                <i class="fas fa-barcode" style="color: #3498db;"></i> {{order.maVanDon}}
+                                            </strong><br>
+                                            <small style="color: #7f8c8d;">
+                                                <i class="fas fa-hashtag" style="font-size: 10px;"></i> ID: {{order.id}}
+                                            </small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div style="margin-bottom: 8px;">
+                                            <i class="fas fa-user" style="color: #3498db;"></i>
+                                            <strong style="color: #2c3e50;">{{order.tenNguoiGui}}</strong>
+                                        </div>
+                                        <div>
+                                            <i class="fas fa-arrow-right" style="color: #27ae60;"></i>
+                                            <strong style="color: #27ae60;">{{order.tenNguoiNhan}}</strong>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div style="margin-bottom: 8px; font-size: 13px;">
+                                            <i class="fas fa-map-marker-alt" style="color: #e67e22;"></i>
+                                            <span style="color: #7f8c8d;">Lấy:</span> {{order.diaChiLayHang}}
+                                        </div>
+                                        <div style="font-size: 13px;">
+                                            <i class="fas fa-map-marker-alt" style="color: #27ae60;"></i>
+                                            <span style="color: #7f8c8d;">Giao:</span> {{order.diaChiGiaoHang}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div style="margin-bottom: 5px;">
+                                            <i class="fas fa-phone" style="color: #3498db;"></i>
+                                            <span style="font-size: 13px;">{{order.sdtNguoiGui}}</span>
+                                        </div>
+                                        <div>
+                                            <i class="fas fa-phone" style="color: #27ae60;"></i>
+                                            <span style="font-size: 13px;">{{order.sdtNguoiNhan}}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div ng-if="order.tienThuHo > 0" style="font-weight: 600; font-size: 15px; color: #e74c3c;">
+                                            <i class="fas fa-money-bill-wave"></i><br>
+                                            {{order.tienThuHo | number:0}} đ
+                                        </div>
+                                        <div ng-if="!order.tienThuHo || order.tienThuHo === 0" style="color: #95a5a6; font-style: italic;">
+                                            <i class="fas fa-minus-circle"></i> Không COD
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="badge {{getStatusBadgeClass(order.trangThai)}}" 
+                                              style="font-size: 13px; padding: 8px 16px; border-radius: 20px; display: inline-flex; align-items: center; gap: 5px;">
+                                            <i class="fas fa-circle"></i> 
+                                            {{getStatusLabel(order.trangThai)}}
+                                        </span>
+                                    </td>
+                                    <td style="text-align: center;">
+                                        <div style="display: flex; gap: 5px; justify-content: center; flex-wrap: wrap;">
+                                            <button class="btn btn-sm btn-info" 
+                                                    ng-click="viewOrderDetails(order)" 
+                                                    title="Xem chi tiết"
+                                                    style="border-radius: 8px; padding: 8px 12px;">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                            <button class="btn btn-sm btn-warning" 
+                                                    ng-if="order.trangThai === 'CHO_LAY_HANG'"
+                                                    ng-click="updateOrderStatus(order, 'DA_LAY_HANG')" 
+                                                    title="Đã lấy hàng"
+                                                    style="border-radius: 8px; padding: 8px 12px;">
+                                                <i class="fas fa-box"></i> Đã lấy
+                                            </button>
+                                            <button class="btn btn-sm btn-primary" 
+                                                    ng-if="order.trangThai === 'DA_LAY_HANG'"
+                                                    ng-click="updateOrderStatus(order, 'DANG_GIAO')" 
+                                                    title="Đang giao"
+                                                    style="border-radius: 8px; padding: 8px 12px;">
+                                                <i class="fas fa-shipping-fast"></i> Đang giao
+                                            </button>
+                                            <button class="btn btn-sm btn-success" 
+                                                    ng-if="order.trangThai === 'DANG_GIAO'"
+                                                    ng-click="updateOrderStatus(order, 'GIAO_THANH_CONG')" 
+                                                    title="Hoàn thành"
+                                                    style="border-radius: 8px; padding: 8px 12px;">
+                                                <i class="fas fa-check-double"></i> Hoàn thành
+                                            </button>
+                                            <button class="btn btn-sm btn-danger" 
+                                                    ng-if="order.trangThai === 'DANG_GIAO'"
+                                                    ng-click="updateOrderStatus(order, 'THAT_BAI')" 
+                                                    title="Giao thất bại"
+                                                    style="border-radius: 8px; padding: 8px 12px; margin-left: 5px;">
+                                                <i class="fas fa-times"></i> Thất bại
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div ng-if="!isLoading && filteredOrders.length > 0" 
+                         style="display: flex; justify-content: space-between; align-items: center; padding: 20px; background: #f8f9fa; border-top: 2px solid #e9ecef;">
+                        <div style="color: #7f8c8d; font-size: 14px;">
+                            Hiển thị {{(currentPage - 1) * itemsPerPage + 1}} - 
+                            {{currentPage * itemsPerPage > filteredOrders.length ? filteredOrders.length : currentPage * itemsPerPage}} 
+                            trong tổng số <strong style="color: #2c3e50;">{{filteredOrders.length}}</strong> đơn hàng
+                        </div>
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <button class="btn btn-secondary btn-sm" ng-click="prevPage()" ng-disabled="currentPage === 1"
+                                    style="border-radius: 8px; padding: 8px 16px;">
+                                <i class="fas fa-chevron-left"></i> Trước
+                            </button>
+                            <div style="padding: 8px 16px; background: white; border-radius: 8px; font-weight: 600;">
+                                Trang {{currentPage}} / {{totalPages}}
+                            </div>
+                            <button class="btn btn-secondary btn-sm" ng-click="nextPage()" ng-disabled="currentPage === totalPages"
+                                    style="border-radius: 8px; padding: 8px 16px;">
+                                Sau <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Order Detail Modal (AngularJS) -->
+    <div ng-if="showDetailModal" class="modal" style="display: block;">
+        <div class="modal-content modal-large" style="max-width: 900px;">
+            <div class="modal-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 12px 12px 0 0; padding: 20px;">
+                <h2 style="margin: 0; color: white;">
+                    <i class="fas fa-file-alt"></i> Chi tiết đơn hàng 
+                    <span style="background: rgba(255,255,255,0.3); padding: 5px 15px; border-radius: 20px; font-size: 0.9em;">{{selectedOrder.maVanDon}}</span>
+                </h2>
+                <button class="close-btn" ng-click="closeModal()" style="background: rgba(255,255,255,0.2); color: white; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" style="padding: 30px; max-height: 70vh; overflow-y: auto;">
+                <!-- Thông tin người gửi -->
+                <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 20px; border-radius: 12px; margin-bottom: 20px; color: white;">
+                    <h3 style="margin: 0 0 15px 0; color: white;">
+                        <i class="fas fa-user-circle"></i> Thông tin người gửi
+                    </h3>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                        <div>
+                            <strong style="opacity: 0.9;">Tên:</strong><br>
+                            <span style="font-size: 1.1em;">{{selectedOrder.tenNguoiGui}}</span>
+                        </div>
+                        <div>
+                            <strong style="opacity: 0.9;">SĐT:</strong><br>
+                            <span style="font-size: 1.1em;">{{selectedOrder.sdtNguoiGui}}</span>
+                        </div>
+                        <div style="grid-column: 1 / -1;">
+                            <strong style="opacity: 0.9;">Địa chỉ lấy hàng:</strong><br>
+                            <span style="font-size: 1.1em;">{{selectedOrder.diaChiLayHang}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Thông tin người nhận -->
+                <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 20px; border-radius: 12px; margin-bottom: 20px; color: white;">
+                    <h3 style="margin: 0 0 15px 0; color: white;">
+                        <i class="fas fa-user-check"></i> Thông tin người nhận
+                    </h3>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                        <div>
+                            <strong style="opacity: 0.9;">Tên:</strong><br>
+                            <span style="font-size: 1.1em;">{{selectedOrder.tenNguoiNhan}}</span>
+                        </div>
+                        <div>
+                            <strong style="opacity: 0.9;">SĐT:</strong><br>
+                            <span style="font-size: 1.1em;">{{selectedOrder.sdtNguoiNhan}}</span>
+                        </div>
+                        <div style="grid-column: 1 / -1;">
+                            <strong style="opacity: 0.9;">Địa chỉ giao hàng:</strong><br>
+                            <span style="font-size: 1.1em;">{{selectedOrder.diaChiGiaoHang}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chi tiết hàng hóa -->
+                <div style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); padding: 20px; border-radius: 12px; margin-bottom: 20px; color: white;">
+                    <h3 style="margin: 0 0 15px 0; color: white;">
+                        <i class="fas fa-box-open"></i> Chi tiết hàng hóa
+                    </h3>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+                        <div>
+                            <strong style="opacity: 0.9;">Loại hàng:</strong><br>
+                            <span style="font-size: 1.1em;">{{selectedOrder.loaiHang || 'Chưa xác định'}}</span>
+                        </div>
+                        <div>
+                            <strong style="opacity: 0.9;">Khối lượng:</strong><br>
+                            <span style="font-size: 1.1em;">{{selectedOrder.khoiLuong || 0}} kg</span>
+                        </div>
+                        <div>
+                            <strong style="opacity: 0.9;">Loại dịch vụ:</strong><br>
+                            <span style="font-size: 1.1em;">{{selectedOrder.loaiDichVu || 'Tiêu chuẩn'}}</span>
+                        </div>
+                        <div>
+                            <strong style="opacity: 0.9;">Tiền thu hộ (COD):</strong><br>
+                            <span style="font-size: 1.3em; font-weight: bold;">{{formatCurrency(selectedOrder.tienThuHo)}}</span>
+                        </div>
+                        <div>
+                            <strong style="opacity: 0.9;">Trạng thái:</strong><br>
+                            <span class="badge {{getStatusBadgeClass(selectedOrder.trangThai)}}" style="font-size: 1em; padding: 8px 16px;">
+                                {{getStatusLabel(selectedOrder.trangThai)}}
+                            </span>
+                        </div>
+                        <div>
+                            <strong style="opacity: 0.9;">Thời gian tạo:</strong><br>
+                            <span style="font-size: 0.95em;">{{formatDate(selectedOrder.thoiGianTao)}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action buttons -->
+                <div style="display: flex; gap: 10px; justify-content: center; margin-top: 25px;">
+                    <button class="btn btn-warning" 
+                            ng-if="selectedOrder.trangThai === 'CHO_LAY_HANG'"
+                            ng-click="updateOrderStatus(selectedOrder, 'DA_LAY_HANG')"
+                            style="padding: 12px 24px; border-radius: 8px; font-weight: 600;">
+                        <i class="fas fa-box"></i> Đã lấy hàng
+                    </button>
+                    <button class="btn btn-primary" 
+                            ng-if="selectedOrder.trangThai === 'DA_LAY_HANG'"
+                            ng-click="updateOrderStatus(selectedOrder, 'DANG_GIAO')"
+                            style="padding: 12px 24px; border-radius: 8px; font-weight: 600;">
+                        <i class="fas fa-shipping-fast"></i> Bắt đầu giao
+                    </button>
+                    <button class="btn btn-success" 
+                            ng-if="selectedOrder.trangThai === 'DANG_GIAO'"
+                            ng-click="updateOrderStatus(selectedOrder, 'GIAO_THANH_CONG')"
+                            style="padding: 12px 24px; border-radius: 8px; font-weight: 600;">
+                        <i class="fas fa-check-double"></i> Giao thành công
+                    </button>
+                    <button class="btn btn-danger" 
+                            ng-if="selectedOrder.trangThai === 'DANG_GIAO'"
+                            ng-click="updateOrderStatus(selectedOrder, 'THAT_BAI')"
+                            style="padding: 12px 24px; border-radius: 8px; font-weight: 600;">
+                        <i class="fas fa-times-circle"></i> Giao thất bại
+                    </button>
+                    <button class="btn btn-secondary" 
+                            ng-click="closeModal()"
+                            style="padding: 12px 24px; border-radius: 8px; font-weight: 600;">
+                        <i class="fas fa-arrow-left"></i> Đóng
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    
+    <!-- App Configuration -->
+    <script src="app.config.js?v=9"></script>
+    <script src="services/api.service.js?v=9"></script>
+    
+    <!-- Controllers -->
+    <script src="controllers/driver-orders.controller.js?v=9"></script>
+</body>
+</html>

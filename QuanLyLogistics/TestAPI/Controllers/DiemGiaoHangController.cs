@@ -71,5 +71,27 @@ namespace Logistics.API.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
+        [HttpPost("search")]
+        public IActionResult Search([FromBody] DiemGiaoHangSearchRequest request)
+        {
+            try
+            {
+                var data = _business.GetByTuyenDuongId(request.IdTuyenDuong);
+                return Ok(new { TotalItems = data.Count, Data = data });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
     }
+}
+
+// Search request model
+public class DiemGiaoHangSearchRequest
+{
+    public int PageIndex { get; set; }
+    public int PageSize { get; set; }
+    public long IdTuyenDuong { get; set; }
 }

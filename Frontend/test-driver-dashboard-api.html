@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API Dashboard Tài Xế</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        .input-group {
+            margin: 15px 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f9f9f9;
+            border-left: 4px solid #4CAF50;
+            border-radius: 4px;
+        }
+        .error {
+            background: #ffebee;
+            border-left-color: #f44336;
+            color: #c62828;
+        }
+        .success {
+            background: #e8f5e9;
+            border-left-color: #4CAF50;
+            color: #2e7d32;
+        }
+        pre {
+            background: #263238;
+            color: #aed581;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+        .status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 4px;
+            margin: 5px 5px 5px 0;
+        }
+        .status.online {
+            background: #4CAF50;
+            color: white;
+        }
+        .status.offline {
+            background: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Test API Dashboard Tài Xế</h1>
+    
+    <div class="container">
+        <h2>1. Kiểm tra kết nối Backend</h2>
+        <p>Backend URL: <strong id="apiUrl">http://localhost:5257/api</strong></p>
+        <p>Status: <span id="backendStatus" class="status offline">Chưa kiểm tra</span></p>
+        <button onclick="checkBackend()">Kiểm tra Backend</button>
+        <div id="backendResult"></div>
+    </div>
+
+    <div class="container">
+        <h2>2. Lấy danh sách Tài xế</h2>
+        <button onclick="getAllDrivers()">Lấy tất cả Tài xế</button>
+        <div id="driversResult"></div>
+    </div>
+
+    <div class="container">
+        <h2>3. Test Dashboard Stats</h2>
+        <div class="input-group">
+            <label for="driverId">ID Tài xế:</label>
+            <select id="driverId">
+                <option value="">-- Chọn tài xế --</option>
+            </select>
+        </div>
+        <button onclick="getDashboardStats()">Lấy thống kê Dashboard</button>
+        <div id="statsResult"></div>
+    </div>
+
+    <div class="container">
+        <h2>4. Test Đơn hàng của Tài xế</h2>
+        <div class="input-group">
+            <label for="driverIdForOrders">ID Tài xế:</label>
+            <select id="driverIdForOrders">
+                <option value="">-- Chọn tài xế --</option>
+            </select>
+        </div>
+        <button onclick="getDriverOrders()">Lấy đơn hàng</button>
+        <div id="ordersResult"></div>
+    </div>
+
+    <div class="container">
+        <h2>5. Console Logs</h2>
+        <button onclick="clearLogs()">Xóa logs</button>
+        <pre id="consoleLogs">Mở Console (F12) để xem chi tiết hơn...</pre>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:5257/api';
+        let logs = [];
+
+        function log(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logMessage = `[${timestamp}] ${message}`;
+            console.log(logMessage);
+            logs.push(logMessage);
+            document.getElementById('consoleLogs').textContent = logs.slice(-20).join('\n');
+        }
+
+        function clearLogs() {
+            logs = [];
+            document.getElementById('consoleLogs').textContent = 'Logs cleared...';
+        }
+
+        function showResult(elementId, content, type = 'info') {
+            const element = document.getElementById(elementId);
+            element.className = 'result ' + type;
+            element.innerHTML = content;
+            element.style.display = 'block';
+        }
+
+        async function checkBackend() {
+            log('Checking backend connection...');
+            try {
+                const response = await fetch(`${API_URL}/TaiXe/search`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        PageIndex: 1,
+                        PageSize: 1,
+                        HoTen: '',
+                        SoDienThoai: ''
+                    })
+                });
+
+                if (response.ok) {
+                    document.getElementById('backendStatus').className = 'status online';
+                    document.getElementById('backendStatus').textContent = 'Online ✓';
+                    showResult('backendResult', '✓ Backend đang chạy và có thể kết nối!', 'success');
+                    log('Backend connection successful');
+                } else {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+            } catch (error) {
+                document.getElementById('backendStatus').className = 'status offline';
+                document.getElementById('backendStatus').textContent = 'Offline ✗';
+                showResult('backendResult', '✗ Không thể kết nối Backend! Lỗi: ' + error.message + '<br><br>Hãy chắc chắn rằng backend đang chạy tại: <code>http://localhost:5257</code>', 'error');
+                log('Backend connection failed: ' + error.message, 'error');
+            }
+        }
+
+        async function getAllDrivers() {
+            log('Fetching all drivers...');
+            try {
+                const response = await fetch(`${API_URL}/TaiXe/search`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        PageIndex: 1,
+                        PageSize: 100,
+                        HoTen: '',
+                        SoDienThoai: ''
+                    })
+                });
+
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                
+                const data = await response.json();
+                log(`Received ${data.TotalItems} drivers`);
+                
+                const drivers = data.Data || [];
+                
+                // Update dropdowns
+                const select1 = document.getElementById('driverId');
+                const select2 = document.getElementById('driverIdForOrders');
+                select1.innerHTML = '<option value="">-- Chọn tài xế --</option>';
+                select2.innerHTML = '<option value="">-- Chọn tài xế --</option>';
+                
+                drivers.forEach(driver => {
+                    const option1 = document.createElement('option');
+                    const option2 = document.createElement('option');
+                    option1.value = driver.Id;
+                    option2.value = driver.Id;
+                    option1.textContent = `${driver.HoTen} (ID: ${driver.Id})`;
+                    option2.textContent = `${driver.HoTen} (ID: ${driver.Id})`;
+                    select1.appendChild(option1);
+                    select2.appendChild(option2);
+                });
+                
+                let html = `<p class="success">✓ Tìm thấy ${drivers.length} tài xế</p>`;
+                html += '<pre>' + JSON.stringify(drivers, null, 2) + '</pre>';
+                showResult('driversResult', html, 'success');
+                
+            } catch (error) {
+                log('Error fetching drivers: ' + error.message, 'error');
+                showResult('driversResult', '✗ Lỗi: ' + error.message, 'error');
+            }
+        }
+
+        async function getDashboardStats() {
+            const driverId = document.getElementById('driverId').value;
+            if (!driverId) {
+                alert('Vui lòng chọn tài xế!');
+                return;
+            }
+
+            log(`Fetching dashboard stats for driver ${driverId}...`);
+            try {
+                const response = await fetch(`${API_URL}/TaiXe/dashboard-stats/${driverId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                
+                const stats = await response.json();
+                log('Dashboard stats received successfully');
+                
+                let html = '<p class="success">✓ Thống kê Dashboard</p>';
+                html += '<h3>Tổng quan:</h3>';
+                html += `<ul>
+                    <li>Đơn hôm nay: <strong>${stats.TodayOrders || 0}</strong></li>
+                    <li>Đang giao: <strong>${stats.DeliveringOrders || 0}</strong></li>
+                    <li>Đã giao hôm nay: <strong>${stats.CompletedOrders || 0}</strong></li>
+                    <li>COD đã thu: <strong>${(stats.CodCollected || 0).toLocaleString('vi-VN')} đ</strong></li>
+                    <li>Tổng đơn: <strong>${stats.TotalOrders || 0}</strong></li>
+                    <li>Đơn đang chờ: <strong>${stats.PendingOrders || 0}</strong></li>
+                </ul>`;
+                
+                html += '<h3>Raw JSON:</h3>';
+                html += '<pre>' + JSON.stringify(stats, null, 2) + '</pre>';
+                showResult('statsResult', html, 'success');
+                
+            } catch (error) {
+                log('Error fetching dashboard stats: ' + error.message, 'error');
+                showResult('statsResult', '✗ Lỗi: ' + error.message, 'error');
+            }
+        }
+
+        async function getDriverOrders() {
+            const driverId = document.getElementById('driverIdForOrders').value;
+            if (!driverId) {
+                alert('Vui lòng chọn tài xế!');
+                return;
+            }
+
+            log(`Fetching orders for driver ${driverId}...`);
+            try {
+                const response = await fetch(`${API_URL}/DonVanChuyen/by-tai-xe/${driverId}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                
+                const orders = await response.json();
+                log(`Received ${orders.length} orders`);
+                
+                let html = `<p class="success">✓ Tìm thấy ${orders.length} đơn hàng</p>`;
+                
+                if (orders.length > 0) {
+                    html += '<h3>Danh sách đơn hàng:</h3><ul>';
+                    orders.forEach(order => {
+                        html += `<li><strong>${order.MaVanDon}</strong> - ${order.TenNguoiNhan} - ${order.TrangThai}</li>`;
+                    });
+                    html += '</ul>';
+                }
+                
+                html += '<h3>Raw JSON:</h3>';
+                html += '<pre>' + JSON.stringify(orders, null, 2) + '</pre>';
+                showResult('ordersResult', html, 'success');
+                
+            } catch (error) {
+                log('Error fetching orders: ' + error.message, 'error');
+                showResult('ordersResult', '✗ Lỗi: ' + error.message, 'error');
+            }
+        }
+
+        // Auto check backend on load
+        window.addEventListener('load', function() {
+            log('Page loaded. Auto-checking backend...');
+            checkBackend();
+            setTimeout(getAllDrivers, 1000);
+        });
+    </script>
+</body>
+</html>

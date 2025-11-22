@@ -137,10 +137,31 @@ namespace DAL
             return dt.ConvertTo<DonVanChuyenModel>().FirstOrDefault();
         }
 
+        public List<DonVanChuyenModel> GetAll()
+        {
+            string sql = "SELECT * FROM DonVanChuyen ORDER BY ThoiGianTao DESC";
+            var dt = _dbHelper.ExecuteQuery(sql);
+            return dt.ConvertTo<DonVanChuyenModel>().ToList();
+        }
+
+        public List<DonVanChuyenModel> GetByIdTaiXe(long idTaiXe)
+        {
+            string sql = "SELECT * FROM DonVanChuyen WHERE IdTaiXe = @IdTaiXe ORDER BY ThoiGianTao DESC";
+            var dt = _dbHelper.ExecuteQuery(sql, new SqlParameter[]
+            {
+                new SqlParameter("@IdTaiXe", idTaiXe)
+            });
+            return dt.ConvertTo<DonVanChuyenModel>().ToList();
+        }
+
         public List<DonVanChuyenModel> Search(int pageIndex, int pageSize, out long total, string maVanDon, string trangThai)
         {
             total = 0;
             int offset = (pageIndex - 1) * pageSize;
+
+            // Convert empty string to null for proper SQL query
+            maVanDon = string.IsNullOrWhiteSpace(maVanDon) ? null : maVanDon;
+            trangThai = string.IsNullOrWhiteSpace(trangThai) ? null : trangThai;
 
             string sql = @"
                 SELECT *, COUNT(*) OVER() AS RecordCount

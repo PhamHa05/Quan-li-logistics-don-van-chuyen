@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Customer Support - Debug Tool</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        h1 { color: #2c3e50; margin-bottom: 10px; }
+        .subtitle { color: #7f8c8d; font-size: 1.1rem; }
+        .test-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .section-title {
+            color: #2c3e50;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        .btn-primary { background: #3498db; color: white; }
+        .btn-success { background: #27ae60; color: white; }
+        .btn-warning { background: #f39c12; color: white; }
+        .result-box {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .status {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            margin: 5px;
+        }
+        .status-success { background: #d4edda; color: #27ae60; }
+        .status-error { background: #f8d7da; color: #e74c3c; }
+        .status-warning { background: #fff3cd; color: #f39c12; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧪 Test Customer Support - Debug Tool</h1>
+            <p class="subtitle">Test chức năng hỗ trợ khách hàng</p>
+            <p style="margin-top: 10px; color: #e74c3c; font-weight: 600;">
+                ⚠️ Test với user: nguyenvana (ID=2)
+            </p>
+        </div>
+
+        <!-- Step 1: Page Features -->
+        <div class="test-section">
+            <div class="section-title">✨ Bước 1: Tính năng trang hỗ trợ</div>
+            <div id="features-result" class="result-box">
+                <h3>📋 Các tính năng chính:</h3>
+                <ul style="line-height: 2; margin-left: 20px;">
+                    <li>✅ Thông tin liên hệ (Hotline, Email, Chat, Mạng xã hội)</li>
+                    <li>✅ FAQ (Câu hỏi thường gặp) với 8 câu hỏi</li>
+                    <li>✅ Lọc FAQ theo danh mục (Đơn hàng, Thanh toán, Vận chuyển, Tài khoản)</li>
+                    <li>✅ Mở rộng/Thu gọn câu trả lời FAQ</li>
+                    <li>✅ Form tạo yêu cầu hỗ trợ</li>
+                    <li>✅ Auto-fill thông tin khách hàng từ database</li>
+                    <li>✅ Chọn loại yêu cầu và mức độ ưu tiên</li>
+                    <li>✅ Lưu tickets vào local array</li>
+                    <li>✅ Xem lịch sử yêu cầu hỗ trợ</li>
+                </ul>
+                
+                <h3 style="margin-top: 20px;">📝 Form Fields:</h3>
+                <ul style="line-height: 2; margin-left: 20px;">
+                    <li><strong>Họ tên:</strong> Auto-fill từ database</li>
+                    <li><strong>Email:</strong> Auto-fill từ database</li>
+                    <li><strong>Số điện thoại:</strong> Auto-fill từ database</li>
+                    <li><strong>Loại yêu cầu:</strong> General, Order, Payment, Shipping, Account, Complaint, Other</li>
+                    <li><strong>Tiêu đề:</strong> Mô tả ngắn</li>
+                    <li><strong>Mức độ:</strong> Low, Normal, High, Urgent</li>
+                    <li><strong>Nội dung:</strong> Chi tiết vấn đề</li>
+                </ul>
+                
+                <h3 style="margin-top: 20px;">🎯 Expected Behavior:</h3>
+                <ul style="line-height: 2; margin-left: 20px;">
+                    <li>Load customer info → Pre-fill form</li>
+                    <li>Submit form → Create ticket → Show success</li>
+                    <li>View tickets → Display history</li>
+                    <li>FAQ expand/collapse on click</li>
+                    <li>FAQ filter by category</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Step 2: Test Scenarios -->
+        <div class="test-section">
+            <div class="section-title">🎬 Bước 2: Test Scenarios</div>
+            <div id="scenarios-result" class="result-box">
+                <h3>Scenario 1: View FAQ</h3>
+                <ol style="line-height: 2; margin-left: 20px;">
+                    <li>Open customer-support.html</li>
+                    <li>Scroll to FAQ section</li>
+                    <li>Click on any FAQ question</li>
+                    <li>Expected: Answer expands/collapses</li>
+                    <li>Click filter buttons (Order, Payment, etc.)</li>
+                    <li>Expected: Only relevant FAQs shown</li>
+                </ol>
+                
+                <h3 style="margin-top: 20px;">Scenario 2: Submit Support Request</h3>
+                <ol style="line-height: 2; margin-left: 20px;">
+                    <li>Login as nguyenvana</li>
+                    <li>Navigate to Support page</li>
+                    <li>Expected: Form pre-filled with name, email, phone</li>
+                    <li>Fill in: Subject, Category, Priority, Message</li>
+                    <li>Click "Gửi yêu cầu"</li>
+                    <li>Expected: Success message appears</li>
+                    <li>Expected: Form resets</li>
+                </ol>
+                
+                <h3 style="margin-top: 20px;">Scenario 3: View Support History</h3>
+                <ol style="line-height: 2; margin-left: 20px;">
+                    <li>Submit at least one support request</li>
+                    <li>Click "Xem lịch sử" button</li>
+                    <li>Expected: Tickets section appears</li>
+                    <li>Expected: Shows ticket number, status, priority</li>
+                    <li>Expected: Shows created date, category, message</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Step 3: Manual Testing -->
+        <div class="test-section">
+            <div class="section-title">✅ Bước 3: Checklist</div>
+            <div id="checklist-result" class="result-box">
+                <h3>Test Checklist:</h3>
+                <ul style="line-height: 2.5; margin-left: 20px; list-style: none;">
+                    <li>☐ Page loads without errors</li>
+                    <li>☐ Customer info auto-loaded from database</li>
+                    <li>☐ Contact cards display correctly</li>
+                    <li>☐ FAQ section shows all questions</li>
+                    <li>☐ FAQ expand/collapse works</li>
+                    <li>☐ FAQ filter buttons work</li>
+                    <li>☐ Support form displays with pre-filled data</li>
+                    <li>☐ Form validation works (required fields)</li>
+                    <li>☐ Submit button creates ticket</li>
+                    <li>☐ Success message appears after submit</li>
+                    <li>☐ Form resets after successful submit</li>
+                    <li>☐ Tickets history displays correctly</li>
+                    <li>☐ Ticket status badges show correct colors</li>
+                    <li>☐ No console errors</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Step 4: Quick Test -->
+        <div class="test-section">
+            <div class="section-title">🚀 Bước 4: Quick Test</div>
+            <div class="button-group">
+                <button class="btn-primary" onclick="openSupportPage()">Open Support Page</button>
+                <button class="btn-success" onclick="openLogin()">Login First</button>
+            </div>
+            <div id="quicktest-result" class="result-box" style="display:none;"></div>
+        </div>
+    </div>
+
+    <script>
+        function log(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            element.style.display = 'block';
+            
+            const timestamp = new Date().toLocaleTimeString('vi-VN');
+            const icon = type === 'success' ? '✓' : type === 'error' ? '✗' : 'ℹ';
+            const statusClass = type === 'success' ? 'status-success' : type === 'error' ? 'status-error' : 'status-warning';
+            
+            element.innerHTML += `<div class="status ${statusClass}">${icon} [${timestamp}] ${message}</div>\n`;
+        }
+
+        function openSupportPage() {
+            log('quicktest-result', 'Opening customer support page...', 'info');
+            setTimeout(() => {
+                window.open('customer-support.html', '_blank');
+                log('quicktest-result', 'Page opened! Check the new tab.', 'success');
+            }, 500);
+        }
+
+        function openLogin() {
+            log('quicktest-result', 'Opening login page...', 'info');
+            setTimeout(() => {
+                window.open('login.html', '_blank');
+                log('quicktest-result', 'Login with: nguyenvana / password123', 'warning');
+            }, 500);
+        }
+
+        // Auto-run on load
+        window.onload = () => {
+            console.log('Test Customer Support tool loaded');
+        };
+    </script>
+</body>
+</html>

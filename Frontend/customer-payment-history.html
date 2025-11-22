@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="vi" ng-app="logisticsApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch sử thanh toán - VanChuyenDo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="customer-style.css">
+    <style>
+        .payment-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid;
+        }
+        
+        .stat-card.total { border-left-color: #3498db; }
+        .stat-card.paid { border-left-color: #27ae60; }
+        .stat-card.pending { border-left-color: #f39c12; }
+        .stat-card.cod { border-left-color: #9b59b6; }
+        
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .stat-card.total .stat-icon { background: #3498db; }
+        .stat-card.paid .stat-icon { background: #27ae60; }
+        .stat-card.pending .stat-icon { background: #f39c12; }
+        .stat-card.cod .stat-icon { background: #9b59b6; }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        
+        .filter-panel {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .filter-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 200px auto;
+            gap: 15px;
+            align-items: end;
+        }
+        
+        .payments-container {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        
+        .payment-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .payment-table th {
+            background: #f8f9fa;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #2c3e50;
+            border-bottom: 2px solid #ecf0f1;
+        }
+        
+        .payment-table td {
+            padding: 15px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .payment-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .payment-method {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .payment-method.cod {
+            background: #f3e5f5;
+            color: #9b59b6;
+        }
+        
+        .payment-method.bank {
+            background: #e3f2fd;
+            color: #2196f3;
+        }
+        
+        .payment-method.wallet {
+            background: #fff3e0;
+            color: #ff9800;
+        }
+        
+        .payment-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .payment-status.paid {
+            background: #d4edda;
+            color: #27ae60;
+        }
+        
+        .payment-status.pending {
+            background: #fff3cd;
+            color: #f39c12;
+        }
+        
+        .payment-status.cancelled {
+            background: #f8d7da;
+            color: #e74c3c;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #7f8c8d;
+        }
+        
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+        
+        @media (max-width: 992px) {
+            .filter-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .payment-table {
+                font-size: 0.9rem;
+            }
+            
+            .payment-table th,
+            .payment-table td {
+                padding: 10px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .payment-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body ng-controller="CustomerPaymentHistoryController">
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-shopping-bag"></i> Khách hàng</h2>
+            </div>
+            <div class="sidebar-menu">
+                <ul>
+                    <li><a href="index-customer.html"><i class="fas fa-home"></i> Trang chủ</a></li>
+                    <li><a href="customer-create-order.html"><i class="fas fa-plus-circle"></i> Tạo đơn hàng</a></li>
+                    <li><a href="customer-my-orders.html"><i class="fas fa-box"></i> Đơn hàng của tôi</a></li>
+                    <li><a href="index-customer.html"><i class="fas fa-search"></i> Tra cứu đơn hàng</a></li>
+                    <li class="active"><a href="customer-payment-history.html"><i class="fas fa-receipt"></i> Lịch sử thanh toán</a></li>
+                    <li><a href="customer-account.html"><i class="fas fa-user-circle"></i> Tài khoản</a></li>
+                    <li><a href="customer-support.html"><i class="fas fa-headset"></i> Hỗ trợ</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="header-left">
+                    <h1><i class="fas fa-receipt"></i> Lịch sử thanh toán</h1>
+                    <p style="margin: 5px 0 0 0; color: #7f8c8d;">Quản lý tất cả giao dịch thanh toán của bạn</p>
+                </div>
+                <div class="header-right">
+                    <button class="btn btn-success" ng-click="navigateTo('customer-create-order.html')">
+                        <i class="fas fa-plus"></i> Tạo đơn mới
+                    </button>
+                    <div class="user-info">
+                        <div class="user-avatar">{{getUserInitials()}}</div>
+                        <div>
+                            <div class="user-name">{{customerInfo.hoTen || currentUser.fullName || 'Khách hàng'}}</div>
+                            <div class="user-role">Tài khoản cá nhân</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" ng-click="logout()"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="content">
+                <!-- Statistics Cards -->
+                <div class="payment-stats">
+                    <div class="stat-card total">
+                        <div class="stat-header">
+                            <div>
+                                <div class="stat-label">Tổng thanh toán</div>
+                                <div class="stat-value">{{formatCurrency(stats.totalAmount)}}</div>
+                                <div class="stat-label"><span>{{stats.totalTransactions}}</span> giao dịch</div>
+                            </div>
+                            <div class="stat-icon">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card paid">
+                        <div class="stat-header">
+                            <div>
+                                <div class="stat-label">Đã thanh toán</div>
+                                <div class="stat-value">{{formatCurrency(stats.paidAmount)}}</div>
+                                <div class="stat-label"><span>{{stats.paidCount}}</span> giao dịch</div>
+                            </div>
+                            <div class="stat-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card pending">
+                        <div class="stat-header">
+                            <div>
+                                <div class="stat-label">Chờ thanh toán</div>
+                                <div class="stat-value">{{formatCurrency(stats.pendingAmount)}}</div>
+                                <div class="stat-label"><span>{{stats.pendingCount}}</span> giao dịch</div>
+                            </div>
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card cod">
+                        <div class="stat-header">
+                            <div>
+                                <div class="stat-label">COD thu hộ</div>
+                                <div class="stat-value">{{formatCurrency(stats.codAmount)}}</div>
+                                <div class="stat-label"><span>{{stats.totalTransactions}}</span> đơn hàng</div>
+                            </div>
+                            <div class="stat-icon">
+                                <i class="fas fa-hand-holding-usd"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filter Panel -->
+                <div class="filter-panel">
+                    <div class="filter-row">
+                        <div class="form-group">
+                            <label><i class="fas fa-search"></i> Tìm kiếm</label>
+                            <input type="text" class="form-control" ng-model="searchText" ng-change="applyFilters()" 
+                                   placeholder="Tìm theo mã đơn hàng, người nhận...">
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-filter"></i> Trạng thái</label>
+                            <select class="form-control" ng-model="filterStatus" ng-change="applyFilters()">
+                                <option value="all">Tất cả</option>
+                                <option value="paid">Đã thanh toán</option>
+                                <option value="pending">Chờ thanh toán</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="fas fa-calendar"></i> Tháng</label>
+                            <input type="month" class="form-control" ng-model="filterMonth" ng-change="applyFilters()">
+                        </div>
+                        <div class="form-group">
+                            <label style="opacity: 0;">Action</label>
+                            <button class="btn btn-primary" ng-click="resetFilters()">
+                                <i class="fas fa-sync-alt"></i> Làm mới
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payments Table -->
+                <div class="payments-container">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3 style="margin: 0; color: #2c3e50;">
+                            <i class="fas fa-list"></i> Danh sách giao dịch
+                        </h3>
+                        <button class="btn btn-secondary btn-sm" ng-click="exportToExcel()">
+                            <i class="fas fa-download"></i> Xuất Excel
+                        </button>
+                    </div>
+                    
+                    <!-- Loading state -->
+                    <div ng-if="loading" style="text-align: center; padding: 40px; color: #7f8c8d;">
+                        <i class="fas fa-spinner fa-spin" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                        <p>Đang tải dữ liệu...</p>
+                    </div>
+                    
+                    <!-- Error state -->
+                    <div ng-if="error" class="empty-state">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h3>{{error}}</h3>
+                        <button class="btn btn-primary" ng-click="loadPaymentHistory()">
+                            <i class="fas fa-redo"></i> Thử lại
+                        </button>
+                    </div>
+                    
+                    <!-- Empty state -->
+                    <div ng-if="!loading && !error && filteredPayments.length === 0" class="empty-state">
+                        <i class="fas fa-receipt"></i>
+                        <h3>Chưa có giao dịch nào</h3>
+                        <p>Bạn chưa có giao dịch thanh toán nào.</p>
+                        <button class="btn btn-success" ng-click="navigateTo('customer-create-order.html')">
+                            <i class="fas fa-plus"></i> Tạo đơn hàng mới
+                        </button>
+                    </div>
+                    
+                    <!-- Payments table -->
+                    <div ng-if="!loading && !error && filteredPayments.length > 0">
+                        <table class="payment-table">
+                            <thead>
+                                <tr>
+                                    <th>Mã vận đơn</th>
+                                    <th>Người nhận</th>
+                                    <th>Số tiền</th>
+                                    <th>Thời gian</th>
+                                    <th>Trạng thái</th>
+                                    <th>Đối soát</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="payment in filteredPayments | limitTo:itemsPerPage:(currentPage-1)*itemsPerPage">
+                                    <td><strong>{{payment.maVanDon}}</strong></td>
+                                    <td>
+                                        <div>{{payment.tenNguoiNhan}}</div>
+                                        <div style="font-size: 0.85rem; color: #7f8c8d;">{{payment.sdtNguoiNhan}}</div>
+                                    </td>
+                                    <td>
+                                        <div><strong>{{formatCurrency(payment.soTienThucTe || payment.soTienDuKien)}}</strong></div>
+                                        <div style="font-size: 0.85rem; color: #7f8c8d;" ng-if="payment.soTienThucTe !== payment.soTienDuKien">
+                                            Dự kiến: {{formatCurrency(payment.soTienDuKien)}}
+                                        </div>
+                                    </td>
+                                    <td>{{formatDate(payment.thoiGianThuTien || payment.thoiGianTao)}}</td>
+                                    <td>
+                                        <span class="badge" ng-class="getPaymentStatusClass(payment)">
+                                            {{getPaymentStatusText(payment)}}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span ng-if="payment.daDoiSoat" style="color: #27ae60;">
+                                            <i class="fas fa-check-circle"></i> Đã đối soát
+                                        </span>
+                                        <span ng-if="!payment.daDoiSoat" style="color: #f39c12;">
+                                            <i class="fas fa-clock"></i> Chờ đối soát
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <!-- Pagination -->
+                        <div class="pagination" ng-if="totalPages > 1">
+                            <button class="btn btn-secondary btn-sm" ng-click="prevPage()" ng-disabled="currentPage === 1">
+                                <i class="fas fa-chevron-left"></i> Trước
+                            </button>
+                            <span style="margin: 0 15px;">Trang {{currentPage}} / {{totalPages}}</span>
+                            <button class="btn btn-secondary btn-sm" ng-click="nextPage()" ng-disabled="currentPage === totalPages">
+                                Sau <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AngularJS Scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.config.js"></script>
+    <script src="services/api.service.js"></script>
+    <script src="controllers/customer-payment-history.controller.js"></script>
+</body>
+</html>

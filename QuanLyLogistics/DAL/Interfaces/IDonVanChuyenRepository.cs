@@ -13,6 +13,8 @@ namespace DAL.Interfaces
         bool Update(DonVanChuyenModel model);
         bool Delete(long id);
         DonVanChuyenModel GetDatabyID(long id);
+        List<DonVanChuyenModel> GetAll();
+        List<DonVanChuyenModel> GetByIdTaiXe(long idTaiXe);
         List<DonVanChuyenModel> Search(int pageIndex, int pageSize, out long total, string ma_van_don, string trang_thai);
     }
 }

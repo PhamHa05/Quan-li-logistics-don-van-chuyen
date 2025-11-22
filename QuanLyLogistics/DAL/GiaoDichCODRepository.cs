@@ -102,5 +102,35 @@ namespace DAL
                 throw new Exception("Error in GetByDonVanChuyenId GiaoDichCOD", ex);
             }
         }
+
+        public List<GiaoDichCODModel> GetAll()
+        {
+            try
+            {
+                string sql = "SELECT * FROM GiaoDichCOD ORDER BY ThoiGianThuTien DESC";
+                var dt = _dbHelper.ExecuteQuery(sql);
+
+                var result = new List<GiaoDichCODModel>();
+                foreach (DataRow row in dt.Rows)
+                {
+                    result.Add(new GiaoDichCODModel
+                    {
+                        Id = Convert.ToInt64(row["Id"]),
+                        IdDonVanChuyen = Convert.ToInt64(row["IdDonVanChuyen"]),
+                        SoTienDuKien = Convert.ToDecimal(row["SoTienDuKien"]),
+                        SoTienThucTe = row["SoTienThucTe"] != DBNull.Value ? Convert.ToDecimal(row["SoTienThucTe"]) : (decimal?)null,
+                        ThoiGianThuTien = row["ThoiGianThuTien"] != DBNull.Value ? Convert.ToDateTime(row["ThoiGianThuTien"]) : (DateTime?)null,
+                        DaDoiSoat = Convert.ToBoolean(row["DaDoiSoat"]),
+                        TrangThaiThanhToan = row["TrangThaiThanhToan"].ToString()
+                    });
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error in GetAll GiaoDichCOD", ex);
+            }
+        }
     }
 }

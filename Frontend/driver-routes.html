@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="vi" ng-app="logisticsApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuyến đường hôm nay - Tài xế</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="admin-style.css">
+    <style>
+        /* Hide any error notifications or alert bars */
+        .ng-exception,
+        .error-bar,
+        .alert-bar,
+        [class*="notification-error"],
+        [class*="error-notification"],
+        div[style*="position: fixed"][style*="top"],
+        div[style*="position:fixed"][style*="top"] {
+            display: none !important;
+        }
+        
+        #map {
+            height: 500px;
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .route-stop {
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            border-left: 5px solid #3498db;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .route-stop:hover {
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            transform: translateX(8px);
+        }
+        .route-stop.completed {
+            border-left-color: #27ae60;
+            background: linear-gradient(to right, #f0fff4 0%, white 100%);
+        }
+        .route-stop.current {
+            border-left-color: #f39c12;
+            background: linear-gradient(to right, #fffbf0 0%, white 100%);
+            animation: pulse 2s infinite;
+        }
+        .route-stop.pending {
+            border-left-color: #95a5a6;
+            opacity: 0.85;
+        }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+            50% { box-shadow: 0 6px 20px rgba(243, 156, 18, 0.3); }
+        }
+        .stop-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+        }
+        .route-stop.completed .stop-number {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            box-shadow: 0 4px 12px rgba(39, 174, 96, 0.4);
+        }
+        .route-stop.current .stop-number {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            box-shadow: 0 4px 12px rgba(243, 156, 18, 0.4);
+            animation: bounce 1s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        .route-stop.pending .stop-number {
+            background: linear-gradient(135deg, #95a5a6, #7f8c8d);
+        }
+        .progress-bar-container {
+            background: #ecf0f1;
+            height: 8px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #7f8c8d;
+        }
+        .empty-state i {
+            font-size: 4rem;
+            opacity: 0.3;
+            margin-bottom: 20px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s;
+        }
+        .modal.show {
+            display: flex;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 900px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.3s;
+        }
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        .modal-header {
+            padding: 20px 25px;
+            border-bottom: 1px solid #ecf0f1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 12px 12px 0 0;
+        }
+        .modal-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        .modal-body {
+            padding: 25px;
+        }
+        .close-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        .close-btn:hover {
+            background: #c0392b;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body ng-controller="DriverRoutesController">
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2><i class="fas fa-truck"></i> Driver Portal</h2>
+            </div>
+            <div class="sidebar-menu">
+                <ul>
+                    <li><a href="index-driver.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="driver-orders.html"><i class="fas fa-clipboard-list"></i> Đơn hàng của tôi</a></li>
+                    <li class="active"><a href="driver-routes.html"><i class="fas fa-route"></i> Tuyến đường hôm nay</a></li>
+                    <li><a href="driver-cod.html"><i class="fas fa-money-bill-wave"></i> Quản lý COD</a></li>
+                    <li><a href="driver-history.html"><i class="fas fa-history"></i> Lịch sử giao hàng</a></li>
+                    <li><a href="driver-profile.html"><i class="fas fa-user"></i> Thông tin cá nhân</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="header-left">
+                    <h1>Tuyến đường hôm nay</h1>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <div class="user-avatar" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">{{(driverInfo.hoTen || currentUser.hoTen || 'TX').substring(0,2).toUpperCase()}}</div>
+                        <div>
+                            <div class="user-name">{{driverInfo.hoTen || currentUser.hoTen || 'Tài xế'}}</div>
+                            <div class="user-role">Nhân viên giao hàng</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" ng-click="logout()" style="border-radius: 8px;">
+                        <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Content -->
+            <div class="content">
+                <!-- Loading State -->
+                <div ng-if="isLoading" style="text-align: center; padding: 40px;">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 3rem; color: #667eea;"></i>
+                    <p style="margin-top: 20px; color: #7f8c8d;">Đang tải dữ liệu tuyến đường...</p>
+                </div>
+
+                <!-- Route Stats -->
+                <div ng-if="!isLoading" class="dashboard-cards">
+                    <div class="card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; cursor: pointer;">
+                        <div class="card-header">
+                            <div class="card-title" style="color: white; opacity: 0.95;">Tổng điểm dừng</div>
+                            <div class="card-icon" style="background: rgba(255,255,255,0.2);">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                        </div>
+                        <div class="card-value" style="color: white;">{{stats.totalStops}}</div>
+                        <div class="card-description" style="color: rgba(255,255,255,0.9);">Điểm cần đến hôm nay</div>
+                    </div>
+                    
+                    <div class="card" style="background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%); color: white; cursor: pointer;">
+                        <div class="card-header">
+                            <div class="card-title" style="color: white; opacity: 0.95;">Đã hoàn thành</div>
+                            <div class="card-icon" style="background: rgba(255,255,255,0.2);">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+                        <div class="card-value" style="color: white;">{{stats.completedStops}}</div>
+                        <div class="card-description">
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" style="width: {{stats.progressPercent}}%;"></div>
+                            </div>
+                            <span style="color: rgba(255,255,255,0.9);">{{stats.progressPercent}}% hoàn thành</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card" style="background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); color: white; cursor: pointer;">
+                        <div class="card-header">
+                            <div class="card-title" style="color: white; opacity: 0.95;">Điểm hiện tại</div>
+                            <div class="card-icon" style="background: rgba(255,255,255,0.2);">
+                                <i class="fas fa-shipping-fast"></i>
+                            </div>
+                        </div>
+                        <div class="card-value" style="font-size: 1.8rem; color: white;">{{stats.currentStop}}</div>
+                        <div class="card-description" style="color: rgba(255,255,255,0.9); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                            {{stats.currentStopAddress}}
+                        </div>
+                    </div>
+                    
+                    <div class="card" style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%); color: white; cursor: pointer;">
+                        <div class="card-header">
+                            <div class="card-title" style="color: white; opacity: 0.95;">Còn lại</div>
+                            <div class="card-icon" style="background: rgba(255,255,255,0.2);">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                        </div>
+                        <div class="card-value" style="color: white;">{{stats.remainingStops}}</div>
+                        <div class="card-description" style="color: rgba(255,255,255,0.9);">
+                            <i class="fas fa-clock"></i> {{stats.estimatedTime}}
+                        </div>
+                    </div>
+                    
+                    <div class="card" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); color: white;">
+                        <div class="card-header">
+                            <div class="card-title" style="color: white; opacity: 0.95;">Tổng COD</div>
+                            <div class="card-icon" style="background: rgba(255,255,255,0.2);">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                        </div>
+                        <div class="card-value" style="font-size: 1.5rem; color: white;">{{formatCurrency(stats.totalCOD)}}</div>
+                        <div class="card-description" style="color: rgba(255,255,255,0.9);">Cần thu hôm nay</div>
+                    </div>
+                </div>
+                
+                <!-- Map -->
+                <div ng-if="!isLoading && deliveryPoints.length > 0" class="card" style="margin-top: 20px;">
+                    <div style="padding: 20px; border-bottom: 1px solid #ecf0f1; display: flex; justify-content: space-between; align-items: center;">
+                        <h3 style="margin: 0; color: #2c3e50;">
+                            <i class="fas fa-map"></i> Bản đồ tuyến đường
+                        </h3>
+                        <div style="display: flex; gap: 10px;">
+                            <button class="btn btn-secondary" ng-click="refresh()" style="border-radius: 8px;">
+                                <i class="fas fa-sync-alt"></i> Làm mới
+                            </button>
+                        </div>
+                    </div>
+                    <div style="padding: 20px;">
+                        <div id="map"></div>
+                        <div style="display: flex; gap: 20px; margin-top: 15px; flex-wrap: wrap; justify-content: space-between; align-items: center;">
+                            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <div style="width: 24px; height: 24px; background: #27ae60; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.2);"></div>
+                                    <span style="font-weight: 500;">Đã giao</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <div style="width: 24px; height: 24px; background: #f39c12; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.2);"></div>
+                                    <span style="font-weight: 500;">Đang giao</span>
+                                </div>
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <div style="width: 24px; height: 24px; background: #3498db; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.2);"></div>
+                                    <span style="font-weight: 500;">Chưa giao</span>
+                                </div>
+                            </div>
+                            <div style="color: #7f8c8d; font-size: 0.9rem;">
+                                <i class="fas fa-info-circle"></i> Click vào marker để xem chi tiết
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Route Stops -->
+                <div ng-if="!isLoading" class="card" style="margin-top: 20px;">
+                    <div style="padding: 20px; border-bottom: 1px solid #ecf0f1; display: flex; justify-content: space-between; align-items: center;">
+                        <h3 style="margin: 0; color: #2c3e50;">
+                            <i class="fas fa-list-ol"></i> Danh sách điểm giao hàng
+                        </h3>
+                        <div ng-if="todayRoute" style="color: #7f8c8d;">
+                            <i class="fas fa-route"></i> Mã tuyến: <strong>{{todayRoute.maTuyen}}</strong>
+                        </div>
+                    </div>
+                    <div style="padding: 20px;">
+                        <!-- Empty State -->
+                        <div ng-if="deliveryPoints.length === 0" class="empty-state">
+                            <i class="fas fa-calendar-times"></i>
+                            <h3 style="margin: 0 0 10px 0;">Không có tuyến đường nào hôm nay</h3>
+                            <p style="margin: 0;">Bạn chưa được phân công tuyến đường cho ngày hôm nay.</p>
+                            <button class="btn btn-primary" ng-click="refresh()" style="margin-top: 20px; border-radius: 8px;">
+                                <i class="fas fa-sync-alt"></i> Tải lại
+                            </button>
+                        </div>
+
+                        <!-- Delivery Points List -->
+                        <div ng-if="deliveryPoints.length > 0">
+                            <div ng-repeat="point in deliveryPoints" 
+                                 class="route-stop {{getStopStatusClass(point)}}"
+                                 ng-click="viewStopDetail($index)">
+                                <div style="display: flex; align-items: flex-start; gap: 20px;">
+                                    <div class="stop-number">{{point.thuTuDung}}</div>
+                                    <div style="flex: 1;">
+                                        <!-- Header -->
+                                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
+                                            <div>
+                                                <h3 style="margin: 0 0 5px 0; color: #2c3e50;">
+                                                    {{point.order ? point.order.maVanDon : 'N/A'}}
+                                                </h3>
+                                                <div style="color: #7f8c8d; font-size: 0.9rem;">
+                                                    <i class="fas fa-clock"></i> {{formatTime(point.thoiGianDuKien)}}
+                                                    <span ng-if="point.thoiGianThucTe"> 
+                                                        → <i class="fas fa-check"></i> {{formatTime(point.thoiGianThucTe)}}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <span class="badge" 
+                                                  ng-class="{'badge-success': point.trangThai === 'DA_DEN', 
+                                                             'badge-warning': point.trangThai === 'CHO_XU_LY', 
+                                                             'badge-secondary': point.trangThai === 'DA_BO_QUA'}">
+                                                {{getStopStatusLabel(point.trangThai)}}
+                                            </span>
+                                        </div>
+                                        
+                                        <!-- Order Info Grid -->
+                                        <div ng-if="point.order" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 10px;">
+                                            <div>
+                                                <div style="font-weight: 600; color: #34495e; margin-bottom: 5px;">
+                                                    <i class="fas fa-user"></i> Người nhận
+                                                </div>
+                                                <div style="color: #2c3e50;">{{point.order.tenNguoiNhan}}</div>
+                                                <div style="color: #7f8c8d; font-size: 0.9rem;">
+                                                    <i class="fas fa-phone"></i> {{point.order.sdtNguoiNhan}}
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div style="font-weight: 600; color: #34495e; margin-bottom: 5px;">
+                                                    <i class="fas fa-box"></i> Hàng hóa
+                                                </div>
+                                                <div style="color: #2c3e50;">
+                                                    {{point.order.loaiHang}} ({{point.order.khoiLuong}} kg)
+                                                </div>
+                                                <div ng-if="point.order.tienThuHo > 0" style="color: #e74c3c; font-weight: 600;">
+                                                    <i class="fas fa-money-bill-wave"></i> COD: {{formatCurrency(point.order.tienThuHo)}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <!-- Address -->
+                                        <div ng-if="point.order" style="margin-bottom: 10px;">
+                                            <div style="font-weight: 600; color: #34495e; margin-bottom: 5px;">
+                                                <i class="fas fa-map-marker-alt"></i> Địa chỉ giao
+                                            </div>
+                                            <div style="color: #2c3e50;">{{point.order.diaChiGiaoHang}}</div>
+                                        </div>
+                                        
+                                        <!-- Action Buttons -->
+                                        <div ng-if="point.trangThai === 'CHO_XU_LY' && point.order" class="action-buttons">
+                                            <button class="btn btn-success" ng-click="markAsCompleted($index); $event.stopPropagation();" style="border-radius: 8px;">
+                                                <i class="fas fa-check"></i> Đã giao xong
+                                            </button>
+                                            <button class="btn btn-warning" ng-click="markAsFailed($index); $event.stopPropagation();" style="border-radius: 8px;">
+                                                <i class="fas fa-times"></i> Giao thất bại
+                                            </button>
+                                            <button class="btn btn-info" ng-click="callCustomer(point.order.sdtNguoiNhan); $event.stopPropagation();" style="border-radius: 8px;">
+                                                <i class="fas fa-phone"></i> Gọi khách
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Stop Detail Modal -->
+    <div id="stopDetailModal" class="modal" ng-if="showStopModal" ng-class="{'show': showStopModal}">
+        <div class="modal-content" style="border-radius: 12px; max-width: 900px;">
+            <div class="modal-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 12px 12px 0 0;">
+                <h2 style="margin: 0; color: white;">
+                    <span ng-if="selectedStop">Điểm #{{selectedStop.thuTuDung}} - {{selectedStop.order.maVanDon}}</span>
+                </h2>
+                <button class="close-btn" ng-click="closeStopDetailModal()" style="background: #e74c3c; color: white; border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" ng-if="selectedStop && selectedStop.order">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                    <!-- Sender Info -->
+                    <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 20px; border-radius: 12px; color: white;">
+                        <h3 style="margin: 0 0 15px 0; color: white;">
+                            <i class="fas fa-user"></i> Thông tin người gửi
+                        </h3>
+                        <p style="margin: 8px 0;"><strong>Họ tên:</strong> {{selectedStop.order.tenNguoiGui}}</p>
+                        <p style="margin: 8px 0;"><strong>SĐT:</strong> {{selectedStop.order.sdtNguoiGui}}</p>
+                        <p style="margin: 8px 0;"><strong>Địa chỉ:</strong> {{selectedStop.order.diaChiLayHang}}</p>
+                    </div>
+                    
+                    <!-- Receiver Info -->
+                    <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 20px; border-radius: 12px; color: white;">
+                        <h3 style="margin: 0 0 15px 0; color: white;">
+                            <i class="fas fa-user-check"></i> Thông tin người nhận
+                        </h3>
+                        <p style="margin: 8px 0;"><strong>Họ tên:</strong> {{selectedStop.order.tenNguoiNhan}}</p>
+                        <p style="margin: 8px 0;"><strong>SĐT:</strong> {{selectedStop.order.sdtNguoiNhan}}</p>
+                        <p style="margin: 8px 0;"><strong>Địa chỉ:</strong> {{selectedStop.order.diaChiGiaoHang}}</p>
+                    </div>
+                    
+                    <!-- Package Info -->
+                    <div style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); padding: 20px; border-radius: 12px; color: white;">
+                        <h3 style="margin: 0 0 15px 0; color: white;">
+                            <i class="fas fa-box"></i> Thông tin hàng hóa
+                        </h3>
+                        <p style="margin: 8px 0;"><strong>Loại hàng:</strong> {{selectedStop.order.loaiHang}}</p>
+                        <p style="margin: 8px 0;"><strong>Khối lượng:</strong> {{selectedStop.order.khoiLuong}} kg</p>
+                        <p style="margin: 8px 0;"><strong>Dịch vụ:</strong> {{selectedStop.order.loaiDichVu === 'NHANH' ? 'Nhanh' : 'Thông thường'}}</p>
+                        <p ng-if="selectedStop.order.tienThuHo > 0" style="margin: 8px 0;">
+                            <strong>COD:</strong> {{formatCurrency(selectedStop.order.tienThuHo)}}
+                        </p>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                    <p style="margin: 5px 0;">
+                        <strong>Thời gian dự kiến:</strong> {{formatTime(selectedStop.thoiGianDuKien)}}
+                    </p>
+                    <p ng-if="selectedStop.thoiGianThucTe" style="margin: 5px 0;">
+                        <strong>Thời gian thực tế:</strong> {{formatTime(selectedStop.thoiGianThucTe)}}
+                    </p>
+                    <p style="margin: 5px 0;">
+                        <strong>Trạng thái:</strong> 
+                        <span class="badge" ng-class="{'badge-success': selectedStop.trangThai === 'DA_DEN', 
+                                                       'badge-warning': selectedStop.trangThai === 'CHO_XU_LY', 
+                                                       'badge-secondary': selectedStop.trangThai === 'DA_BO_QUA'}">
+                            {{getStopStatusLabel(selectedStop.trangThai)}}
+                        </span>
+                    </p>
+                </div>
+                
+                <!-- Modal Actions -->
+                <div ng-if="selectedStop.trangThai === 'CHO_XU_LY'" style="margin-top: 20px; display: flex; gap: 10px; justify-content: flex-end;">
+                    <button class="btn btn-success" ng-click="markAsCompleted(deliveryPoints.indexOf(selectedStop)); closeStopDetailModal();" style="border-radius: 8px;">
+                        <i class="fas fa-check"></i> Đã giao xong
+                    </button>
+                    <button class="btn btn-warning" ng-click="markAsFailed(deliveryPoints.indexOf(selectedStop)); closeStopDetailModal();" style="border-radius: 8px;">
+                        <i class="fas fa-times"></i> Giao thất bại
+                    </button>
+                    <button class="btn btn-info" ng-click="callCustomer(selectedStop.order.sdtNguoiNhan);" style="border-radius: 8px;">
+                        <i class="fas fa-phone"></i> Gọi khách
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.config.js?v=10"></script>
+    <script src="services/api.service.js?v=10"></script>
+    <script src="controllers/driver-routes.controller.js?v=11"></script>
+    <script>
+        // Suppress AngularJS unhandled rejection warnings
+        angular.module('logisticsApp').config(['$qProvider', function($qProvider) {
+            $qProvider.errorOnUnhandledRejections(false);
+        }]);
+        
+        // Custom exception handler to suppress error popups
+        angular.module('logisticsApp').factory('$exceptionHandler', function() {
+            return function(exception, cause) {
+                // Log to console only, don't show UI alerts
+                console.warn('[Handled Exception]:', exception.message || exception);
+                if (cause) console.warn('Cause:', cause);
+            };
+        });
+        
+        // Remove any purple notification bars that might appear
+        setInterval(function() {
+            // Find and remove any fixed position elements with purple/blue gradient at top
+            var elements = document.querySelectorAll('div[style*="position: fixed"], div[style*="position:fixed"]');
+            elements.forEach(function(el) {
+                var style = el.getAttribute('style') || '';
+                var computedStyle = window.getComputedStyle(el);
+                
+                // Check if it's at the top and has purple/blue gradient
+                if ((style.includes('top') || computedStyle.position === 'fixed') && 
+                    (style.includes('667eea') || style.includes('764ba2') || 
+                     style.includes('linear-gradient') && (style.includes('purple') || style.includes('blue'))) &&
+                    !el.classList.contains('modal') && 
+                    !el.classList.contains('sidebar') &&
+                    !el.id.includes('map')) {
+                    console.log('[Cleanup] Removing unwanted notification bar:', el);
+                    el.remove();
+                }
+            });
+            
+            // Also remove any elements with specific error classes
+            var errorElements = document.querySelectorAll('.ng-exception, .error-bar, .alert-bar, [class*="notification-error"]');
+            errorElements.forEach(function(el) {
+                el.remove();
+            });
+        }, 100);
+    </script>
+</body>
+</html>

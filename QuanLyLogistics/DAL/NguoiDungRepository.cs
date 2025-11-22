@@ -36,8 +36,8 @@ namespace DAL
         public bool Create(NguoiDungModel model)
         {
             string sql = @"INSERT INTO NguoiDung
-                          (HoTen, TenDangNhap, MatKhau, VaiTro, Email, SoDienThoai, DiaChi, NgayTao)
-                          VALUES (@HoTen, @TenDangNhap, @MatKhau, @VaiTro, @Email, @SoDienThoai, @DiaChi, @NgayTao)";
+                          (HoTen, TenDangNhap, MatKhau, VaiTro, Email, SoDienThoai, DiaChi, TrangThai, NgayTao)
+                          VALUES (@HoTen, @TenDangNhap, @MatKhau, @VaiTro, @Email, @SoDienThoai, @DiaChi, @TrangThai, @NgayTao)";
 
             int result = _dbHelper.ExecuteNonQuery(sql, new SqlParameter[]
             {
@@ -46,8 +46,9 @@ namespace DAL
                 new SqlParameter("@MatKhau", model.MatKhau),
                 new SqlParameter("@VaiTro", model.VaiTro),
                 new SqlParameter("@Email", model.Email),
-                new SqlParameter("@SoDienThoai", model.SoDienThoai),
-                new SqlParameter("@DiaChi", model.DiaChi),
+                new SqlParameter("@SoDienThoai", model.SoDienThoai ?? ""),
+                new SqlParameter("@DiaChi", model.DiaChi ?? ""),
+                new SqlParameter("@TrangThai", model.TrangThai ?? "HOAT_DONG"),
                 new SqlParameter("@NgayTao", model.NgayTao)
             });
 
@@ -62,7 +63,8 @@ namespace DAL
                           VaiTro = @VaiTro,
                           Email = @Email,
                           SoDienThoai = @SoDienThoai,
-                          DiaChi = @DiaChi
+                          DiaChi = @DiaChi,
+                          TrangThai = @TrangThai
                           WHERE MaNguoiDung = @MaNguoiDung";
 
             int result = _dbHelper.ExecuteNonQuery(sql, new SqlParameter[]
@@ -72,8 +74,9 @@ namespace DAL
                 new SqlParameter("@MatKhau", model.MatKhau),
                 new SqlParameter("@VaiTro", model.VaiTro),
                 new SqlParameter("@Email", model.Email),
-                new SqlParameter("@SoDienThoai", model.SoDienThoai),
-                new SqlParameter("@DiaChi", model.DiaChi)
+                new SqlParameter("@SoDienThoai", model.SoDienThoai ?? ""),
+                new SqlParameter("@DiaChi", model.DiaChi ?? ""),
+                new SqlParameter("@TrangThai", model.TrangThai ?? "HOAT_DONG")
             });
 
             return result > 0;
@@ -116,6 +119,32 @@ namespace DAL
             });
 
             return dt.ConvertTo<NguoiDungModel>().ToList();
+        }
+
+        public bool UpdatePassword(int maNguoiDung, string matKhauMoi)
+        {
+            string sql = "UPDATE NguoiDung SET MatKhau = @MatKhau WHERE MaNguoiDung = @MaNguoiDung";
+
+            int result = _dbHelper.ExecuteNonQuery(sql, new SqlParameter[]
+            {
+                new SqlParameter("@MaNguoiDung", maNguoiDung),
+                new SqlParameter("@MatKhau", matKhauMoi)
+            });
+
+            return result > 0;
+        }
+
+        public bool UpdateStatus(int maNguoiDung, string trangThai)
+        {
+            string sql = "UPDATE NguoiDung SET TrangThai = @TrangThai WHERE MaNguoiDung = @MaNguoiDung";
+
+            int result = _dbHelper.ExecuteNonQuery(sql, new SqlParameter[]
+            {
+                new SqlParameter("@MaNguoiDung", maNguoiDung),
+                new SqlParameter("@TrangThai", trangThai)
+            });
+
+            return result > 0;
         }
     }
 }

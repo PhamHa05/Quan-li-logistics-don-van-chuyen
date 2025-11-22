@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="vi" ng-app="logisticsApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ thống Quản lý Logistics</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="admin-style.css">
+</head>
+<body ng-controller="AdminDashboardController">
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Logistics Manager</h2>
+            </div>
+            <div class="sidebar-menu">
+                <ul>
+                    <li class="active"><a href="index.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="admin-orders.html"><i class="fas fa-shipping-fast"></i> Đơn hàng</a></li>
+                    <li><a href="admin-routes.html"><i class="fas fa-route"></i> Tuyến đường</a></li>
+                    <li><a href="admin-drivers.html"><i class="fas fa-users"></i> Tài xế</a></li>
+                    <li><a href="admin-cod.html"><i class="fas fa-money-bill-wave"></i> COD</a></li>
+                    <li><a href="admin-users.html"><i class="fas fa-user-cog"></i> Người dùng</a></li>
+                    <li><a href="admin-reports.html"><i class="fas fa-chart-bar"></i> Báo cáo</a></li>
+                    <li><a href="admin-settings.html"><i class="fas fa-cog"></i> Cài đặt</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="header-left">
+                    <h1>Quản lý Logistics</h1>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <div class="user-avatar">{{currentUser.fullName.substring(0,2).toUpperCase()}}</div>
+                        <div>
+                            <div class="user-name">{{currentUser.fullName}}</div>
+                            <div class="user-role">Quản trị viên</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" ng-click="logout()"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
+                </div>
+            </div>
+            
+            <!-- Content -->
+            <div class="content">
+                <!-- Loading -->
+                <div ng-show="isLoading" style="text-align: center; padding: 40px;">
+                    <i class="fas fa-spinner fa-spin" style="font-size: 3rem;"></i>
+                    <p>Đang tải dữ liệu...</p>
+                </div>
+                
+                <!-- Dashboard Cards -->
+                <div class="dashboard-cards" ng-show="!isLoading">
+                    <div class="card" onclick="window.location.href='admin-orders.html'" style="cursor: pointer;">
+                        <div class="card-header">
+                            <div class="card-title">Tổng đơn hàng</div>
+                            <div class="card-icon primary">
+                                <i class="fas fa-box"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">{{stats.totalOrders}}</div>
+                        <div class="card-description">Tất cả đơn hàng trong hệ thống</div>
+                    </div>
+                    
+                    <div class="card" onclick="window.location.href='admin-orders.html'" style="cursor: pointer;">
+                        <div class="card-header">
+                            <div class="card-title">Chờ xử lý</div>
+                            <div class="card-icon warning">
+                                <i class="fas fa-shipping-fast"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">{{stats.pendingOrders}}</div>
+                        <div class="card-description">Đơn cần xử lý</div>
+                    </div>
+                    
+                    <div class="card" onclick="window.location.href='admin-orders.html'" style="cursor: pointer;">
+                        <div class="card-header">
+                            <div class="card-title">Giao thành công</div>
+                            <div class="card-icon success">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">{{stats.completedOrders}}</div>
+                        <div class="card-description">Đã hoàn thành</div>
+                    </div>
+                    
+                    <div class="card" onclick="window.location.href='admin-cod.html'" style="cursor: pointer;">
+                        <div class="card-header">
+                            <div class="card-title">Tổng COD</div>
+                            <div class="card-icon danger">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                        </div>
+                        <div class="card-value">{{formatCurrency(stats.totalCOD)}}</div>
+                        <div class="card-description">Tiền thu hộ</div>
+                    </div>
+                </div>
+                
+                <!-- Thống kê -->
+                <div class="content-section" ng-show="!isLoading">
+                    <div class="section-header">
+                        <div class="section-title"><i class="fas fa-chart-line"></i> Thống kê tổng quan</div>
+                        <button class="btn btn-primary" ng-click="loadDashboard()">
+                            <i class="fas fa-sync"></i> Làm mới
+                        </button>
+                    </div>
+                    <div class="section-body">
+                        <div class="stats-grid">
+                            <div class="stat-box">
+                                <h4><i class="fas fa-box"></i> Đơn hàng</h4>
+                                <div class="stat-row">
+                                    <span>Tổng số:</span>
+                                    <strong>{{stats.totalOrders}} đơn</strong>
+                                </div>
+                                <div class="stat-row">
+                                    <span>Chờ xử lý:</span>
+                                    <strong>{{stats.pendingOrders}} đơn</strong>
+                                </div>
+                                <div class="stat-row">
+                                    <span>Hoàn thành:</span>
+                                    <strong>{{stats.completedOrders}} đơn</strong>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-box">
+                                <h4><i class="fas fa-users"></i> Tài xế</h4>
+                                <div class="stat-row">
+                                    <span>Tổng số:</span>
+                                    <strong>{{stats.totalDrivers}} người</strong>
+                                </div>
+                                <div class="stat-row">
+                                    <span>Đang hoạt động:</span>
+                                    <strong>{{stats.activeDrivers}} người</strong>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-box">
+                                <h4><i class="fas fa-money-bill"></i> Doanh thu</h4>
+                                <div class="stat-row">
+                                    <span>Phí vận chuyển:</span>
+                                    <strong>{{formatCurrency(stats.totalRevenue)}}</strong>
+                                </div>
+                                <div class="stat-row">
+                                    <span>Tiền COD:</span>
+                                    <strong>{{formatCurrency(stats.totalCOD)}}</strong>
+                                </div>
+                                <div class="stat-row">
+                                    <span>Tổng doanh thu:</span>
+                                    <strong style="color: #27ae60;">{{formatCurrency(stats.totalRevenue + stats.totalCOD)}}</strong>
+                                </div>
+                            </div>
+                            
+                            <div class="stat-box">
+                                <h4><i class="fas fa-route"></i> Tuyến đường</h4>
+                                <div class="stat-row">
+                                    <span>Đang lên kế hoạch:</span>
+                                    <strong>{{stats.routesPlanning || 0}} tuyến</strong>
+                                </div>
+                                <div class="stat-row">
+                                    <span>Đang giao:</span>
+                                    <strong>{{stats.routesActive || 0}} tuyến</strong>
+                                </div>
+                                <div class="stat-row">
+                                    <span>Hoàn thành:</span>
+                                    <strong>{{stats.routesCompleted || 0}} tuyến</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Đơn hàng gần đây -->
+                <div class="content-section" ng-show="!isLoading">
+                    <div class="section-header">
+                        <div class="section-title"><i class="fas fa-history"></i> Đơn hàng gần đây</div>
+                        <a href="admin-orders.html" class="btn btn-primary">Xem tất cả</a>
+                    </div>
+                    <div class="section-body">
+                        <table class="data-table" ng-if="recentOrders.length > 0">
+                            <thead>
+                                <tr>
+                                    <th>Mã đơn</th>
+                                    <th>Người gửi</th>
+                                    <th>Người nhận</th>
+                                    <th>Hàng hóa</th>
+                                    <th>Dịch vụ</th>
+                                    <th>COD</th>
+                                    <th>Trạng thái</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="order in recentOrders">
+                                    <td><strong>{{order.maVanDon}}</strong></td>
+                                    <td>
+                                        {{order.tenNguoiGui}}<br>
+                                        <small style="color: #7f8c8d;">{{order.sdtNguoiGui}}</small>
+                                    </td>
+                                    <td>
+                                        {{order.tenNguoiNhan}}<br>
+                                        <small style="color: #7f8c8d;">{{order.sdtNguoiNhan}}</small>
+                                    </td>
+                                    <td>
+                                        {{order.loaiHang}}<br>
+                                        <small style="color: #7f8c8d;">{{order.khoiLuong}} kg</small>
+                                    </td>
+                                    <td>
+                                        <span ng-if="order.loaiDichVu === 'NHANH'" class="badge badge-danger">
+                                            <i class="fas fa-bolt"></i> Nhanh
+                                        </span>
+                                        <span ng-if="order.loaiDichVu === 'THONG_THUONG'" class="badge badge-secondary">
+                                            Thường
+                                        </span>
+                                    </td>
+                                    <td><strong style="color: #e67e22;">{{formatCurrency(order.tienThuHo)}}</strong></td>
+                                    <td>
+                                        <span class="badge" ng-class="getStatusClass(order.trangThai)">
+                                            {{getStatusText(order.trangThai)}}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <small>{{order.thoiGianTao | date:'dd/MM/yyyy HH:mm'}}</small>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm btn-primary" ng-click="viewOrder(order.id)">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div ng-if="recentOrders.length === 0" style="text-align: center; padding: 40px; color: #7f8c8d;">
+                            <i class="fas fa-inbox" style="font-size: 3rem; opacity: 0.3;"></i>
+                            <p>Chưa có đơn hàng nào</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    
+    <!-- App Config and Services -->
+    <script src="app.config.js"></script>
+    <script src="services/api.service.js"></script>
+    
+    <!-- Controllers -->
+    <script src="controllers/admin-dashboard.controller.js"></script>
+</body>
+</html>

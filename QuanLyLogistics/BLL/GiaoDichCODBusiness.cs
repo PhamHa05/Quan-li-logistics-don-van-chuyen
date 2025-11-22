@@ -36,5 +36,10 @@ namespace BLL
         {
             return _repository.GetByDonVanChuyenId(donVanChuyenId);
         }
+
+        public List<GiaoDichCODModel> GetAll()
+        {
+            return _repository.GetAll();
+        }
     }
 }

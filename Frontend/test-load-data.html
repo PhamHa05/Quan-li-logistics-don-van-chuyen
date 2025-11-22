@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Load Test Data</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .card {
+            background: white;
+            color: #333;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        h1 {
+            margin-top: 0;
+            color: #667eea;
+        }
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        .success {
+            background: #2ecc71;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        .info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #667eea;
+        }
+        pre {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🚚 Load Test Data cho Driver Orders</h1>
+        
+        <div class="info">
+            <strong>📌 Hướng dẫn:</strong>
+            <ol>
+                <li>Click nút "Load Sample Data" để tạo dữ liệu test</li>
+                <li>Đăng nhập với tài khoản tài xế (taixe01/123456)</li>
+                <li>Vào trang "Đơn hàng" để xem dữ liệu</li>
+            </ol>
+        </div>
+        
+        <button class="btn" onclick="loadSampleData()">📦 Load Sample Data</button>
+        <button class="btn" onclick="clearData()">🗑️ Clear Data</button>
+        <button class="btn" onclick="viewData()">👁️ View Current Data</button>
+        
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function loadSampleData() {
+            var sampleOrders = [
+                {
+                    id: 1,
+                    maVanDon: 'WB001',
+                    tenNguoiGui: 'Cửa Hàng Điện Thoại A',
+                    sdtNguoiGui: '0909123456',
+                    diaChiLayHang: '123 Nguyễn Văn Linh, Q.7',
+                    tenNguoiNhan: 'Anh Bình',
+                    sdtNguoiNhan: '0911122334',
+                    diaChiGiaoHang: '45 Lê Lợi, Q.1',
+                    loaiHang: 'Điện thoại',
+                    khoiLuong: 0.5,
+                    tienThuHo: 7500000,
+                    loaiDichVu: 'NHANH',
+                    trangThai: 'DANG_GIAO',
+                    idTaiXe: 1,
+                    idTuyenDuong: 1,
+                    thoiGianTao: '2025-11-21T08:00:00',
+                    thoiGianCapNhat: '2025-11-21T08:00:00'
+                },
+                {
+                    id: 2,
+                    maVanDon: 'WB002',
+                    tenNguoiGui: 'Chị Hoa',
+                    sdtNguoiGui: '0987654321',
+                    diaChiLayHang: '78 Hoàng Văn Thụ, Q.Phú Nhuận',
+                    tenNguoiNhan: 'Chị Liên',
+                    sdtNguoiNhan: '0978965432',
+                    diaChiGiaoHang: '102 Pasteur, Q.3',
+                    loaiHang: 'Mỹ phẩm',
+                    khoiLuong: 1.2,
+                    tienThuHo: 0,
+                    loaiDichVu: 'THONG_THUONG',
+                    trangThai: 'CHO_LAY_HANG',
+                    idTaiXe: null,
+                    idTuyenDuong: null,
+                    thoiGianTao: '2025-11-21T09:00:00',
+                    thoiGianCapNhat: '2025-11-21T09:00:00'
+                },
+                {
+                    id: 3,
+                    maVanDon: 'WB003',
+                    tenNguoiGui: 'Công Ty Máy Tính XYZ',
+                    sdtNguoiGui: '02838250123',
+                    diaChiLayHang: 'Lô A1, Khu Công Nghệ Cao',
+                    tenNguoiNhan: 'Anh Tuấn',
+                    sdtNguoiNhan: '0933344556',
+                    diaChiGiaoHang: '11 Nguyễn Huệ, Q.1',
+                    loaiHang: 'Laptop',
+                    khoiLuong: 2.0,
+                    tienThuHo: 22500000,
+                    loaiDichVu: 'NHANH',
+                    trangThai: 'DA_LAY_HANG',
+                    idTaiXe: 1,
+                    idTuyenDuong: 1,
+                    thoiGianTao: '2025-11-21T10:00:00',
+                    thoiGianCapNhat: '2025-11-21T10:00:00'
+                },
+                {
+                    id: 4,
+                    maVanDon: 'WB004',
+                    tenNguoiGui: 'Shop Quần Áo Online',
+                    sdtNguoiGui: '0909555666',
+                    diaChiLayHang: 'Số 5, đường 12, Q.Gò Vấp',
+                    tenNguoiNhan: 'Chị Ngọc',
+                    sdtNguoiNhan: '0899888777',
+                    diaChiGiaoHang: '300 Lý Thường Kiệt, Q.Tân Bình',
+                    loaiHang: 'Quần áo',
+                    khoiLuong: 3.5,
+                    tienThuHo: 1200000,
+                    loaiDichVu: 'THONG_THUONG',
+                    trangThai: 'GIAO_THANH_CONG',
+                    idTaiXe: 3,
+                    idTuyenDuong: 3,
+                    thoiGianTao: '2025-11-20T14:00:00',
+                    thoiGianCapNhat: '2025-11-20T16:30:00'
+                },
+                {
+                    id: 5,
+                    maVanDon: 'WB005',
+                    tenNguoiGui: 'Nhà Sách Sư Phạm',
+                    sdtNguoiGui: '02838365432',
+                    diaChiLayHang: '366 Phan Văn Trị, Q.5',
+                    tenNguoiNhan: 'Thư viện ĐH B',
+                    sdtNguoiNhan: '02838667788',
+                    diaChiGiaoHang: 'Ký túc xá Khu A, Đại học B',
+                    loaiHang: 'Sách giáo trình',
+                    khoiLuong: 15.0,
+                    tienThuHo: 0,
+                    loaiDichVu: 'THONG_THUONG',
+                    trangThai: 'THAT_BAI',
+                    idTaiXe: 3,
+                    idTuyenDuong: 3,
+                    thoiGianTao: '2025-11-20T11:00:00',
+                    thoiGianCapNhat: '2025-11-20T15:00:00'
+                },
+                {
+                    id: 6,
+                    maVanDon: 'WB006',
+                    tenNguoiGui: 'Siêu Thị Điện Máy',
+                    sdtNguoiGui: '0281234567',
+                    diaChiLayHang: '100 Cách Mạng Tháng 8, Q.3',
+                    tenNguoiNhan: 'Anh Nam',
+                    sdtNguoiNhan: '0912345678',
+                    diaChiGiaoHang: '50 Trần Hưng Đạo, Q.5',
+                    loaiHang: 'Tivi',
+                    khoiLuong: 25.0,
+                    tienThuHo: 15000000,
+                    loaiDichVu: 'NHANH',
+                    trangThai: 'CHO_LAY_HANG',
+                    idTaiXe: 1,
+                    idTuyenDuong: 1,
+                    thoiGianTao: '2025-11-21T11:30:00',
+                    thoiGianCapNhat: '2025-11-21T11:30:00'
+                }
+            ];
+
+            localStorage.setItem('orders', JSON.stringify(sampleOrders));
+
+            var driver1Orders = sampleOrders.filter(o => o.idTaiXe === 1).length;
+            var driver3Orders = sampleOrders.filter(o => o.idTaiXe === 3).length;
+
+            document.getElementById('result').innerHTML = `
+                <div class="success">
+                    <strong>✅ Đã load thành công!</strong><br>
+                    📦 Tổng số đơn: ${sampleOrders.length}<br>
+                    👤 Đơn của driver 1: ${driver1Orders}<br>
+                    👤 Đơn của driver 3: ${driver3Orders}<br>
+                    <br>
+                    <a href="login.html" style="color: white; text-decoration: underline;">➡️ Đi đến trang đăng nhập</a>
+                </div>
+            `;
+        }
+
+        function clearData() {
+            localStorage.removeItem('orders');
+            document.getElementById('result').innerHTML = `
+                <div class="success">
+                    <strong>🗑️ Đã xóa dữ liệu!</strong>
+                </div>
+            `;
+        }
+
+        function viewData() {
+            var orders = JSON.parse(localStorage.getItem('orders') || '[]');
+            document.getElementById('result').innerHTML = `
+                <div class="info">
+                    <strong>📊 Dữ liệu hiện tại:</strong><br>
+                    Số lượng đơn: ${orders.length}
+                    <pre>${JSON.stringify(orders, null, 2)}</pre>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

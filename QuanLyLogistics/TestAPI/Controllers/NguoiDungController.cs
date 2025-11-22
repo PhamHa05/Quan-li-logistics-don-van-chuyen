@@ -74,5 +74,41 @@
                 var data = _nguoiDungBusiness.GetAll(hoTen, tenDangNhap);
                 return Ok(data);
             }
+
+            [HttpPut("update-password/{id}")]
+            public IActionResult UpdatePassword(int id, [FromBody] UpdatePasswordRequest request)
+            {
+                if (string.IsNullOrEmpty(request.MatKhauMoi))
+                    return BadRequest("Mật khẩu mới không được để trống!");
+
+                var result = _nguoiDungBusiness.UpdatePassword(id, request.MatKhauMoi);
+                if (!result)
+                    return NotFound(new { message = "Không tìm thấy người dùng!" });
+
+                return Ok(new { success = true, message = "Đổi mật khẩu thành công!" });
+            }
+
+            [HttpPut("update-status/{id}")]
+            public IActionResult UpdateStatus(int id, [FromBody] UpdateStatusRequest request)
+            {
+                if (string.IsNullOrEmpty(request.TrangThai))
+                    return BadRequest("Trạng thái không được để trống!");
+
+                var result = _nguoiDungBusiness.UpdateStatus(id, request.TrangThai);
+                if (!result)
+                    return NotFound(new { message = "Không tìm thấy người dùng!" });
+
+                return Ok(new { success = true, message = "Cập nhật trạng thái thành công!" });
+            }
+        }
+
+        public class UpdatePasswordRequest
+        {
+            public string MatKhauMoi { get; set; }
+        }
+
+        public class UpdateStatusRequest
+        {
+            public string TrangThai { get; set; }
         }
     }

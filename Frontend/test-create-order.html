@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Create Order - Debug Tool</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .test-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .test-section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #27ae60, #229954);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+        }
+        
+        .btn-info {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+        }
+        
+        .btn-info:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+        
+        .status {
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .status.success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .status.error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        
+        .status.info {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+        
+        .console-output {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-top: 15px;
+        }
+        
+        .console-output div {
+            margin-bottom: 5px;
+        }
+        
+        .console-output .time {
+            color: #95a5a6;
+        }
+        
+        .console-output .success {
+            color: #2ecc71;
+        }
+        
+        .console-output .error {
+            color: #e74c3c;
+        }
+        
+        .console-output .info {
+            color: #3498db;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+        
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: #667eea;
+            outline: none;
+        }
+        
+        .two-cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Test Create Order</h1>
+        <p class="subtitle">Debug tool to test create order functionality with database integration</p>
+        
+        <!-- Test 1: Check Backend API -->
+        <div class="test-section">
+            <h3>🔌 Test 1: Kiểm tra Backend API</h3>
+            <button class="btn btn-info" onclick="testBackendAPI()">
+                ▶️ Test Backend API
+            </button>
+            <div id="api-status"></div>
+        </div>
+        
+        <!-- Test 2: Load Customer Info -->
+        <div class="test-section">
+            <h3>👤 Test 2: Load Thông tin Khách hàng</h3>
+            <button class="btn btn-primary" onclick="testLoadCustomerInfo()">
+                ▶️ Load Customer Info (ID=2)
+            </button>
+            <div id="customer-status"></div>
+        </div>
+        
+        <!-- Test 3: Create Test Order -->
+        <div class="test-section">
+            <h3>📦 Test 3: Tạo đơn hàng test</h3>
+            
+            <div class="two-cols">
+                <div class="form-group">
+                    <label>Tên người gửi:</label>
+                    <input type="text" id="senderName" value="Nguyễn Văn A">
+                </div>
+                <div class="form-group">
+                    <label>SĐT người gửi:</label>
+                    <input type="text" id="senderPhone" value="0911222333">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Địa chỉ lấy hàng:</label>
+                <input type="text" id="senderAddress" value="Quận 1, TP.HCM">
+            </div>
+            
+            <div class="two-cols">
+                <div class="form-group">
+                    <label>Tên người nhận:</label>
+                    <input type="text" id="receiverName" value="Trần Thị B">
+                </div>
+                <div class="form-group">
+                    <label>SĐT người nhận:</label>
+                    <input type="text" id="receiverPhone" value="0922333444">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Địa chỉ giao hàng:</label>
+                <input type="text" id="receiverAddress" value="Quận 3, TP.HCM">
+            </div>
+            
+            <div class="two-cols">
+                <div class="form-group">
+                    <label>Loại hàng:</label>
+                    <input type="text" id="productType" value="Điện tử">
+                </div>
+                <div class="form-group">
+                    <label>Khối lượng (kg):</label>
+                    <input type="number" id="weight" value="2.5" step="0.1">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label>Tiền thu hộ (COD):</label>
+                <input type="number" id="codAmount" value="500000">
+            </div>
+            
+            <button class="btn btn-success" onclick="testCreateOrder()">
+                ▶️ Tạo đơn hàng TEST
+            </button>
+            <button class="btn btn-primary" onclick="prefillFromCustomer()">
+                🔄 Điền từ thông tin KH
+            </button>
+            <div id="create-status"></div>
+        </div>
+        
+        <!-- Console Output -->
+        <div class="test-section">
+            <h3>📄 Console Output</h3>
+            <div class="console-output" id="console"></div>
+        </div>
+    </div>
+    
+    <script>
+        const API_BASE_URL = 'http://localhost:5257/api';
+        let customerData = null;
+        
+        // Console logger
+        function log(message, type = 'info') {
+            const console = document.getElementById('console');
+            const time = new Date().toLocaleTimeString();
+            const div = document.createElement('div');
+            div.className = type;
+            div.innerHTML = `<span class="time">[${time}]</span> ${message}`;
+            console.appendChild(div);
+            console.scrollTop = console.scrollHeight;
+            console.log(`[${time}] ${message}`);
+        }
+        
+        // Show status in div
+        function showStatus(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            element.className = `status ${type}`;
+            element.innerHTML = message;
+        }
+        
+        // Test 1: Check Backend API
+        async function testBackendAPI() {
+            log('Testing backend API...', 'info');
+            showStatus('api-status', '⏳ Đang kiểm tra...', 'info');
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/DonVanChuyen/search`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ PageIndex: 1, PageSize: 1 })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    log(`✅ Backend API OK! Total orders: ${data.TotalItems || data.totalItems || 0}`, 'success');
+                    showStatus('api-status', 
+                        `✅ Backend API đang chạy!<br>Total orders: ${data.TotalItems || data.totalItems || 0}`, 
+                        'success'
+                    );
+                } else {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+            } catch (error) {
+                log(`❌ Backend API Error: ${error.message}`, 'error');
+                showStatus('api-status', 
+                    `❌ Backend API KHÔNG phản hồi!<br>Error: ${error.message}<br><br>Vui lòng chạy: cd TestAPI; dotnet run`, 
+                    'error'
+                );
+            }
+        }
+        
+        // Test 2: Load Customer Info
+        async function testLoadCustomerInfo() {
+            log('Loading customer info (ID=2)...', 'info');
+            showStatus('customer-status', '⏳ Đang tải...', 'info');
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/NguoiDung/get-by-id/2`, {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                
+                if (response.ok) {
+                    customerData = await response.json();
+                    log(`✅ Customer loaded: ${customerData.hoTen}`, 'success');
+                    log(`Phone: ${customerData.soDienThoai}`, 'info');
+                    log(`Address: ${customerData.diaChi}`, 'info');
+                    
+                    showStatus('customer-status', 
+                        `✅ Thông tin khách hàng đã load!<br>
+                        <strong>ID:</strong> ${customerData.maNguoiDung}<br>
+                        <strong>Tên:</strong> ${customerData.hoTen}<br>
+                        <strong>SĐT:</strong> ${customerData.soDienThoai}<br>
+                        <strong>Email:</strong> ${customerData.email}<br>
+                        <strong>Địa chỉ:</strong> ${customerData.diaChi}`, 
+                        'success'
+                    );
+                } else {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+            } catch (error) {
+                log(`❌ Load customer error: ${error.message}`, 'error');
+                showStatus('customer-status', 
+                    `❌ Không thể load thông tin khách hàng!<br>Error: ${error.message}`, 
+                    'error'
+                );
+            }
+        }
+        
+        // Prefill form from customer data
+        function prefillFromCustomer() {
+            if (!customerData) {
+                alert('Vui lòng load thông tin khách hàng trước! (Test 2)');
+                return;
+            }
+            
+            document.getElementById('senderName').value = customerData.hoTen;
+            document.getElementById('senderPhone').value = customerData.soDienThoai;
+            document.getElementById('senderAddress').value = customerData.diaChi;
+            
+            log('✅ Đã điền thông tin người gửi từ database', 'success');
+        }
+        
+        // Test 3: Create Order
+        async function testCreateOrder() {
+            log('Creating test order...', 'info');
+            showStatus('create-status', '⏳ Đang tạo đơn hàng...', 'info');
+            
+            // Prepare order data matching backend model
+            const orderData = {
+                TenNguoiGui: document.getElementById('senderName').value.trim(),
+                SdtNguoiGui: document.getElementById('senderPhone').value.trim(),
+                DiaChiLayHang: document.getElementById('senderAddress').value.trim(),
+                TenNguoiNhan: document.getElementById('receiverName').value.trim(),
+                SdtNguoiNhan: document.getElementById('receiverPhone').value.trim(),
+                DiaChiGiaoHang: document.getElementById('receiverAddress').value.trim(),
+                LoaiHang: document.getElementById('productType').value.trim(),
+                KhoiLuong: parseFloat(document.getElementById('weight').value),
+                TienThuHo: parseFloat(document.getElementById('codAmount').value),
+                LoaiDichVu: 'Standard',
+                TrangThai: 'CHO_LAY_HANG'
+            };
+            
+            log('Order data: ' + JSON.stringify(orderData, null, 2), 'info');
+            
+            try {
+                const response = await fetch(`${API_BASE_URL}/DonVanChuyen/create`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(orderData)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok && result.success !== false) {
+                    log(`✅ Order created successfully!`, 'success');
+                    log(`Response: ${JSON.stringify(result, null, 2)}`, 'success');
+                    
+                    showStatus('create-status', 
+                        `✅ Đơn hàng đã tạo thành công!<br>
+                        <strong>Message:</strong> ${result.message || 'OK'}<br>
+                        <strong>Success:</strong> ${result.success}<br><br>
+                        Bạn có thể kiểm tra trong database hoặc trang "Đơn hàng của tôi"`, 
+                        'success'
+                    );
+                } else {
+                    throw new Error(result.message || 'Create failed');
+                }
+            } catch (error) {
+                log(`❌ Create order error: ${error.message}`, 'error');
+                showStatus('create-status', 
+                    `❌ Không thể tạo đơn hàng!<br>Error: ${error.message}`, 
+                    'error'
+                );
+            }
+        }
+        
+        // Auto-run tests on load
+        window.onload = function() {
+            log('='.repeat(50), 'info');
+            log('Test Create Order Tool Loaded', 'info');
+            log('='.repeat(50), 'info');
+            
+            // Auto-test backend
+            setTimeout(() => {
+                testBackendAPI();
+            }, 500);
+        };
+    </script>
+</body>
+</html>

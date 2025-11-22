@@ -12,5 +12,6 @@ namespace DAL.Interfaces
         bool Create(GiaoDichCODModel model);
         bool Update(GiaoDichCODModel model);
         GiaoDichCODModel GetByDonVanChuyenId(long donVanChuyenId);
+        List<GiaoDichCODModel> GetAll();
     }
 }

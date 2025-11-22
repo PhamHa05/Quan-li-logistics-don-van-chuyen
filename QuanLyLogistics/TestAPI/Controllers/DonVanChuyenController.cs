@@ -16,6 +16,20 @@ namespace Logistics.API.Controllers
             _donVanChuyenBusiness = donVanChuyenBusiness ?? throw new ArgumentNullException(nameof(donVanChuyenBusiness));
         }
 
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var donHangs = _donVanChuyenBusiness.GetAll();
+            return Ok(donHangs);
+        }
+
+        [HttpGet("by-tai-xe/{idTaiXe}")]
+        public IActionResult GetByIdTaiXe(long idTaiXe)
+        {
+            var donHangs = _donVanChuyenBusiness.GetByIdTaiXe(idTaiXe);
+            return Ok(donHangs);
+        }
+
         [HttpGet("get-by-id/{id}")]
         public IActionResult GetDatabyID(long id)
         {

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .btn {
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background: #3498db;
+            color: white;
+            font-size: 16px;
+        }
+        .info {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Phân Quyền Hệ Thống</h1>
+    
+    <div class="info">
+        <h3>Trạng thái đăng nhập hiện tại:</h3>
+        <p id="status">Chưa đăng nhập</p>
+    </div>
+    
+    <h3>Test đăng nhập nhanh:</h3>
+    <button class="btn" onclick="testLogin('admin')">Đăng nhập Admin</button>
+    <button class="btn" onclick="testLogin('driver1')">Đăng nhập Tài xế</button>
+    <button class="btn" onclick="testLogin('customer1')">Đăng nhập Khách hàng</button>
+    
+    <br><br>
+    <button class="btn" style="background: #e74c3c;" onclick="clearLogin()">Xóa session</button>
+    
+    <h3>Test chuyển trang:</h3>
+    <button class="btn" onclick="goTo('index.html')">Vào trang Admin</button>
+    <button class="btn" onclick="goTo('index-driver.html')">Vào trang Tài xế</button>
+    <button class="btn" onclick="goTo('index-customer.html')">Vào trang Khách hàng</button>
+    
+    <script>
+        // Danh sách user (copy từ login.js)
+        const users = [
+            {
+                username: 'admin',
+                password: 'admin123',
+                role: 'admin',
+                fullName: 'Nguyễn Văn Admin',
+                phone: '0901234567',
+                email: 'admin@logistics.com'
+            },
+            {
+                username: 'driver1',
+                password: 'driver123',
+                role: 'driver',
+                fullName: 'Trần Văn Tài',
+                phone: '0912345678',
+                email: 'driver1@logistics.com',
+                vehicleNumber: '29A-12345',
+                licenseNumber: 'B2-123456'
+            },
+            {
+                username: 'customer1',
+                password: 'customer123',
+                role: 'customer',
+                fullName: 'Phạm Thị Lan',
+                phone: '0934567890',
+                email: 'customer1@gmail.com',
+                address: '123 Nguyễn Huệ, Q1, TP.HCM'
+            }
+        ];
+        
+        function updateStatus() {
+            const user = sessionStorage.getItem('loggedInUser') || localStorage.getItem('loggedInUser');
+            const statusEl = document.getElementById('status');
+            
+            if (user) {
+                const userData = JSON.parse(user);
+                statusEl.innerHTML = `
+                    <strong>Đã đăng nhập</strong><br>
+                    Tên: ${userData.fullName}<br>
+                    Role: ${userData.role}<br>
+                    Username: ${userData.username}
+                `;
+                statusEl.style.color = 'green';
+            } else {
+                statusEl.textContent = 'Chưa đăng nhập';
+                statusEl.style.color = 'red';
+            }
+        }
+        
+        function testLogin(username) {
+            const user = users.find(u => u.username === username);
+            if (user) {
+                const userData = {
+                    username: user.username,
+                    fullName: user.fullName,
+                    role: user.role,
+                    phone: user.phone,
+                    email: user.email,
+                    vehicleNumber: user.vehicleNumber,
+                    licenseNumber: user.licenseNumber,
+                    address: user.address,
+                    loginTime: new Date().toISOString()
+                };
+                
+                sessionStorage.setItem('loggedInUser', JSON.stringify(userData));
+                console.log('Đã lưu user vào sessionStorage:', userData);
+                alert('Đã đăng nhập với: ' + user.fullName + ' (' + user.role + ')');
+                updateStatus();
+            }
+        }
+        
+        function clearLogin() {
+            sessionStorage.removeItem('loggedInUser');
+            localStorage.removeItem('loggedInUser');
+            localStorage.removeItem('rememberMe');
+            console.log('Đã xóa session');
+            alert('Đã xóa session đăng nhập');
+            updateStatus();
+        }
+        
+        function goTo(page) {
+            console.log('Chuyển đến:', page);
+            window.location.href = page;
+        }
+        
+        // Update status khi load
+        updateStatus();
+        
+        // Auto update status mỗi giây
+        setInterval(updateStatus, 1000);
+    </script>
+</body>
+</html>

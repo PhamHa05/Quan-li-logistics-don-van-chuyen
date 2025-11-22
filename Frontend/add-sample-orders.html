@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Sample Orders for Customer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1 { color: #667eea; }
+        .btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 10px 5px;
+        }
+        .btn:hover { background: #5568d3; }
+        .btn-success { background: #2ecc71; }
+        .btn-success:hover { background: #27ae60; }
+        pre {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+        .status {
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>📦 Thêm đơn hàng mẫu cho Customer</h1>
+        <p>Tạo một vài đơn hàng test cho khách hàng <strong>Nguyễn Văn A</strong> (SĐT: 0911222333)</p>
+        
+        <div id="status"></div>
+        
+        <button class="btn btn-success" onclick="createSampleOrders()">
+            ➕ Tạo 3 đơn hàng mẫu
+        </button>
+        
+        <button class="btn" onclick="checkOrders()">
+            🔍 Kiểm tra đơn hàng
+        </button>
+        
+        <h2>Kết quả:</h2>
+        <pre id="result">Nhấn nút để tạo hoặc kiểm tra...</pre>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5257/api';
+        const CUSTOMER_PHONE = '0911222333';
+        const CUSTOMER_NAME = 'Nguyễn Văn A';
+        
+        function showStatus(msg, type = 'info') {
+            const div = document.getElementById('status');
+            div.className = `status ${type}`;
+            div.textContent = msg;
+            console.log(`[${type}] ${msg}`);
+        }
+        
+        async function createSampleOrders() {
+            try {
+                showStatus('🔄 Đang tạo đơn hàng mẫu...', 'info');
+                
+                const orders = [
+                    {
+                        MaVanDon: 'NVA001',
+                        TenNguoiGui: CUSTOMER_NAME,
+                        SdtNguoiGui: CUSTOMER_PHONE,
+                        DiaChiLayHang: 'Quận 1, TP.HCM',
+                        TenNguoiNhan: 'Anh Minh',
+                        SdtNguoiNhan: '0922111222',
+                        DiaChiGiaoHang: '100 Lê Lợi, Quận 1, TP.HCM',
+                        LoaiHang: 'Quần áo',
+                        KhoiLuong: 2.5,
+                        TienThuHo: 500000,
+                        LoaiDichVu: 'NHANH',
+                        TrangThai: 'CHO_LAY_HANG',
+                        IdTaiXe: null,
+                        IdTuyenDuong: null
+                    },
+                    {
+                        MaVanDon: 'NVA002',
+                        TenNguoiGui: CUSTOMER_NAME,
+                        SdtNguoiGui: CUSTOMER_PHONE,
+                        DiaChiLayHang: 'Quận 1, TP.HCM',
+                        TenNguoiNhan: 'Chị Lan',
+                        SdtNguoiNhan: '0933222333',
+                        DiaChiGiaoHang: '45 Nguyễn Huệ, Quận 1, TP.HCM',
+                        LoaiHang: 'Điện tử',
+                        KhoiLuong: 1.0,
+                        TienThuHo: 1500000,
+                        LoaiDichVu: 'NHANH',
+                        TrangThai: 'DANG_GIAO',
+                        IdTaiXe: 1,
+                        IdTuyenDuong: 1
+                    },
+                    {
+                        MaVanDon: 'NVA003',
+                        TenNguoiGui: CUSTOMER_NAME,
+                        SdtNguoiGui: CUSTOMER_PHONE,
+                        DiaChiLayHang: 'Quận 1, TP.HCM',
+                        TenNguoiNhan: 'Anh Tuấn',
+                        SdtNguoiNhan: '0944333444',
+                        DiaChiGiaoHang: '78 Pasteur, Quận 3, TP.HCM',
+                        LoaiHang: 'Sách',
+                        KhoiLuong: 3.0,
+                        TienThuHo: 300000,
+                        LoaiDichVu: 'THONG_THUONG',
+                        TrangThai: 'GIAO_THANH_CONG',
+                        IdTaiXe: 2,
+                        IdTuyenDuong: 2
+                    }
+                ];
+                
+                const results = [];
+                
+                for (let i = 0; i < orders.length; i++) {
+                    try {
+                        const response = await fetch(`${API_BASE}/DonVanChuyen/create`, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(orders[i])
+                        });
+                        
+                        if (response.ok) {
+                            const data = await response.json();
+                            results.push(`✅ Tạo thành công: ${orders[i].MaVanDon}`);
+                            console.log('Created order:', data);
+                        } else {
+                            const error = await response.text();
+                            results.push(`❌ Lỗi ${orders[i].MaVanDon}: ${response.status} - ${error}`);
+                        }
+                    } catch (e) {
+                        results.push(`❌ Exception ${orders[i].MaVanDon}: ${e.message}`);
+                    }
+                }
+                
+                document.getElementById('result').textContent = results.join('\n');
+                showStatus('✅ Hoàn tất tạo đơn hàng!', 'success');
+                
+                // Auto check orders after creating
+                setTimeout(checkOrders, 1000);
+                
+            } catch (e) {
+                showStatus(`❌ Lỗi: ${e.message}`, 'error');
+                console.error(e);
+            }
+        }
+        
+        async function checkOrders() {
+            try {
+                showStatus('🔄 Đang kiểm tra đơn hàng...', 'info');
+                
+                const response = await fetch(`${API_BASE}/DonVanChuyen/search`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        PageIndex: 1,
+                        PageSize: 100,
+                        MaVanDon: '',
+                        TrangThai: ''
+                    })
+                });
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    const allOrders = result.data || result.Data || [];
+                    
+                    // Filter by customer phone
+                    const customerOrders = allOrders.filter(order => 
+                        order.sdtNguoiGui === CUSTOMER_PHONE || order.SdtNguoiGui === CUSTOMER_PHONE
+                    );
+                    
+                    const output = [];
+                    output.push(`📊 Tổng số đơn hàng: ${allOrders.length}`);
+                    output.push(`👤 Đơn hàng của Nguyễn Văn A: ${customerOrders.length}`);
+                    output.push('\n='.repeat(50));
+                    
+                    if (customerOrders.length > 0) {
+                        output.push('\n📦 Chi tiết đơn hàng:\n');
+                        customerOrders.forEach((order, index) => {
+                            output.push(`${index + 1}. ${order.maVanDon || order.MaVanDon}`);
+                            output.push(`   Người nhận: ${order.tenNguoiNhan || order.TenNguoiNhan}`);
+                            output.push(`   Trạng thái: ${order.trangThai || order.TrangThai}`);
+                            output.push(`   COD: ${(order.tienThuHo || order.TienThuHo || 0).toLocaleString('vi-VN')} đ`);
+                            output.push('');
+                        });
+                    } else {
+                        output.push('\n⚠️ Chưa có đơn hàng nào cho customer này!');
+                        output.push('👉 Nhấn nút "Tạo 3 đơn hàng mẫu" để tạo data test.');
+                    }
+                    
+                    document.getElementById('result').textContent = output.join('\n');
+                    showStatus('✅ Kiểm tra hoàn tất!', 'success');
+                } else {
+                    showStatus(`❌ API Error: ${response.status}`, 'error');
+                }
+            } catch (e) {
+                showStatus(`❌ Lỗi: ${e.message}`, 'error');
+                console.error(e);
+            }
+        }
+        
+        // Auto check on load
+        window.onload = () => {
+            checkOrders();
+        };
+    </script>
+</body>
+</html>

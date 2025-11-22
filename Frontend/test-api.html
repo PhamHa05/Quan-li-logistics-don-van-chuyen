@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="vi" ng-app="logisticsApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API Connection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        .loading {
+            color: #3498db;
+            font-weight: bold;
+        }
+        .error {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        .success {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        pre {
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            max-height: 400px;
+        }
+    </style>
+</head>
+<body ng-controller="TestAPIController">
+    <h1>🧪 Test API Connection</h1>
+    
+    <div class="section">
+        <h2>API Configuration</h2>
+        <p><strong>Base URL:</strong> {{API_BASE_URL}}</p>
+        <p><strong>Status:</strong> <span ng-class="{'success': apiStatus === 'OK', 'error': apiStatus === 'Error'}">{{apiStatus}}</span></p>
+    </div>
+    
+    <div class="section">
+        <h2>1. Người Dùng (NguoiDung)</h2>
+        <button ng-click="testGetAllUsers()">Load All Users</button>
+        <p ng-show="usersLoading" class="loading">⏳ Loading...</p>
+        <p ng-show="usersError" class="error">❌ Error: {{usersError}}</p>
+        <p ng-show="users.length > 0" class="success">✅ Loaded {{users.length}} users</p>
+        <pre ng-show="users.length > 0">{{users | json}}</pre>
+    </div>
+    
+    <div class="section">
+        <h2>2. Đơn Vận Chuyển (DonVanChuyen)</h2>
+        <button ng-click="testGetAllOrders()">Load All Orders</button>
+        <p ng-show="ordersLoading" class="loading">⏳ Loading...</p>
+        <p ng-show="ordersError" class="error">❌ Error: {{ordersError}}</p>
+        <p ng-show="orders.length > 0" class="success">✅ Loaded {{orders.length}} orders</p>
+        <pre ng-show="orders.length > 0">{{orders | json}}</pre>
+    </div>
+    
+    <div class="section">
+        <h2>3. Tài Xế (TaiXe)</h2>
+        <button ng-click="testGetAllDrivers()">Load All Drivers</button>
+        <p ng-show="driversLoading" class="loading">⏳ Loading...</p>
+        <p ng-show="driversError" class="error">❌ Error: {{driversError}}</p>
+        <p ng-show="drivers.length > 0" class="success">✅ Loaded {{drivers.length}} drivers</p>
+        <pre ng-show="drivers.length > 0">{{drivers | json}}</pre>
+    </div>
+    
+    <div class="section">
+        <h2>Console Output</h2>
+        <p>Mở Developer Console (F12) để xem log chi tiết</p>
+        <button ng-click="clearConsole()">Clear Console</button>
+    </div>
+
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    
+    <!-- App Configuration & Services -->
+    <script src="app.config.js"></script>
+    <script src="services/api.service.js"></script>
+    
+    <!-- Test Controller -->
+    <script>
+        app.controller('TestAPIController', ['$scope', 'apiService', 'API_CONFIG', 
+            function($scope, apiService, API_CONFIG) {
+            
+            $scope.API_BASE_URL = API_CONFIG.BASE_URL;
+            $scope.apiStatus = 'Unknown';
+            
+            // Users
+            $scope.users = [];
+            $scope.usersLoading = false;
+            $scope.usersError = '';
+            
+            // Orders
+            $scope.orders = [];
+            $scope.ordersLoading = false;
+            $scope.ordersError = '';
+            
+            // Drivers
+            $scope.drivers = [];
+            $scope.driversLoading = false;
+            $scope.driversError = '';
+            
+            // Test get all users
+            $scope.testGetAllUsers = function() {
+                console.log('=== Testing getAllNguoiDung() ===');
+                $scope.usersLoading = true;
+                $scope.usersError = '';
+                $scope.users = [];
+                
+                apiService.getAllNguoiDung()
+                    .then(function(response) {
+                        console.log('✅ Users loaded successfully:', response);
+                        $scope.users = response;
+                        $scope.apiStatus = 'OK';
+                        $scope.usersLoading = false;
+                    })
+                    .catch(function(error) {
+                        console.error('❌ Error loading users:', error);
+                        $scope.usersError = error.statusText || error.message || 'Unknown error';
+                        $scope.apiStatus = 'Error';
+                        $scope.usersLoading = false;
+                    });
+            };
+            
+            // Test get all orders
+            $scope.testGetAllOrders = function() {
+                console.log('=== Testing getAllDonVanChuyen() ===');
+                $scope.ordersLoading = true;
+                $scope.ordersError = '';
+                $scope.orders = [];
+                
+                apiService.getAllDonVanChuyen()
+                    .then(function(response) {
+                        console.log('✅ Orders loaded successfully:', response);
+                        $scope.orders = response;
+                        $scope.apiStatus = 'OK';
+                        $scope.ordersLoading = false;
+                    })
+                    .catch(function(error) {
+                        console.error('❌ Error loading orders:', error);
+                        $scope.ordersError = error.statusText || error.message || 'Unknown error';
+                        $scope.apiStatus = 'Error';
+                        $scope.ordersLoading = false;
+                    });
+            };
+            
+            // Test get all drivers
+            $scope.testGetAllDrivers = function() {
+                console.log('=== Testing getAllTaiXe() ===');
+                $scope.driversLoading = true;
+                $scope.driversError = '';
+                $scope.drivers = [];
+                
+                apiService.getAllTaiXe()
+                    .then(function(response) {
+                        console.log('✅ Drivers loaded successfully:', response);
+                        $scope.drivers = response;
+                        $scope.apiStatus = 'OK';
+                        $scope.driversLoading = false;
+                    })
+                    .catch(function(error) {
+                        console.error('❌ Error loading drivers:', error);
+                        $scope.driversError = error.statusText || error.message || 'Unknown error';
+                        $scope.apiStatus = 'Error';
+                        $scope.driversLoading = false;
+                    });
+            };
+            
+            // Clear console
+            $scope.clearConsole = function() {
+                console.clear();
+                console.log('Console cleared');
+            };
+            
+            console.log('Test API Controller initialized');
+            console.log('API Base URL:', $scope.API_BASE_URL);
+        }]);
+    </script>
+</body>
+</html>

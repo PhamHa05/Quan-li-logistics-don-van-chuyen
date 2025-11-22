@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cài đặt - Logistics Manager</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="admin-style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Logistics Manager</h2>
+            </div>
+            <div class="sidebar-menu">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="admin-orders.html"><i class="fas fa-shipping-fast"></i> Đơn hàng</a></li>
+                    <li><a href="admin-routes.html"><i class="fas fa-route"></i> Tuyến đường</a></li>
+                    <li><a href="admin-drivers.html"><i class="fas fa-users"></i> Tài xế</a></li>
+                    <li><a href="admin-cod.html"><i class="fas fa-money-bill-wave"></i> COD</a></li>
+                    <li><a href="admin-users.html"><i class="fas fa-user-cog"></i> Người dùng</a></li>
+                    <li><a href="admin-reports.html"><i class="fas fa-chart-bar"></i> Báo cáo</a></li>
+                    <li class="active"><a href="admin-settings.html"><i class="fas fa-cog"></i> Cài đặt</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="header-left">
+                    <h1>Cài đặt hệ thống</h1>
+                </div>
+                <div class="header-right">
+                    <div class="user-info">
+                        <div class="user-avatar">AD</div>
+                        <div>
+                            <div class="user-name">Admin User</div>
+                            <div class="user-role">Quản trị viên</div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Đăng xuất</button>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="content">
+                <!-- Tabs -->
+                <div class="card">
+                    <div class="tabs">
+                        <button class="tab-btn active" onclick="switchTab('general')">
+                            <i class="fas fa-cog"></i> Chung
+                        </button>
+                        <button class="tab-btn" onclick="switchTab('data')">
+                            <i class="fas fa-database"></i> Dữ liệu
+                        </button>
+                        <button class="tab-btn" onclick="switchTab('system')">
+                            <i class="fas fa-server"></i> Hệ thống
+                        </button>
+                        <button class="tab-btn" onclick="switchTab('appearance')">
+                            <i class="fas fa-palette"></i> Giao diện
+                        </button>
+                        <button class="tab-btn" onclick="switchTab('about')">
+                            <i class="fas fa-info-circle"></i> Giới thiệu
+                        </button>
+                    </div>
+
+                    <!-- General Tab -->
+                    <div id="generalTab" class="tab-content active">
+                        <h3 class="section-title"><i class="fas fa-cog"></i> Cài đặt chung</h3>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div class="form-group">
+                                <label><i class="fas fa-building"></i> Tên công ty</label>
+                                <input type="text" id="companyName" class="input" value="Logistics Manager">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label><i class="fas fa-phone"></i> Số điện thoại</label>
+                                <input type="tel" id="companyPhone" class="input" value="1900 xxxx">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label><i class="fas fa-envelope"></i> Email</label>
+                                <input type="email" id="companyEmail" class="input" value="contact@logistics.com">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label><i class="fas fa-globe"></i> Website</label>
+                                <input type="url" id="companyWebsite" class="input" value="https://logistics.com">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label><i class="fas fa-map-marker-alt"></i> Địa chỉ</label>
+                            <textarea id="companyAddress" class="input" rows="2">123 Nguyễn Huệ, Quận 1, TP.HCM</textarea>
+                        </div>
+                        
+                        <h3 class="section-title" style="margin-top: 30px;"><i class="fas fa-sliders-h"></i> Tùy chọn</h3>
+                        
+                        <div class="form-group">
+                            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                                <input type="checkbox" id="autoAssignDriver" checked>
+                                <span>Tự động phân công tài xế khi tạo đơn hàng</span>
+                            </label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                                <input type="checkbox" id="enableNotifications" checked>
+                                <span>Bật thông báo desktop</span>
+                            </label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                                <input type="checkbox" id="enableSounds" checked>
+                                <span>Bật âm thanh thông báo</span>
+                            </label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label><i class="fas fa-clock"></i> Múi giờ</label>
+                            <select id="timezone" class="input">
+                                <option value="Asia/Ho_Chi_Minh" selected>GMT+7 (Việt Nam)</option>
+                                <option value="Asia/Bangkok">GMT+7 (Bangkok)</option>
+                                <option value="Asia/Singapore">GMT+8 (Singapore)</option>
+                            </select>
+                        </div>
+                        
+                        <button class="btn btn-primary" onclick="saveGeneralSettings()">
+                            <i class="fas fa-save"></i> Lưu cài đặt
+                        </button>
+                    </div>
+
+                    <!-- Data Tab -->
+                    <div id="dataTab" class="tab-content">
+                        <h3 class="section-title"><i class="fas fa-database"></i> Quản lý dữ liệu</h3>
+                        
+                        <!-- Statistics -->
+                        <div class="dashboard-cards">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title">Đơn hàng</div>
+                                    <div class="card-icon primary">
+                                        <i class="fas fa-box"></i>
+                                    </div>
+                                </div>
+                                <div class="card-value" id="statsOrders">0</div>
+                                <div class="card-description" id="statsOrdersDetail">-</div>
+                            </div>
+                            
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title">Tài xế</div>
+                                    <div class="card-icon success">
+                                        <i class="fas fa-user-tie"></i>
+                                    </div>
+                                </div>
+                                <div class="card-value" id="statsDrivers">0</div>
+                                <div class="card-description" id="statsDriversDetail">-</div>
+                            </div>
+                            
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title">Người dùng</div>
+                                    <div class="card-icon warning">
+                                        <i class="fas fa-users"></i>
+                                    </div>
+                                </div>
+                                <div class="card-value" id="statsUsers">0</div>
+                                <div class="card-description" id="statsUsersDetail">-</div>
+                            </div>
+                            
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title">Storage</div>
+                                    <div class="card-icon danger">
+                                        <i class="fas fa-hdd"></i>
+                                    </div>
+                                </div>
+                                <div class="card-value" id="statsStorage">0 KB</div>
+                                <div class="card-description" id="statsStorageDetail">-</div>
+                            </div>
+                        </div>
+                        
+                        <h3 class="section-title" style="margin-top: 30px;"><i class="fas fa-file-export"></i> Sao lưu & Khôi phục</h3>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div class="card" style="padding: 20px;">
+                                <h4 style="margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px;">
+                                    <i class="fas fa-download" style="color: #27ae60;"></i>
+                                    Xuất dữ liệu
+                                </h4>
+                                <p style="color: #7f8c8d; margin-bottom: 15px; font-size: 0.9rem;">
+                                    Tải xuống toàn bộ dữ liệu (đơn hàng, tài xế, tuyến đường, người dùng) dưới dạng file JSON.
+                                </p>
+                                <button class="btn btn-success" onclick="exportData()">
+                                    <i class="fas fa-file-export"></i> Xuất dữ liệu
+                                </button>
+                            </div>
+                            
+                            <div class="card" style="padding: 20px;">
+                                <h4 style="margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px;">
+                                    <i class="fas fa-upload" style="color: #3498db;"></i>
+                                    Nhập dữ liệu
+                                </h4>
+                                <p style="color: #7f8c8d; margin-bottom: 15px; font-size: 0.9rem;">
+                                    Khôi phục dữ liệu từ file sao lưu. Dữ liệu hiện tại sẽ được ghi đè.
+                                </p>
+                                <input type="file" id="importFile" accept=".json" style="display: none;" onchange="importData(event)">
+                                <button class="btn btn-primary" onclick="document.getElementById('importFile').click()">
+                                    <i class="fas fa-file-import"></i> Nhập dữ liệu
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <h3 class="section-title" style="margin-top: 30px;"><i class="fas fa-trash-alt"></i> Xóa dữ liệu</h3>
+                        
+                        <div class="card" style="padding: 20px; background: #fff5f5; border-left: 4px solid #e74c3c;">
+                            <h4 style="margin: 0 0 10px 0; color: #e74c3c;">
+                                <i class="fas fa-exclamation-triangle"></i> Cảnh báo
+                            </h4>
+                            <p style="color: #7f8c8d; margin-bottom: 15px;">
+                                Xóa toàn bộ dữ liệu trong hệ thống. Hành động này không thể hoàn tác!
+                            </p>
+                            <button class="btn btn-danger" onclick="clearAllData()">
+                                <i class="fas fa-trash"></i> Xóa tất cả dữ liệu
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- System Tab -->
+                    <div id="systemTab" class="tab-content">
+                        <h3 class="section-title"><i class="fas fa-server"></i> Thông tin hệ thống</h3>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div class="card" style="padding: 20px;">
+                                <h4 style="margin: 0 0 15px 0;"><i class="fas fa-code"></i> Phiên bản</h4>
+                                <table style="width: 100%; font-size: 0.9rem;">
+                                    <tr>
+                                        <td style="padding: 8px 0; color: #7f8c8d;">Hệ thống:</td>
+                                        <td style="padding: 8px 0; font-weight: 600;">v1.0.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 8px 0; color: #7f8c8d;">Build:</td>
+                                        <td style="padding: 8px 0; font-weight: 600;">20251110</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 8px 0; color: #7f8c8d;">Database:</td>
+                                        <td style="padding: 8px 0; font-weight: 600;">LocalStorage</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            
+                            <div class="card" style="padding: 20px;">
+                                <h4 style="margin: 0 0 15px 0;"><i class="fas fa-desktop"></i> Trình duyệt</h4>
+                                <table style="width: 100%; font-size: 0.9rem;">
+                                    <tr>
+                                        <td style="padding: 8px 0; color: #7f8c8d;">Tên:</td>
+                                        <td style="padding: 8px 0; font-weight: 600;" id="browserName">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 8px 0; color: #7f8c8d;">Ngôn ngữ:</td>
+                                        <td style="padding: 8px 0; font-weight: 600;" id="browserLang">-</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 8px 0; color: #7f8c8d;">Online:</td>
+                                        <td style="padding: 8px 0; font-weight: 600;" id="browserOnline">-</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <h3 class="section-title" style="margin-top: 30px;"><i class="fas fa-tools"></i> Công cụ</h3>
+                        
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <button class="btn btn-info" onclick="checkStorageQuota()">
+                                <i class="fas fa-chart-pie"></i> Kiểm tra Storage
+                            </button>
+                            <button class="btn btn-success" onclick="testNotifications()">
+                                <i class="fas fa-bell"></i> Test thông báo
+                            </button>
+                            <button class="btn btn-warning" onclick="clearCache()">
+                                <i class="fas fa-broom"></i> Xóa cache
+                            </button>
+                            <button class="btn btn-secondary" onclick="viewConsole()">
+                                <i class="fas fa-terminal"></i> Console (F12)
+                            </button>
+                        </div>
+                        
+                        <h3 class="section-title" style="margin-top: 30px;"><i class="fas fa-sync"></i> Đồng bộ dữ liệu</h3>
+                        
+                        <div class="card" style="padding: 20px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                <div>
+                                    <h4 style="margin: 0 0 5px 0;">Auto-sync: <span id="syncStatus" style="color: #27ae60;">Đang bật</span></h4>
+                                    <p style="color: #7f8c8d; margin: 0; font-size: 0.9rem;">
+                                        Lần sync cuối: <span id="lastSyncTime">-</span>
+                                    </p>
+                                </div>
+                                <button class="btn btn-primary" onclick="manualSync()">
+                                    <i class="fas fa-sync"></i> Sync ngay
+                                </button>
+                            </div>
+                            
+                            <div style="display: flex; gap: 10px;">
+                                <button class="btn btn-success" onclick="toggleAutoSync(true)">
+                                    <i class="fas fa-play"></i> Bật Auto-sync
+                                </button>
+                                <button class="btn btn-warning" onclick="toggleAutoSync(false)">
+                                    <i class="fas fa-pause"></i> Tắt Auto-sync
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Appearance Tab -->
+                    <div id="appearanceTab" class="tab-content">
+                        <h3 class="section-title"><i class="fas fa-palette"></i> Tùy chỉnh giao diện</h3>
+                        
+                        <div class="form-group">
+                            <label><i class="fas fa-paint-brush"></i> Chế độ màu</label>
+                            <select id="themeMode" class="input" onchange="changeTheme(this.value)">
+                                <option value="light" selected>Sáng</option>
+                                <option value="dark">Tối</option>
+                                <option value="auto">Tự động theo hệ thống</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label><i class="fas fa-text-height"></i> Kích thước chữ</label>
+                            <select id="fontSize" class="input" onchange="changeFontSize(this.value)">
+                                <option value="small">Nhỏ</option>
+                                <option value="medium" selected>Trung bình</option>
+                                <option value="large">Lớn</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label><i class="fas fa-compress"></i> Độ rộng sidebar</label>
+                            <input type="range" id="sidebarWidth" min="200" max="320" value="260" step="10" 
+                                   oninput="changeSidebarWidth(this.value)" style="width: 100%;">
+                            <div style="display: flex; justify-content: space-between; color: #7f8c8d; font-size: 0.85rem;">
+                                <span>200px</span>
+                                <span id="sidebarWidthValue">260px</span>
+                                <span>320px</span>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                                <input type="checkbox" id="compactMode">
+                                <span>Chế độ gọn (Compact mode)</span>
+                            </label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                                <input type="checkbox" id="animationsEnabled" checked>
+                                <span>Bật hiệu ứng chuyển động</span>
+                            </label>
+                        </div>
+                        
+                        <button class="btn btn-primary" onclick="saveAppearanceSettings()">
+                            <i class="fas fa-save"></i> Lưu cài đặt
+                        </button>
+                        
+                        <button class="btn btn-secondary" onclick="resetAppearance()" style="margin-left: 10px;">
+                            <i class="fas fa-undo"></i> Đặt lại mặc định
+                        </button>
+                    </div>
+
+                    <!-- About Tab -->
+                    <div id="aboutTab" class="tab-content">
+                        <div style="text-align: center; padding: 40px 20px;">
+                            <div style="font-size: 4rem; color: var(--primary); margin-bottom: 20px;">
+                                <i class="fas fa-truck-moving"></i>
+                            </div>
+                            <h2 style="margin: 0 0 10px 0; color: #2c3e50;">Logistics Manager</h2>
+                            <p style="color: #7f8c8d; font-size: 1.1rem; margin: 0 0 30px 0;">Hệ thống quản lý vận chuyển thông minh</p>
+                            
+                            <div style="background: #f8f9fa; padding: 30px; border-radius: 10px; text-align: left; max-width: 600px; margin: 0 auto;">
+                                <h3 style="margin: 0 0 15px 0;"><i class="fas fa-info-circle"></i> Thông tin</h3>
+                                <table style="width: 100%; font-size: 0.95rem;">
+                                    <tr>
+                                        <td style="padding: 10px 0; color: #7f8c8d;">Phiên bản:</td>
+                                        <td style="padding: 10px 0; font-weight: 600;">1.0.0</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 10px 0; color: #7f8c8d;">Ngày phát hành:</td>
+                                        <td style="padding: 10px 0; font-weight: 600;">10/11/2025</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 10px 0; color: #7f8c8d;">Công nghệ:</td>
+                                        <td style="padding: 10px 0; font-weight: 600;">HTML5, CSS3, JavaScript</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 10px 0; color: #7f8c8d;">License:</td>
+                                        <td style="padding: 10px 0; font-weight: 600;">MIT License</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            
+                            <div style="margin-top: 40px;">
+                                <h3 style="margin: 0 0 20px 0;"><i class="fas fa-heart"></i> Tính năng</h3>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; text-align: center;">
+                                    <div>
+                                        <i class="fas fa-box" style="font-size: 2rem; color: #3498db; margin-bottom: 10px;"></i>
+                                        <p style="margin: 0; font-weight: 600;">Quản lý đơn hàng</p>
+                                    </div>
+                                    <div>
+                                        <i class="fas fa-route" style="font-size: 2rem; color: #27ae60; margin-bottom: 10px;"></i>
+                                        <p style="margin: 0; font-weight: 600;">Tuyến đường</p>
+                                    </div>
+                                    <div>
+                                        <i class="fas fa-users" style="font-size: 2rem; color: #f39c12; margin-bottom: 10px;"></i>
+                                        <p style="margin: 0; font-weight: 600;">Quản lý tài xế</p>
+                                    </div>
+                                    <div>
+                                        <i class="fas fa-money-bill-wave" style="font-size: 2rem; color: #e74c3c; margin-bottom: 10px;"></i>
+                                        <p style="margin: 0; font-weight: 600;">COD & Thanh toán</p>
+                                    </div>
+                                    <div>
+                                        <i class="fas fa-chart-bar" style="font-size: 2rem; color: #9b59b6; margin-bottom: 10px;"></i>
+                                        <p style="margin: 0; font-weight: 600;">Báo cáo & Thống kê</p>
+                                    </div>
+                                    <div>
+                                        <i class="fas fa-user-cog" style="font-size: 2rem; color: #34495e; margin-bottom: 10px;"></i>
+                                        <p style="margin: 0; font-weight: 600;">Quản lý người dùng</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid #ecf0f1;">
+                                <p style="color: #7f8c8d; margin: 0;">&copy; 2025 Logistics Manager. All rights reserved.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="data-sync.js"></script>
+    <script src="admin-settings.js"></script>
+</body>
+</html>

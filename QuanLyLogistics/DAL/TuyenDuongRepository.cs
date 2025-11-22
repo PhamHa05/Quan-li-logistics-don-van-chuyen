@@ -101,6 +101,9 @@ namespace DAL
             total = 0;
             int offset = (pageIndex - 1) * pageSize;
 
+            // Convert empty string to null for proper SQL query
+            maTuyen = string.IsNullOrWhiteSpace(maTuyen) ? null : maTuyen;
+
             string sql = @"
                         SELECT *, COUNT(*) OVER() AS RecordCount
                         FROM TuyenDuong
